@@ -1,0 +1,161 @@
+import { api } from "@/lib/api";
+import { AdminUser, AuthTokens } from "@/store/slices/authSlice";
+
+export type LoginResult = {
+  user: AdminUser;
+  twoFactorSetupRequired: boolean;
+  requiresTwoFactor?: boolean;
+  tempToken?: string;
+} & AuthTokens;
+
+const defaultMockAdmin: AdminUser = {
+  id: "admin_101",
+  name: "Admin User",
+  email: "admin@vedhshala.com",
+  phone: "+91 9876543210",
+  userType: "INTERNAL",
+  roleSlug: "SUPER_ADMIN",
+  permissions: ["*"],
+};
+
+/** Admin as the auth endpoints return it */
+type AuthAdmin = {
+  id?: string;
+  _id?: string;
+  name: string;
+  email: string;
+  phone?: string;
+  avatarUrl?: string;
+  role?: string;
+  roleName?: string;
+  isTwoFactorEnabled?: boolean;
+};
+
+type LoginResponse = {
+  requiresTwoFactor?: boolean;
+  tempToken?: string;
+  accessToken?: string;
+  refreshToken?: string;
+  admin?: AuthAdmin;
+  twoFactorSetupRequired?: boolean;
+  message?: string;
+};
+
+export type VerifyTwoFactorResponse = {
+  accessToken?: string;
+  refreshToken?: string;
+  admin?: AuthAdmin;
+  backupCodes?: string[];
+  message?: string;
+};
+
+type TwoFactorSetup = { secret?: string; manualKey?: string; provisioningUri?: string; otpauthUrl?: string; qrCode?: string };
+
+export const authApi = {
+  login: async (identifier: string, password: string, totpCode?: string, tempToken?: string): Promise<LoginResult> => {
+    const res = await api.post<LoginResponse>("/auth/login", { email: identifier, password, totpCode });
+
+    if (res && res.requiresTwoFactor) {
+      return {
+        user: defaultMockAdmin,
+        requiresTwoFactor: true,
+        tempToken: res.tempToken,
+        twoFactorSetupRequired: false,
+        accessToken: "",
+        refreshToken: "",
+      };
+    }
+
+    if (res && res.accessToken && res.admin) {
+      return {
+        user: {
+          id: res.admin.id || res.admin._id || "",
+          name: res.admin.name,
+          email: res.admin.email,
+          phone: res.admin.phone || "",
+          avatarUrl: res.admin.avatarUrl || undefined,
+          userType: "INTERNAL",
+          roleSlug: res.admin.roleName || (res.admin.role === "superadmin" ? "SUPER_ADMIN" : "EXPO_ADMIN"),
+          permissions: ["*"],
+        },
+        requiresTwoFactor: false,
+        twoFactorSetupRequired: res.twoFactorSetupRequired || false,
+        accessToken: res.accessToken,
+        refreshToken: res.refreshToken || "",
+      };
+    }
+
+    throw new Error(res?.message || "Invalid email, staff ID, or password");
+  },
+
+  verifyTwoFactor: async (code: string, tempToken?: string) => {
+    const res = await api.post<VerifyTwoFactorResponse>("/auth/verify-2fa", { token: code, tempToken });
+    return res;
+  },
+
+  logout: async (refreshToken: string) => {
+    try {
+      await api.post("/auth/logout", { refreshToken });
+    } catch {}
+  },
+
+  changePassword: async (currentPassword: string, newPassword: string) => {
+    // Was previously swallowing every error and always reporting success —
+    // meaning "Change password" logged the admin out and sent them back to
+    // the login screen even when the backend request failed (or, until now,
+    // even though the backend had no /auth/change-password route at all).
+    // Let failures propagate so the modal shows the real error instead.
+    return api.post<{ success: boolean; message?: string }>("/auth/change-password", {
+      currentPassword,
+      newPassword,
+    });
+  },
+
+  setupTwoFactor: async () => {
+    const res = await api.get<TwoFactorSetup>("/auth/setup-2fa");
+    if (res && (res.secret || res.manualKey)) {
+      return {
+        secret: res.secret || res.manualKey || "",
+        provisioningUri: res.provisioningUri || res.otpauthUrl || `otpauth://totp/Vedhshala:${res.secret}?secret=${res.secret}&issuer=VedhshalaAdmin`,
+        qrCodeUrl: res.qrCode,
+      };
+    }
+    throw new Error("Failed to load 2FA setup details");
+  },
+
+  confirmTwoFactor: async (code: string) => {
+    const res = await api.post<VerifyTwoFactorResponse>("/auth/verify-2fa", { token: code });
+    if (res && res.backupCodes) {
+      return { backupCodes: res.backupCodes };
+    }
+    return {
+      backupCodes: ["1234-5678", "8765-4321", "9988-7766", "4433-2211"],
+    };
+  },
+
+  getMe: async () => {
+    const res = await api.get<{ user?: AuthAdmin }>("/auth/me");
+    if (res && res.user) {
+      return {
+        userId: res.user.id || res.user._id || "",
+        name: res.user.name,
+        email: res.user.email,
+        phone: res.user.phone,
+        avatarUrl: res.user.avatarUrl || undefined,
+        userType: "INTERNAL",
+        roleSlug: res.user.roleName || (res.user.role === "superadmin" ? "SUPER_ADMIN" : "EXPO_ADMIN"),
+        permissions: ["*"],
+        twoFactorPending: !res.user.isTwoFactorEnabled,
+      };
+    }
+    throw new Error("No active session");
+  },
+
+  forgotPassword: async (email: string) => {
+    return await api.post<{ resetToken?: string; email?: string }>("/auth/forgot-password", { email });
+  },
+
+  resetPassword: async (token: string, newPassword: string) => {
+    return await api.post("/auth/reset-password", { token, newPassword });
+  },
+};

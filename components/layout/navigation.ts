@@ -1,0 +1,166 @@
+import {
+  Activity,
+  BarChart3,
+  BellRing,
+  BookOpenText,
+  Bot,
+  Briefcase,
+  BriefcaseBusiness,
+  Building2,
+  DatabaseBackup,
+  FileCode,
+  FileSearch,
+  FileText,
+  GalleryHorizontalEnd,
+  Gauge,
+  Handshake,
+  History,
+  Inbox,
+  LayoutDashboard,
+  LayoutGrid,
+  Link2,
+  ListChecks,
+  ListTree,
+  LockKeyhole,
+  Mail,
+  MessageSquare,
+  MessageSquareText,
+  MessagesSquare,
+  Route,
+  SearchCheck,
+  Settings,
+  Settings2,
+  ShieldCheck,
+  Star,
+  UserCheck,
+  UserCog,
+  Users,
+  Video,
+  type LucideIcon,
+} from "lucide-react";
+
+export interface NavItem {
+  label: string;
+  href?: string;
+  icon: LucideIcon;
+  disabled?: boolean;
+  badge?: string;
+  // Shown as a dropdown under this item (the item itself then has no href)
+  children?: NavItem[];
+}
+
+export interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+export const NAV_SECTIONS: NavSection[] = [
+  {
+    title: "Main Navigation",
+    items: [
+      { label: "Dashboard", href: "/", icon: LayoutDashboard },
+      { label: "General Enquiries", href: "/general-enquiries", icon: Mail },
+      { label: "Contact Us Messages", href: "/contact-us", icon: MessageSquareText },
+      { label: "Communication / Follow-ups", href: "/communication", icon: MessageSquare, badge: "NEW" },
+    ],
+  },
+  {
+    title: "AI Chatbot",
+    items: [
+      { label: "Chatbot Overview", href: "/chatbot/overview", icon: Bot, badge: "NEW" },
+      { label: "Inbox & Leads", href: "/chatbot/inbox", icon: Inbox },
+      { label: "Chatbot Manager", href: "/chatbot/manager", icon: UserCog },
+      { label: "Reports", href: "/chatbot/reports", icon: BarChart3 },
+      { label: "Chat Conversations", href: "/chatbot/conversations", icon: MessagesSquare },
+      { label: "Chatbot Leads", href: "/chatbot/leads", icon: UserCheck },
+    ],
+  },
+  {
+    title: "Feedback & Subscribers",
+    items: [
+      { label: "Website Feedback", href: "/website-feedback", icon: Star, badge: "NEW" },
+      { label: "Newsletter Subscribers", href: "/newsletter", icon: Mail, badge: "342" },
+    ],
+  },
+  {
+    title: "Content Management",
+    items: [
+      { label: "Pages & CMS", href: "/pages", icon: FileText },
+      { label: "Services Management", href: "/services", icon: BriefcaseBusiness },
+      { label: "Blog & Insights", href: "/blogs", icon: BookOpenText },
+      { label: "Media Library", href: "/gallery", icon: GalleryHorizontalEnd },
+      { label: "Video Highlights", href: "/video-highlights", icon: Video, badge: "NEW" },
+      { label: "Exhibitor List", href: "/exhibitor-list", icon: Building2 },
+      { label: "Feedback & Reviews", href: "/feedback-reviews", icon: MessageSquareText },
+      { label: "Trusted Leaders", href: "/trusted-leaders", icon: Handshake, badge: "NEW" },
+      { label: "Advisory Board Members", href: "/advisory-board-members", icon: Users, badge: "NEW" },
+      { label: "Exhibitor Testimonials", href: "/exhibitor-testimonials", icon: MessageSquareText, badge: "NEW" },
+      { label: "Testimonials", href: "/testimonials", icon: MessageSquare },
+      { label: "Testimonial Videos", href: "/testimonial-videos", icon: Video },
+      { label: "FAQs", href: "/faqs", icon: MessageSquare },
+      { label: "Navigation Menus", href: "/navigation-menus", icon: ListTree },
+    ],
+  },
+  {
+    title: "Careers & Applications",
+    items: [
+      { label: "Career Dashboard", href: "/career-dashboard", icon: LayoutGrid },
+      { label: "Job Postings", href: "/job-postings", icon: Briefcase },
+      { label: "Applications & AI Response", href: "/applications-ai-response", icon: Bot },
+      { label: "↳ Submit Form", href: "/applications-ai-response?modal=submitform", icon: FileText },
+      { label: "↳ Candidate Details", href: "/applications-ai-response?modal=candidatedetails", icon: FileText },
+      { label: "↳ Forward to HR", href: "/applications-ai-response?modal=forwardtohr", icon: FileText },
+      { label: "Career Settings", href: "/career-settings", icon: Settings2 },
+      { label: "IP Block Limits", href: "/ip-block-limits", icon: LockKeyhole, badge: "NEW" },
+    ],
+  },
+  {
+    title: "SEO & Performance",
+    items: [
+      { label: "SEO Audit", href: "/seo", icon: SearchCheck, badge: "NEW" },
+      { label: "Advanced SEO", href: "/advanced-seo", icon: FileCode, badge: "NEW" },
+      { label: "Audited Pages", href: "/auditpage", icon: FileSearch },
+      { label: "SEO Center", href: "/reports", icon: SearchCheck },
+      { label: "Google Search Console", icon: BarChart3, disabled: true },
+      { label: "Analytics Dashboard", icon: Gauge, disabled: true },
+      { label: "Performance Center", icon: Activity, disabled: true },
+      { label: "Site Health Monitor", icon: ShieldCheck, disabled: true },
+      { label: "Schema Manager", icon: FileSearch, disabled: true },
+      { label: "Redirects Manager", href: "/redirects", icon: Route },
+      { label: "Internal Linking", icon: Link2, disabled: true },
+    ],
+  },
+  {
+    title: "Reputation Management",
+    items: [
+      { label: "Google Reviews", href: "/google-reviews", icon: Star, badge: "NEW" },
+      { label: "Review Analytics", icon: BarChart3, disabled: true },
+      { label: "Response Templates", icon: MessageSquare, disabled: true },
+      { label: "Review Alerts", icon: BellRing, disabled: true },
+      { label: "Reputation Settings", icon: Settings, disabled: true },
+    ],
+  },
+  {
+    title: "System & Security",
+    items: [
+      { label: "Users & Roles", href: "/roles", icon: Users },
+      { label: "Staff Management", href: "/staff", icon: UserCog },
+      { label: "Security Center", href: "/system-services", icon: LockKeyhole },
+      { label: "Backups & Restore", icon: DatabaseBackup, disabled: true },
+      { label: "Audit Logs", href: "/audit-log", icon: History },
+      { label: "Settings", href: "/settings", icon: Settings },
+    ],
+  },
+  {
+    title: "Activity Log",
+    items: [
+      { label: "All Activity", href: "/activity-log", icon: History, badge: "NEW" },
+    ],
+  },
+  {
+    title: "Add by Admin",
+    items: [
+      { label: "Dropdown Manager", href: "/add-by-admin/dropdowns", icon: ListChecks, badge: "NEW" },
+    ],
+  },
+];

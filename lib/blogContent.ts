@@ -1,0 +1,165 @@
+import { LandingSectionContent } from "./landingContent";
+
+export const defaultBlogSections: LandingSectionContent[] = [
+  {
+    key: "blog-hero",
+    name: "BlogHero",
+    enabled: true,
+    eyebrow: "BHARAT ORGANIC EXPO",
+    // Single H1: the website shows the last word on the orange line, the rest green.
+    title: "BLOGS & NEWS",
+    subtitle: "Insights. Innovation. Impact.",
+    description: "Stay updated with the latest trends, expert perspectives, innovations and success stories shaping India's organic food, agriculture and sustainable products industry.",
+    image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791010203/bharat-organic/blog/hero-bg.webp",
+    imageAlt: "Bharat Organic Expo Blog Banner",
+  },
+  {
+    key: "blog-featured",
+    name: "BlogFeatured",
+    enabled: true,
+    eyebrow: "FEATURED ARTICLES",
+    title: "Featured Articles",
+    buttonLabel: "View all articles",
+    items: [
+      {
+        tag: "Expo News",
+        title: "Bharat Organic Expo 2026: India's Organic Industry Comes Together",
+        description: "Discover the brands, farmers, buyers and innovators bringing India's organic ecosystem together at Bharat Organic Expo 2026.",
+        date: "May 8, 2026",
+        readTime: "5 min read",
+        image: ""
+      },
+      {
+        tag: "Industry Insight",
+        title: "Why India's Organic Industry Is Ready for Its Next Growth Phase",
+        description: "Explore the market trends, consumer demand and business opportunities shaping India's organic food and natural products sector.",
+        date: "May 6, 2026",
+        readTime: "6 min read",
+        image: ""
+      },
+      {
+        tag: "Sustainable Future",
+        title: "Sustainable Farming Practices Shaping a Better Tomorrow",
+        description: "Discover regenerative agriculture, natural farming and sustainable practices helping create a healthier agricultural ecosystem.",
+        date: "April 30, 2026",
+        readTime: "4 min read",
+        image: ""
+      }
+    ],
+  },
+  {
+    key: "blog-experts",
+    name: "BlogExperts",
+    enabled: true,
+    eyebrow: "VOICES OF EXPERTS",
+    title: "Voices of Experts",
+    buttonLabel: "View all experts",
+    items: [
+      { name: "Dr. Ramesh Patel", role: "Organic Farming Expert", quote: "Organic agriculture is not just a choice, it's the need of the hour for a sustainable future.", image: "" },
+      { name: "Ms. Anita Verma", role: "CEO, Organic India", quote: "Consumer awareness and trust are the strongest pillars of the organic movement.", image: "" },
+      { name: "Mr. Suresh Kumar", role: "Founder, 24 Mantra Organic", quote: "From our farms to your table, organic is our promise for a healthier India.", image: "" },
+      { name: "Dr. Neha Sharma", role: "Sustainability Expert", quote: "Sustainable living begins with conscious choices we make every day.", image: "" },
+      { name: "Mr. Arjun Singh", role: "Agri Entrepreneur", quote: "Innovation and collaboration are driving India's organic future forward.", image: "" },
+    ],
+  },
+  {
+    key: "blog-[#sidebar]",
+    name: "BlogSidebar",
+    enabled: true,
+    eyebrow: "EXPLORE CATEGORIES",
+    title: "Explore Categories",
+    items: [
+      { label: "Expo News", count: 26 },
+      { label: "Organic Farming", count: 24 },
+      { label: "Organic Food", count: 22 },
+      { label: "Natural Products", count: 21 },
+      { label: "Sustainability", count: 19 },
+      { label: "Industry Insights", count: 17 },
+      { label: "Policy & Regulations", count: 10 },
+      { label: "Success Stories", count: 9 },
+    ],
+  },
+  {
+    key: "blog-latest",
+    name: "BlogLatest",
+    enabled: true,
+    eyebrow: "LATEST FROM BHARAT ORGANIC EXPO",
+    title: "Latest from Bharat Organic Expo",
+    buttonLabel: "View all",
+    items: [
+      {
+        tag: "Expo Update",
+        title: "Inside Bharat Organic Expo 2026",
+        description: "A glimpse into grand launches, leading brands, knowledge sessions and business networking at India's biggest organic expo.",
+        date: "May 7, 2026",
+        readTime: "3 min read",
+        image: ""
+      },
+      {
+        tag: "Business Update",
+        title: "Building New Opportunities Across India's Organic Ecosystem",
+        description: "How exhibitors, buyers and partners are creating new markets and long-term growth opportunities.",
+        date: "May 5, 2026",
+        readTime: "4 min read",
+        image: ""
+      }
+    ],
+  },
+  {
+    key: "blog-videos",
+    name: "BlogVideos",
+    enabled: true,
+    eyebrow: "VIDEO INSIGHTS",
+    title: "Video Insights",
+    buttonLabel: "View all",
+    items: [
+      { title: "The Future of Organic Farming in India", duration: "6:24", image: "" },
+      { title: "Inside Bharat Organic Expo", duration: "4:18", image: "" },
+      { title: "Organic Brands & Sustainable Innovation", duration: "5:10", image: "" },
+    ],
+  },
+  {
+    key: "blog-reports",
+    name: "BlogReports",
+    enabled: true,
+    eyebrow: "REPORTS & RESOURCES",
+    title: "Reports & Resources",
+    buttonLabel: "View all",
+    items: [
+      { title: "Organic Industry Report 2026", meta: "PDF · 2.5 MB" },
+      { title: "India Organic Market Outlook", meta: "PDF · 1.8 MB" },
+      { title: "Organic Certification Guide", meta: "PDF · 1.2 MB" },
+      { title: "Sustainable Packaging Trends", meta: "PDF · 950 KB" },
+      { title: "Organic Export Opportunities", meta: "PDF · 1.4 MB" },
+    ],
+  },
+  {
+    key: "blog-stats",
+    name: "BlogStats",
+    enabled: true,
+    title: "STATISTICS",
+    items: [
+      { value: "200+", label: "EXHIBITORS" },
+      { value: "8000+", label: "VISITORS" },
+      { value: "100+", label: "EXPERT SPEAKERS" },
+      { value: "100+", label: "ORGANIC & NATURAL BRANDS" },
+      { value: "3+", label: "DAYS OF EXHIBITION" },
+      { value: "1000+", label: "GLOBAL BUYERS" },
+    ],
+  },
+  {
+    key: "blog-cta",
+    name: "BlogCta",
+    enabled: true,
+    title: "Exhibit. Attend. Connect. Grow.",
+    description: "Join farmers, brands, buyers, exporters, retailers and sustainability leaders shaping India's organic and natural products economy.",
+    date: "19–21 February 2027",
+    location: "Pragati Maidan, New Delhi",
+    buttonLabel: "Register as Visitor",
+    buttonHref: "/registration/visitor-registration",
+    secondaryButtonLabel: "Register as Exhibitor",
+    secondaryButtonHref: "/registration/book-a-stand",
+    tertiaryButtonLabel: "Register as Buyer",
+    tertiaryButtonHref: "/registration/buyer-registration",
+  },
+];

@@ -1,0 +1,535 @@
+import { FieldLabel, ImageUploadField, PdfUploadField, TextInput, Textarea, Toggle, VideoUploadField } from "../fields";
+import {
+  IMAGE_KEY_PATTERN,
+  LONG_TEXT_KEY_PATTERN,
+  SECTION_SKIP_KEYS,
+  VIDEO_KEY_PATTERN,
+  humanizeKey,
+} from "./sectionFieldHelpers";
+import type { CmsRecord } from "@/lib/cmsJson";
+
+export function SectionFieldsEditor({
+  section,
+  onFieldChange,
+}: {
+  section: CmsRecord;
+  onFieldChange: (key: string, value: unknown) => void;
+}) {
+  if (section.key === "footer" || section.name === "Footer & Social Links") {
+    return (
+      <div className="flex flex-col gap-4">
+        {/* Description (About Bharat Organic Expo in Footer Left Column) */}
+        <div className="flex flex-col gap-1.5 bg-white p-3 border border-[#e2e8f0] rounded-[6px]">
+          <FieldLabel required>Footer Description</FieldLabel>
+          <Textarea
+            value={
+              section.description !== undefined && !section.description.startsWith("Showcasing certified products")
+                ? String(section.description)
+                : "A global platform uniting over 500+ exhibitors from across the organic value chain, showcasing certified products, advanced agritech, sustainable practices, and the rich heritage of traditional wellness. Discover organic living with conferences and B2B opportunities."
+            }
+            onChange={(next) => onFieldChange("description", next)}
+            rows={4}
+            noLimit={true}
+            placeholder="A global platform uniting over 500+ exhibitors from across the organic value chain..."
+          />
+        </div>
+
+        {/* 5 Image Uploads with Previews & Reset */}
+        <div className="bg-white p-3 border border-[#e2e8f0] rounded-[6px] flex flex-col gap-3">
+          <div className="text-[11px] font-bold text-[#1e40af] border-b border-gray-100 pb-1.5 flex items-center gap-2">
+            <span>Footer Images & Decorations</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <FieldLabel>Main Logo Image</FieldLabel>
+              <ImageUploadField
+                value={String(section.logoImage || "")}
+                onChange={(next) => onFieldChange("logoImage", next)}
+              />
+            </div>
+            <div>
+              <FieldLabel>Left Leaf Decoration Image</FieldLabel>
+              <ImageUploadField
+                value={String(section.leafImage || "")}
+                onChange={(next) => onFieldChange("leafImage", next)}
+              />
+            </div>
+            <div>
+              <FieldLabel>Down / Mandala Pattern Image</FieldLabel>
+              <ImageUploadField
+                value={String(section.downImage || "")}
+                onChange={(next) => onFieldChange("downImage", next)}
+              />
+            </div>
+            <div>
+              <FieldLabel>Organised By Logo Image</FieldLabel>
+              <ImageUploadField
+                value={String(section.organisedByLogo || "")}
+                onChange={(next) => onFieldChange("organisedByLogo", next)}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <FieldLabel>Bottom Nature / Event Banner Image</FieldLabel>
+              <ImageUploadField
+                value={String(section.bottomBannerImage || "")}
+                onChange={(next) => onFieldChange("bottomBannerImage", next)}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Information (GET IN TOUCH) */}
+        <div className="bg-white p-3 border border-[#e2e8f0] rounded-[6px] flex flex-col gap-3">
+          <div className="text-[11px] font-bold text-[#1e40af] border-b border-gray-100 pb-1.5 flex items-center gap-2">
+            <span>Get In Touch (Contact Information)</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <FieldLabel required>Phone Number</FieldLabel>
+              <TextInput
+                value={String(section.phoneNumber || "")}
+                onChange={(next) => onFieldChange("phoneNumber", next)}
+                placeholder="+91 96549 00525"
+                hideLimit={true}
+              />
+            </div>
+            <div>
+              <FieldLabel required>Contact Email</FieldLabel>
+              <TextInput
+                value={String(section.contactEmail || "")}
+                onChange={(next) => onFieldChange("contactEmail", next)}
+                placeholder="info@namogangewellness.com"
+                hideLimit={true}
+              />
+            </div>
+            <div>
+              <FieldLabel required>Website URL</FieldLabel>
+              <TextInput
+                value={String(section.websiteUrl || "")}
+                onChange={(next) => onFieldChange("websiteUrl", next)}
+                placeholder="www.bharatorganicexpo.com"
+                hideLimit={true}
+              />
+            </div>
+            <div>
+              <FieldLabel>Conference Helpline (Phone)</FieldLabel>
+              <TextInput
+                value={String(section.conferenceHelpline || section.altPhoneNumber || "")}
+                onChange={(next) => {
+                  onFieldChange("conferenceHelpline", next);
+                  onFieldChange("altPhoneNumber", next);
+                }}
+                placeholder="+91 98183 53841"
+                hideLimit={true}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <FieldLabel required>Contact Address</FieldLabel>
+              <TextInput
+                value={String(section.contactAddress || "")}
+                onChange={(next) => onFieldChange("contactAddress", next)}
+                placeholder="Hall 12, Pragati Maidan, New Delhi, India 110001"
+                hideLimit={true}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* CONNECT WITH US (Social Media Links) */}
+        <div className="bg-white p-3 border border-[#e2e8f0] rounded-[6px] flex flex-col gap-3">
+          <div className="text-[11px] font-bold text-[#1e40af] border-b border-gray-100 pb-1.5 flex items-center gap-2">
+            <span>Connect With Us (Social Media Links)</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <FieldLabel>Facebook URL</FieldLabel>
+              <TextInput
+                value={String(section.facebookUrl || "")}
+                onChange={(next) => onFieldChange("facebookUrl", next)}
+                placeholder="https://facebook.com/bharatorganicexpo"
+                hideLimit={true}
+              />
+            </div>
+            <div>
+              <FieldLabel>Instagram URL</FieldLabel>
+              <TextInput
+                value={String(section.instagramUrl || "")}
+                onChange={(next) => onFieldChange("instagramUrl", next)}
+                placeholder="https://instagram.com/bharatorganicexpo"
+                hideLimit={true}
+              />
+            </div>
+            <div>
+              <FieldLabel>Twitter / X URL</FieldLabel>
+              <TextInput
+                value={String(section.twitterUrl || "")}
+                onChange={(next) => onFieldChange("twitterUrl", next)}
+                placeholder="https://x.com/organicexpoin"
+                hideLimit={true}
+              />
+            </div>
+            <div>
+              <FieldLabel>YouTube URL</FieldLabel>
+              <TextInput
+                value={String(section.youtubeUrl || "")}
+                onChange={(next) => onFieldChange("youtubeUrl", next)}
+                placeholder="https://youtube.com/@bharatorganicexpo"
+                hideLimit={true}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <FieldLabel>LinkedIn URL</FieldLabel>
+              <TextInput
+                value={String(section.linkedinUrl || "")}
+                onChange={(next) => onFieldChange("linkedinUrl", next)}
+                placeholder="https://linkedin.com/company/bharatorganicexpo"
+                hideLimit={true}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  const entries = Object.entries(section).filter(
+    ([key, value]) => {
+      if (SECTION_SKIP_KEYS.has(key)) return false;
+      if ((section.key === "audience-strip" || section.name === "AudienceStrip") && key === "title") return false;
+      if (
+        (section.key === "global-platform" || section.name === "GlobalPlatform") &&
+        (key === "subtitle" || key === "title" || key === "image" || key === "imageAlt")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "why-participate" || section.name === "WhyParticipate") &&
+        (key === "subtitle" || key === "title")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "conference-section" || section.name === "ConferenceSection") &&
+        (key === "subtitle" || key === "title")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "expo-categories" || section.name === "ExpoCategories") &&
+        (key === "image" || key === "imageAlt" || key === "title" || key === "subtitle")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "beyond-exhibition" || section.name === "BeyondExhibition") &&
+        (key === "title" || key === "subtitle")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "sponsors-attend" || section.name === "SponsorsAndAttend") &&
+        (key === "title" || key === "subtitle" || key === "rightTitle" || key === "rightBottomText" || key === "centerText1" || key === "centerText2" || key === "centerText3")
+      ) {
+        return false;
+      }
+      if (
+        section.key === "why-exhibit-hero" &&
+        (key === "date" || key === "location")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "industry-segments" || section.name === "IndustrySegments") &&
+        (key === "description" || key === "shortDescription" || key === "buttonLabel" || key === "buttonHref")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "why-visit-matters" || section.name === "WhyVisitMatters") &&
+        key === "eyebrow"
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "testimonials-section" || section.name === "TestimonialsSection") &&
+        (key === "subtitle" || key === "description" || key === "shortDescription")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "awards-hero" || section.name === "Awards Hero Banner") &&
+        key === "shortDescription"
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "awards-stats" || section.name === "Key Statistics Strip") &&
+        (key === "eyebrow" || key === "title")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "awards-about" || section.name === "About the Awards") &&
+        (key === "image" || key === "imageAlt")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "awards-categories" || section.name === "Award Sector Categories") &&
+        (key === "description" || key === "shortDescription")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "awards-grand-awards" || section.name === "Prestigious Grand Awards") &&
+        (key === "description" || key === "shortDescription")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "awards-process" || section.name === "Our Evaluation Process") &&
+        (key === "description" || key === "shortDescription")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "gallery-hero" || section.name === "HeroSection") &&
+        (key === "shortDescription" || key === "rightImage")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "about-hero" || section.name === "AboutHero") &&
+        key === "secondaryImage"
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "home-about" || section.name === "HomeAbout (Who We Are)") &&
+        key === "secondaryImage"
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "advisory-hero" || section.name === "AdvisoryHero") &&
+        key === "secondaryImage"
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "topbar" || section.name === "Topbar & Header Contact") &&
+        (key === "title" || key === "marqueeText")
+      ) {
+        return false;
+      }
+      if (
+        (section.key === "msme-pms-banner" || section.name === "MsmePmsBanner") &&
+        (key === "logoImage" || key === "secondaryImage")
+      ) {
+        return false;
+      }
+      return typeof value === "string" || typeof value === "boolean";
+    },
+  );
+
+  if (!entries.length) {
+    return null;
+  }
+
+  return (
+    <div className="grid grid-cols-2 gap-x-[16px] gap-y-[10px]">
+      {entries.map(([key, value]) => {
+        const isLong = LONG_TEXT_KEY_PATTERN.test(key) || key === "mapEmbedUrl";
+        const isImage = IMAGE_KEY_PATTERN.test(key) && !/alt/i.test(key);
+        const isVideo = VIDEO_KEY_PATTERN.test(key) && key !== "mapEmbedUrl";
+        const isPdf =
+          (section.key === "why-participate" && key === "secondaryButtonHref") ||
+          /brochure|pdf/i.test(key) ||
+          (typeof value === "string" && /\.pdf$/i.test(value));
+        const isDate =
+          section.key !== "awards-hero" &&
+          section.key !== "awards-nomination-hero" &&
+          section.key !== "msme-pms-banner" &&
+          section.key !== "buyer-seller-meet" &&
+          section.key !== "buyer-seller-meet-hero" &&
+          section.key !== "exhibitors-hero" &&
+          section.key !== "partnership-page-hero" &&
+          section.key !== "sub-partnership-hero" &&
+          key !== "timerTitle" &&
+          /date|time/i.test(key) &&
+          typeof value === "string";
+        const fieldLimit = isLong ? 450 : 140;
+        const label =
+          (section.key === "about-hero" || section.name === "AboutHero") && key === "image"
+            ? "Background Image (Upload)"
+            : (section.key === "home-about" || section.name === "HomeAbout (Who We Are)") && key === "image"
+              ? "Left Image (Upload)"
+              : (section.key === "advisory-hero" || section.name === "AdvisoryHero") && key === "image"
+                ? "Background Image (Upload)"
+                : (section.key === "sponsorship-hero" || section.name === "Sponsorship Hero & Key Stats") && key === "image"
+                  ? "Background Image (Upload)"
+                  : (section.key === "msme-pms-banner" || section.name === "MsmePmsBanner") && key === "image"
+                    ? "Background Image (Upload)"
+                    : (section.key === "msme-pms-banner" || section.name === "MsmePmsBanner") && key === "imageAlt"
+                      ? "Background Image Alt Text"
+                      : (section.key === "careers-hero" || section.key === "careers-bottom-banner") && key === "image"
+                        ? "Background Image (Upload)"
+                      : (section.key === "careers-hero" || section.key === "careers-bottom-banner") && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "careers-hero" && key === "title"
+                        ? "H1 Title"
+                      : section.key === "careers-hero" && key === "badgeText"
+                        ? "Green Badge Text (bottom right)"
+                      : section.key === "careers-openings" && key === "emptyTitle"
+                        ? "No Openings: Title"
+                      : section.key === "careers-openings" && key === "emptyDescription"
+                        ? "No Openings: Description"
+                      : section.key === "careers-openings" && key === "emptyNote"
+                        ? "No Openings: Note"
+                      : section.key === "introduction-section" && key === "title"
+                        ? "H1 Title"
+                      : (section.key === "about-hero" || section.key === "advisory-hero" || section.key === "exhibition-hero" || section.key === "why-exhibit-hero" || section.key === "nominate-hero" || section.key === "blog-hero" || section.key === "exhibitors-hero" || section.key === "why-visit-hero" || section.key === "sponsorship-hero" || section.key === "epromotion-hero" || section.key === "partnership-page-hero" || section.key === "sub-partnership-hero" || section.key === "contact-hero") && key === "title"
+                        ? "H1 Title"
+                      : section.key === "sub-partnership-hero" && key === "subtitle"
+                        ? "Short Description (under H1)"
+                      : section.key === "sub-partnership-hero" && key === "description"
+                        ? "Description"
+                      : section.key === "sub-partnership-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "sub-partnership-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "sub-partnership-hero" && key === "date"
+                        ? "Event Date"
+                      : section.key === "sub-partnership-hero" && key === "location"
+                        ? "Event Location"
+                      : section.key === "partnership-page-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "partnership-page-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "partnership-page-hero" && key === "date"
+                        ? "Event Date"
+                      : section.key === "partnership-page-hero" && key === "location"
+                        ? "Event Location"
+                      : section.key === "epromotion-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "epromotion-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "sponsorship-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "exhibitors-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "exhibitors-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "exhibitors-hero" && key === "date"
+                        ? "Event Date"
+                      : section.key === "exhibitors-hero" && key === "location"
+                        ? "Event Location"
+                      : section.key === "blog-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "blog-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "nominate-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "nominate-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "exhibition-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "awards-hero" && key === "title"
+                        ? "H1 Title"
+                      : section.key === "awards-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "awards-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "awards-nomination-hero" && key === "title"
+                        ? "H1 Title"
+                      : section.key === "awards-nomination-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "awards-nomination-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "buyer-seller-meet-hero" && key === "title"
+                        ? "H1 Title"
+                      : section.key === "buyer-seller-meet-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                      : section.key === "buyer-seller-meet-hero" && key === "imageAlt"
+                        ? "Background Image Alt Text"
+                      : section.key === "buyer-seller-meet-hero" && key === "date"
+                        ? "Event Date"
+                      : section.key === "buyer-seller-meet-hero" && key === "location"
+                        ? "Event Location"
+                      : section.key === "msme-director-message" && key === "videoUrl"
+                        ? "Video (Upload / YouTube Link / Instagram Link)"
+                      : section.key === "msme-director-message" && key === "thumbnailImage"
+                        ? "Video Thumbnail (Custom Cover Image - optional)"
+                      : section.key === "msme-director-message" && key === "thumbnailAlt"
+                        ? "Video Thumbnail Alt Text"
+                      : section.key === "terms-page-hero" && key === "image"
+                        ? "Background Image (Upload)"
+                        : section.key === "terms-page-hero" && key === "imageAlt"
+                          ? "Background Image Alt Text"
+                          : humanizeKey(key);
+
+        return (
+          <div
+            key={key}
+            className={isLong || isImage || isVideo || isPdf || typeof value === "boolean" || /^keyPoint/i.test(key) || /alt/i.test(key) ? "col-span-2" : ""}
+          >
+            <FieldLabel>{label}</FieldLabel>
+
+            {typeof value === "boolean" ? (
+              <Toggle checked={value} onChange={(next: boolean) => onFieldChange(key, next)} />
+            ) : isVideo ? (
+              <VideoUploadField
+                value={String(value)}
+                onChange={(next: string) => onFieldChange(key, next)}
+              />
+            ) : isImage ? (
+              <ImageUploadField
+                value={String(value)}
+                onChange={(next: string) => onFieldChange(key, next)}
+              />
+            ) : isPdf ? (
+              <PdfUploadField
+                value={String(value)}
+                onChange={(next: string) => onFieldChange(key, next)}
+              />
+            ) : isDate ? (
+              <div className="flex items-center gap-2">
+                <input
+                  type="datetime-local"
+                  value={
+                    String(value).includes("T")
+                      ? String(value).slice(0, 16)
+                      : String(value)
+                  }
+                  onChange={(e) => onFieldChange(key, e.target.value)}
+                  className="h-[34px] rounded border border-[#cbd5e1] px-2.5 text-[12px] bg-white text-[#1e293b] focus:border-[#0f766e] focus:outline-none"
+                />
+                <span className="text-[10px] text-[#64748b]">Select date and time for live countdown timer</span>
+              </div>
+            ) : isLong ? (
+              <>
+                <Textarea
+                  value={String(value)}
+                  onChange={(next: string) => onFieldChange(key, next)}
+                  rows={key === "mapEmbedUrl" ? 2 : 3}
+                  noLimit={section.key === "why-visit-matters" || key === "mapEmbedUrl"}
+                />
+                {key === "mapEmbedUrl" && (
+                  <p className="mt-1 text-[9px] text-[#64748b]">
+                    Google Maps → Share → Embed a map → paste the full &lt;iframe&gt; code or just the src link here.
+                  </p>
+                )}
+              </>
+            ) : (
+              <TextInput
+                value={String(value)}
+                onChange={(next: string) => onFieldChange(key, next)}
+                maxLength={section.key === "why-visit-matters" ? 5000 : 120}
+                hideLimit={section.key === "why-visit-matters"}
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
