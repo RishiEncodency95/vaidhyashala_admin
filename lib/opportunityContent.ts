@@ -15,7 +15,7 @@ export const defaultSponsorshipSections: OpportunitySectionContent[] = [
     subtitle: "Partner. Promote. Make an Impact.",
     description: "Align your brand with India's Premier Organic Expo and connect with the right audience, build credibility and drive real impact.",
     image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791012539/bharat-organic/sponsorship/hero-bg.webp",
-    imageAlt: "Sponsorship opportunities at Bharat Organic Expo 2027",
+    imageAlt: "Sponsorship opportunities at Vaidhyashala",
     items: [
       { title: "8,000+", label: "BUSINESS VISITORS", icon: "Users" },
       { title: "200+", label: "EXHIBITORS", icon: "Store" },
@@ -149,7 +149,7 @@ export const defaultEPromotionSections: OpportunitySectionContent[] = [
     subtitle: "Promote. Engage. Inspire.",
     description: "Maximize your brand visibility and connect with a highly targeted audience before, during and after the event.",
     image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791015124/bharat-organic/e-promotion/hero-bg.webp",
-    imageAlt: "E-Promotion opportunities at Bharat Organic Expo 2027",
+    imageAlt: "E-Promotion opportunities at Vaidhyashala",
     items: [
       { title: "8,000+", label: "BUSINESS VISITORS", icon: "Users" },
       { title: "200+", label: "EXHIBITORS", icon: "Store" },
@@ -254,11 +254,11 @@ export const defaultPartnershipPageSections: OpportunitySectionContent[] = [
     enabled: true,
     eyebrow: "PARTNERSHIP / COLLABORATION",
     title: "Let's Grow Organic. Together.",
-    subtitle: "Partner with Bharat Organic Expo 2027 and be a part of India's leading platform for organic business, innovation, wellness and sustainability.",
+    subtitle: "Partner with Vaidhyashala and be a part of India's leading platform for organic business, innovation, wellness and sustainability.",
     date: "19 – 21 February 2027",
     location: "Bharat Mandapam, New Delhi",
     image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791016243/bharat-organic/partnership/hero-bg.webp",
-    imageAlt: "Partnership and collaboration at Bharat Organic Expo 2027",
+    imageAlt: "Partnership and collaboration at Vaidhyashala",
     items: [
       { title: "8,000+", label: "VISITORS / DELEGATES", icon: "Users" },
       { title: "200+", label: "EXHIBITORS", icon: "Store" },
@@ -319,7 +319,7 @@ export const defaultPartnershipPageSections: OpportunitySectionContent[] = [
     name: "Why Partner With Us & Key Benefits",
     enabled: true,
     eyebrow: "WHY PARTNER",
-    title: "WHY PARTNER WITH BHARAT ORGANIC EXPO 2027?",
+    title: "WHY PARTNER WITH VAIDHYASHALA?",
     subtitle: "KEY BENEFITS",
     description: "Connect with a highly targeted audience, build brand trust and showcase your expertise to thousands of visitors, industry leaders and decision makers.",
     items: [

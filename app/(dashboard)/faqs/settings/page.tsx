@@ -270,7 +270,7 @@ export default function FAQSettingsPage() {
                 </div>
 
                 <textarea
-                  defaultValue={"Find answers to common questions\nabout Bharat Organic Expo\nevent, stall booking & participation."}
+                  defaultValue={"Find answers to common questions\nabout Vaidhyashala\nevent, stall booking & participation."}
                   className="h-[66px] resize-none rounded-[6px] border border-[#dfe4e8] bg-white px-[11px] py-[9px] text-[9px] font-semibold leading-[1.45] text-[#394760] outline-none"
                 />
               </div>
@@ -502,7 +502,7 @@ export default function FAQSettingsPage() {
                     Frequently Asked Questions
                   </h3>
                   <p className="mx-auto mt-[7px] max-w-[270px] text-[9px] font-semibold leading-[1.5] text-[#66738b]">
-                    Find answers to common questions about Bharat Organic Expo
+                    Find answers to common questions about Vaidhyashala
                     stall booking and visitor passes.
                   </p>
                 </div>
@@ -541,7 +541,7 @@ export default function FAQSettingsPage() {
 
                 <div className="mt-[12px] overflow-hidden rounded-[7px] border border-[#e5e8eb]">
                   {[
-                    "What is Bharat Organic Expo 2027?",
+                    "What is Vaidhyashala?",
                     "How to register as an exhibitor?",
                     "Are visitor passes free or paid?",
                     "How do B2B buyer meetings work?",

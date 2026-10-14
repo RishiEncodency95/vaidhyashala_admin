@@ -18,7 +18,7 @@ export function SectionFieldsEditor({
   if (section.key === "footer" || section.name === "Footer & Social Links") {
     return (
       <div className="flex flex-col gap-4">
-        {/* Description (About Bharat Organic Expo in Footer Left Column) */}
+        {/* Description (About Vaidhyashala in Footer Left Column) */}
         <div className="flex flex-col gap-1.5 bg-white p-3 border border-[#e2e8f0] rounded-[6px]">
           <FieldLabel required>Footer Description</FieldLabel>
           <Textarea

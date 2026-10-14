@@ -566,7 +566,7 @@ export default function ChatbotReportsPage() {
           </span>
           <span className="text-right text-[11.6px] leading-snug">
             Response times use configured working hours. Feedback reflects submitted ratings only.
-            <br />© 2026 Bharat Organic Expo. All rights reserved.
+            <br />© 2026 Vaidhyashala. All rights reserved.
           </span>
         </div>
       </div>

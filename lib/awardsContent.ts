@@ -124,7 +124,7 @@ export const defaultAwardsSections: AwardsSectionContent[] = [
       { title: "Evaluation", image: "/assets/awards/evaluation-jury.png", description: "Nominations are evaluated by our expert jury panel based on defined criteria." },
       { title: "Shortlisting", image: "/assets/awards/shortlisting.png", description: "Top nominees are shortlisted in each category." },
       { title: "Jury Assessment", image: "/assets/awards/evaluation-jury.png", description: "Final assessment by the jury to select the award winners." },
-      { title: "Recognition", image: "/assets/awards/recognition.png", description: "Winners are honoured at the Bharat Organic Expo 2027." },
+      { title: "Recognition", image: "/assets/awards/recognition.png", description: "Winners are honoured at the Vaidhyashala." },
     ],
   },
   {
@@ -203,7 +203,7 @@ export const defaultAwardsNominationSections: AwardsSectionContent[] = [
       { num: "03", title: "Evaluation", description: "Nominations are evaluated by our expert jury panel based on defined criteria.", image: "/assets/awards/evaluation-jury.png" },
       { num: "04", title: "Shortlisting", description: "Top nominees are shortlisted in each category.", image: "/assets/awards/shortlisting.png" },
       { num: "05", title: "Jury Assessment", description: "Final assessment by the jury to select the award winners.", image: "/assets/awards/evaluation-jury.png" },
-      { num: "06", title: "Recognition", description: "Winners are honoured at the Bharat Organic Expo 2027.", image: "/assets/awards/recognition.png" },
+      { num: "06", title: "Recognition", description: "Winners are honoured at the Vaidhyashala.", image: "/assets/awards/recognition.png" },
     ],
   },
 ];

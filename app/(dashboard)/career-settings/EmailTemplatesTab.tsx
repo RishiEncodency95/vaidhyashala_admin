@@ -138,7 +138,7 @@ export default function EmailTemplatesTab() {
               {[
                 { var: "{{candidate_name}}", desc: "Candidate's full name" },
                 { var: "{{job_title}}", desc: "Job position title" },
-                { var: "{{company_name}}", desc: "Bharat Organic Expo" },
+                { var: "{{company_name}}", desc: "Vaidhyashala" },
                 { var: "{{application_link}}", desc: "Link to application" },
                 { var: "{{current_ctc}}", desc: "Current CTC (if provided)" },
                 { var: "{{expected_ctc}}", desc: "Expected CTC (if provided)" },
@@ -186,7 +186,7 @@ export default function EmailTemplatesTab() {
               <label className="text-[9px] font-bold text-[#172762] w-[80px]">Subject <span className="text-red-500">*</span></label>
               <input 
                 type="text" 
-                defaultValue="Interview Invitation - {{job_title}} | Bharat Organic Expo" 
+                defaultValue="Interview Invitation - {{job_title}} | Vaidhyashala" 
                 className="flex-1 border border-[#E1E6EC] rounded-[4px] px-[8px] py-[4px] text-[9px] font-semibold text-[#172762] outline-none" 
               />
             </div>
@@ -211,7 +211,7 @@ export default function EmailTemplatesTab() {
                 className="flex-1 p-[8px] text-[9.5px] font-medium text-[#172762] outline-none resize-none leading-[1.6] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                 defaultValue={`Dear {{candidate_name}},
 
-Congratulations! Your application for the position of "{{job_title}}" at Bharat Organic Expo has been shortlisted.
+Congratulations! Your application for the position of "{{job_title}}" at Vaidhyashala has been shortlisted.
 
 We would like to invite you for an interview.
 
@@ -226,7 +226,7 @@ For any queries, feel free to contact us.
 
 Best regards,
 HR Team
-Bharat Organic Expo`}
+Vaidhyashala`}
               />
             </div>
           </div>

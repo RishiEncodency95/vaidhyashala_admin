@@ -54,8 +54,8 @@ const INITIAL_ANSWERS: Answer[] = [
     status: "Approved",
     phrases: ["Expo kab hai?", "Event dates?", "When is the expo?"],
     answer: {
-      en: "Bharat Organic Expo 2027 will be held from 19–21 February 2027 at Bharat Mandapam (Pragati Maidan), New Delhi.",
-      hi: "Bharat Organic Expo 2027, 19–21 February 2027 ko Bharat Mandapam (Pragati Maidan), New Delhi mein hoga.",
+      en: "Vaidhyashala will be held from 19–21 February 2027 at Bharat Mandapam (Pragati Maidan), New Delhi.",
+      hi: "Vaidhyashala, 19–21 February 2027 ko Bharat Mandapam (Pragati Maidan), New Delhi mein hoga.",
     },
     nextAction: "Open Website Page",
     nextTarget: "Event Information",

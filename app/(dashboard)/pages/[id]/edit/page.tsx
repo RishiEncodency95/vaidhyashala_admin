@@ -203,8 +203,8 @@ export default function CmsEditPage() {
 
         metaTitle:
           page.type === "home"
-            ? "Bharat Organic Expo – International Trade Fair on Organic Products"
-            : `${page.title} – Bharat Organic Expo`,
+            ? "Vaidhyashala – International Trade Fair on Organic Products"
+            : `${page.title} – Vaidhyashala`,
 
         metaDescription: page.seo?.metaDescription ?? "",
         metaKeywords: page.seo?.metaKeywords ?? "",
@@ -277,7 +277,7 @@ export default function CmsEditPage() {
       slug: page.slug === "/" ? "" : page.slug.replace(/^\//, ""),
       template: getTemplateForPage(page),
       parent: page.type === "home" ? "— No Parent (Top Level) —" : "Home",
-      metaTitle: page.seo?.metaTitle ?? (page.type === "home" ? "Bharat Organic Expo – International Trade Fair on Organic Products" : `${page.title} – Bharat Organic Expo`),
+      metaTitle: page.seo?.metaTitle ?? (page.type === "home" ? "Vaidhyashala – International Trade Fair on Organic Products" : `${page.title} – Vaidhyashala`),
       metaDescription: page.seo?.metaDescription ?? "",
       metaKeywords: page.seo?.metaKeywords ?? "",
       canonicalUrl:
@@ -803,7 +803,7 @@ export default function CmsEditPage() {
         slug: targetPage.slug === "/" ? "" : targetPage.slug.replace(/^\//, ""),
         template: getTemplateForPage(targetPage),
         parent: targetPage.type === "home" ? "\u2014 No Parent (Top Level) \u2014" : "Home",
-        metaTitle: targetPage.seo?.metaTitle ?? (targetPage.type === "home" ? "Bharat Organic Expo \u2013 International Trade Fair on Organic Products" : `${targetPage.title} \u2013 Bharat Organic Expo`),
+        metaTitle: targetPage.seo?.metaTitle ?? (targetPage.type === "home" ? "Vaidhyashala \u2013 International Trade Fair on Organic Products" : `${targetPage.title} \u2013 Vaidhyashala`),
         metaDescription: targetPage.seo?.metaDescription ?? "",
         metaKeywords: targetPage.seo?.metaKeywords ?? "",
         canonicalUrl: targetPage.seo?.canonicalUrl || "",

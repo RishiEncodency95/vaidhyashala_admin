@@ -266,10 +266,10 @@ function getMockDataForPath(path: string, method: string = "GET"): unknown {
     return [
       {
         _id: "blog-1",
-        title: "Bharat Organic Expo 2027: India's Largest Organic & Herbal Event",
+        title: "Vaidhyashala: India's Largest Organic & Herbal Event",
         slug: "bharat-organic-expo-2027-event",
         excerpt: "Join global industry leaders and organic producers at Yashobhoomi, New Delhi.",
-        content: "<p>Welcome to Bharat Organic Expo 2027...</p>",
+        content: "<p>Welcome to Vaidhyashala...</p>",
         author: "Admin Team",
         tags: ["Organic Food", "Exhibition", "Delhi"],
         isPublished: true,
@@ -524,7 +524,7 @@ function getMockDataForPath(path: string, method: string = "GET"): unknown {
     return [
       {
         _id: "faq-1",
-        question: "What are the dates for Bharat Organic Expo 2027?",
+        question: "What are the dates for Vaidhyashala?",
         answer: "The expo will be held at Yashobhoomi (IICC), Dwarka, New Delhi.",
         category: "General",
         order: 1,
@@ -540,7 +540,7 @@ function getMockDataForPath(path: string, method: string = "GET"): unknown {
         _id: "gal-1",
         type: "image",
         url: "/images/hero-bg.jpg",
-        caption: "Bharat Organic Expo Pavilion",
+        caption: "Vaidhyashala Pavilion",
         category: "Expo",
         isActive: true,
         createdAt: "2026-01-01T10:00:00Z"
@@ -551,7 +551,7 @@ function getMockDataForPath(path: string, method: string = "GET"): unknown {
   if (p.includes("/settings")) {
     return {
       _id: "settings-1",
-      siteName: "Bharat Organic Expo 2027",
+      siteName: "Vaidhyashala",
       helplineNumber: "+91 11 4567 8900",
       whatsappNumber: "+91 9876543210",
       supportEmail: "info@bharatorganicexpo.com",
@@ -691,7 +691,7 @@ async function requestHtml(path: string): Promise<string> {
     if (!res.ok) throw new ApiRequestError(res.status, "Could not load this document.");
     return res.text();
   } catch {
-    return "<div>Mock HTML Document for Bharat Organic Expo</div>";
+    return "<div>Mock HTML Document for Vaidhyashala</div>";
   }
 }
 

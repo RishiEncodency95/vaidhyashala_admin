@@ -8,7 +8,7 @@ export const defaultCareersSections: LandingSectionContent[] = [
     enabled: true,
     eyebrow: "CAREER",
     title: "Be Part of Something Bigger",
-    description: "Build your career with Bharat Organic Expo and contribute to a sustainable, healthier and more conscious tomorrow.",
+    description: "Build your career with Vaidhyashala and contribute to a sustainable, healthier and more conscious tomorrow.",
     badgeText: "Join the people who connect business, nature and a better tomorrow.",
     image: "",
     imageAlt: "Professionals networking at a sustainable organic expo",
@@ -34,7 +34,7 @@ export const defaultCareersSections: LandingSectionContent[] = [
     name: "Why Work With Us",
     enabled: true,
     title: "Why Work With Us?",
-    description: "At Bharat Organic Expo, you’ll grow with a purpose-driven team and be part of a movement that creates lasting change.",
+    description: "At Vaidhyashala, you’ll grow with a purpose-driven team and be part of a movement that creates lasting change.",
     items: [
       { title: "Purpose-Driven Work" },
       { title: "Inclusive Environment" },

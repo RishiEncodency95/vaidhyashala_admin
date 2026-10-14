@@ -30,7 +30,7 @@ import { blogsApi } from "@/lib/blogsApi";
 import { BLOG_UPDATE_LIMITS, blogUpdatesApi, type BlogUpdate, type BlogUpdateInput } from "@/lib/blogUpdatesApi";
 
 /*
- * Manage Updates — the "Latest from Bharat Organic Expo" cards on the website's /blog and
+ * Manage Updates — the "Latest from Vaidhyashala" cards on the website's /blog and
  * /blog/updates pages.
  */
 
@@ -347,7 +347,7 @@ export default function BlogUpdatesPage() {
                 <span className="text-[#7b8597]">›</span>
                 <span onClick={() => router.push("/blogs")} className="cursor-pointer transition hover:text-[#075b33]">Blog &amp; Insights</span>
                 <span className="text-[#7b8597]">›</span>
-                <span className="text-[#075b33]">Latest from Bharat Organic Expo</span>
+                <span className="text-[#075b33]">Latest from Vaidhyashala</span>
               </nav>
             </div>
           </div>
@@ -390,7 +390,7 @@ export default function BlogUpdatesPage() {
             iconClass="bg-emerald-50 text-emerald-700"
             label="Total Updates"
             value={loading ? "–" : String(updates.length)}
-            note="In Latest from Bharat Organic Expo"
+            note="In Latest from Vaidhyashala"
           />
           <MetricCard
             icon={<CalendarDays className="h-[16px] w-[16px]" strokeWidth={1.7} />}
@@ -667,7 +667,7 @@ export default function BlogUpdatesPage() {
               value={form.title}
               maxLength={L.title}
               onChange={(e) => setField("title", e.target.value)}
-              placeholder="e.g. Inside Bharat Organic Expo 2026"
+              placeholder="e.g. Inside Vaidhyashala"
             />
           </div>
 

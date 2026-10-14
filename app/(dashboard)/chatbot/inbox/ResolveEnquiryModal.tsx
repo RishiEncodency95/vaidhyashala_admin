@@ -117,7 +117,7 @@ export default function ResolveEnquiryModal({ enquiry, onClose, onResolve }: Pro
     const text = `${message.trim()}${requestFeedback ? "\n\nHow was your experience with us? Please reply with your feedback." : ""}`;
     // Opens the message ready to send from your WhatsApp / mail / SMS app
     if (sendUpdate && channel === "WhatsApp") window.open(`https://wa.me/91${mobile}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
-    if (sendUpdate && channel === "Email") window.open(`mailto:${enquiry.email}?subject=${encodeURIComponent(`Your ${enquiry.type.toLowerCase()} — Bharat Organic Expo`)}&body=${encodeURIComponent(text)}`, "_blank");
+    if (sendUpdate && channel === "Email") window.open(`mailto:${enquiry.email}?subject=${encodeURIComponent(`Your ${enquiry.type.toLowerCase()} — Vaidhyashala`)}&body=${encodeURIComponent(text)}`, "_blank");
     if (sendUpdate && channel === "SMS") window.open(`sms:+91${mobile}?body=${encodeURIComponent(text)}`, "_blank");
     onResolve({ status, outcome, summary: summary.trim(), sendUpdate, channel, message: text, requestFeedback });
   };

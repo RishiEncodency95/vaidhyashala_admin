@@ -11,7 +11,7 @@ export const en: TranslationDictionary = {
       service: "B2B Connectivity", serviceCopy: "Connecting Producers directly with Buyers",
       trust: "Trust & Quality", trustCopy: "Verified Standards & Premium Expo Platform"
     },
-    secureTitle: "Secure. Confidential. Accountable.", secureCopy: "Your trust is our responsibility.", welcome: "Welcome Back!", continue: "Please login to continue to", portalName: "Bharat Organic Expo Admin Portal",
+    secureTitle: "Secure. Confidential. Accountable.", secureCopy: "Your trust is our responsibility.", welcome: "Welcome Back!", continue: "Please login to continue to", portalName: "Vaidhyashala Admin Portal",
     identifier: "Email / Mobile / Staff ID", identifierPlaceholder: "Enter email, mobile number or staff ID", password: "Password", passwordPlaceholder: "Enter your password", remember: "Remember Me", forgot: "Forgot Password?",
     loginSecurely: "Login Securely", signingIn: "Signing in...", or: "OR", otpLogin: "Login with OTP (2FA)", twoFactorProtected: "Protected with two-factor authentication (2FA)", authorizedTitle: "Authorized Access Only.", authorizedCopy: "For authorized staff only. All activities are monitored.",
     needHelp: "Need help?", contact: "Contact", itSupport: "IT Support",

@@ -6,7 +6,7 @@ const SETTINGS_KEY = "bharat_organic_admin_settings_v3";
 // Used until the backend answers (and offline)
 const defaultMockSettings: Settings = {
   _id: "",
-  siteName: "Bharat Organic Expo 2027",
+  siteName: "Vaidhyashala",
   helplineNumber: "+91 9654900525",
   supportEmail: "info@bharatorganicexpo.com",
   banners: [],

@@ -76,7 +76,7 @@ export const defaultGallerySections: LandingSectionContent[] = [
     key: "gallery-join-banner",
     name: "JoinUsBanner",
     enabled: true,
-    title: "Be Part of Bharat Organic Expo 2027",
+    title: "Be Part of Vaidhyashala",
     description: "Join India's premier organic trade show to showcase your products, connect with global buyers, and grow your brand.",
     buttonLabel: "BOOK YOUR STALL NOW",
     buttonHref: "/registration/book-a-stand",

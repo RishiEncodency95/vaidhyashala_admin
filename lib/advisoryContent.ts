@@ -8,9 +8,9 @@ export const defaultAdvisorySections: LandingSectionContent[] = [
     eyebrow: "GUIDING. INSPIRING. TRANSFORMING.",
     title: "ADVISORY BOARD MEMBERS",
     subtitle: "GUIDING. INSPIRING. TRANSFORMING.",
-    description: "Our Advisory Board comprises distinguished leaders, industry experts, and visionaries who bring strategic guidance, deep expertise and a shared commitment to drive Bharat Organic Expo towards a sustainable, innovative and impactful future.",
+    description: "Our Advisory Board comprises distinguished leaders, industry experts, and visionaries who bring strategic guidance, deep expertise and a shared commitment to drive Vaidhyashala towards a sustainable, innovative and impactful future.",
     image: "",
-    imageAlt: "Bharat Organic Expo 2027 Advisory Board Members",
+    imageAlt: "Vaidhyashala Advisory Board Members",
     items: [
       { title: "LEADING VISIONARIES", subtitle: "From diverse industries", icon: "Users" },
       { title: "STRATEGIC GUIDANCE", subtitle: "For sustainable growth", icon: "Award" },
@@ -24,14 +24,14 @@ export const defaultAdvisorySections: LandingSectionContent[] = [
     enabled: true,
     eyebrow: "CHAIRMAN'S MESSAGE",
     title: "Leading Together for a Healthier Tomorrow",
-    subtitle: "Chairman, Bharat Organic Expo 2027",
-    description: "At Bharat Organic Expo 2027, we believe in the power of collaboration, innovation, and sustainability.",
+    subtitle: "Chairman, Vaidhyashala",
+    description: "At Vaidhyashala, we believe in the power of collaboration, innovation, and sustainability.",
     secondaryDescription: "This platform brings together visionaries, experts, and changemakers to create a lasting impact on health and organic wellness.",
     quote: "A global platform for innovation and collaboration in the organic, health & wellness industry. We aim to empower communities, promote sustainable practices, and drive transformative growth by connecting visionaries and eco-conscious enterprises worldwide.",
     image: "",
     imageAlt: "Mr. Vijay Sharma - Chairman",
     authorName: "Mr. Vijay Sharma",
-    authorDesignation: "Chairman, Bharat Organic Expo 2027",
+    authorDesignation: "Chairman, Vaidhyashala",
   },
   {
     key: "advisory-grid",
@@ -159,7 +159,7 @@ export const defaultNominateAdvisorySections: LandingSectionContent[] = [
     eyebrow: "JOIN OUR LEADERSHIP COUNCIL",
     // Single H1: the website shows the first two words dark, the rest green.
     title: "Nominate an Advisory Board Member",
-    description: "Recognize leaders who can guide, support and strengthen the vision of Bharat Organic Expo.",
+    description: "Recognize leaders who can guide, support and strengthen the vision of Vaidhyashala.",
     image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791009918/bharat-organic/nominate-advisory/hero-bg.webp",
     imageAlt: "Nominate Advisory Board Member",
     // Icon row under the description: title = label, icon = lucide icon name.

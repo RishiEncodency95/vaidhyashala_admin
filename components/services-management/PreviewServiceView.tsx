@@ -254,7 +254,7 @@ export default function PreviewServiceView() {
               </h3>
 
               <p className="mt-[10px] max-w-[900px] text-[10.5px] font-semibold leading-[1.65] text-[#44516a]">
-                Bharat Organic Expo provides complete support for exhibitor stall booking,
+                Vaidhyashala provides complete support for exhibitor stall booking,
                 B2B buyer matchmaking, and sponsor delegations.
                 <br />
                 Our team handles stall allocation, VIP lounge entry, seminars, and technical workshops,

@@ -541,7 +541,7 @@ export default function TrustedLeadersPage() {
         setFormLogo(uploadedUrl);
         setFormFileSize(sizeStr);
         if (!formAltText) {
-          setFormAltText(`${formName || "Partner"} Brand Logo - Bharat Organic Expo`);
+          setFormAltText(`${formName || "Partner"} Brand Logo - Vaidhyashala`);
         }
       }
     }
@@ -556,7 +556,7 @@ export default function TrustedLeadersPage() {
     const existingCount = allPartnersList.filter((x) => x.category === defaultCat).length;
     setFormOrder(existingCount + 1);
     setFormLogo("/partners/logo1.png");
-    setFormAltText("Brand Partner Logo - Bharat Organic Expo");
+    setFormAltText("Brand Partner Logo - Vaidhyashala");
     setFormStatus("Published");
     setFormFileSize("35.0 KB");
     setIsModalOpen(true);
@@ -582,7 +582,7 @@ export default function TrustedLeadersPage() {
     const activeAdmin = loggedInAdminName;
     const finalName = formName.trim() || "Brand Partner";
     const finalLogo = formLogo.trim() || "/partners/logo1.png";
-    const finalAlt = formAltText.trim() || `${finalName} Brand Logo - Bharat Organic Expo`;
+    const finalAlt = formAltText.trim() || `${finalName} Brand Logo - Vaidhyashala`;
     const finalOrder = Number(formOrder) || (editingItem ? editingItem.order : allPartnersList.length + 1);
     const timeNow = formatTimestamp();
 
@@ -1599,7 +1599,7 @@ export default function TrustedLeadersPage() {
               required
               value={formAltText}
               onChange={(e) => setFormAltText(e.target.value)}
-              placeholder="e.g. Namo Gange Partner Logo - Bharat Organic Expo"
+              placeholder="e.g. Namo Gange Partner Logo - Vaidhyashala"
               hint="Unique for every partner brand. Embedded into HTML <img alt='...'> tag for image SEO."
             />
           </div>

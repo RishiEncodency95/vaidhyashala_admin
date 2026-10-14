@@ -18,7 +18,7 @@ export default function AdminFooter() {
             Together, we bring dignity to every final journey.
           </span>
           <span className="h-5 w-px bg-slate-300" />
-          <span className="whitespace-nowrap">© {new Date().getFullYear()} Bharat Organic Expo. All rights reserved.</span>
+          <span className="whitespace-nowrap">© {new Date().getFullYear()} Vaidhyashala. All rights reserved.</span>
           <span className="h-6 w-px bg-slate-300" />
           <span className="whitespace-nowrap">An Initiative of Namo Gange Trust</span>
           <span className="h-6 w-px bg-slate-300" />

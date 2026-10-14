@@ -540,7 +540,7 @@ export default function ExhibitorListPage() {
     setFormLocation("India");
     setFormOrder(exhibitors.length + 1);
     setFormLogo(defaultCloudinaryLogo);
-    setFormAltText("Exhibitor Brand Logo - Bharat Organic Expo");
+    setFormAltText("Exhibitor Brand Logo - Vaidhyashala");
     setFormStatus("Published");
     setFormWebsiteUrl("");
     setFormFileSize("15.0 KB");
@@ -685,7 +685,7 @@ export default function ExhibitorListPage() {
         setFormLogo(uploadedUrl);
         setFormFileSize(sizeStr);
         if (!formAltText) {
-          setFormAltText(`${formName || "Exhibitor"} Brand Logo - Bharat Organic Expo`);
+          setFormAltText(`${formName || "Exhibitor"} Brand Logo - Vaidhyashala`);
         }
       }
     }
@@ -708,7 +708,7 @@ export default function ExhibitorListPage() {
 
   const handleOpenBulk = () => {
     clearBulkFiles();
-    setBulkAltText("Exhibitor Brand Logo - Bharat Organic Expo");
+    setBulkAltText("Exhibitor Brand Logo - Vaidhyashala");
     setBulkCategory("ORGANIC FOOD");
     setBulkStatus("Published");
     setIsBulkOpen(true);
@@ -815,7 +815,7 @@ export default function ExhibitorListPage() {
     const activeAdmin = getAdminName();
     const finalName = formName.trim() || "Exhibitor Brand";
     const finalLogo = formLogo.trim() || "/exhibitors/1.jpg";
-    const finalAlt = formAltText.trim() || `${finalName} Brand Logo - Bharat Organic Expo Exhibitor`;
+    const finalAlt = formAltText.trim() || `${finalName} Brand Logo - Vaidhyashala Exhibitor`;
     const finalOrder = Number(formOrder) || (editingItem ? editingItem.order : exhibitors.length + 1);
     const timeNow = formatTimestamp();
 
@@ -1905,7 +1905,7 @@ export default function ExhibitorListPage() {
               required
               value={formAltText}
               onChange={(e) => setFormAltText(e.target.value)}
-              placeholder="e.g. Ropuiliani Organic Food Exhibitor Logo - Bharat Organic Expo"
+              placeholder="e.g. Ropuiliani Organic Food Exhibitor Logo - Vaidhyashala"
               hint="Unique for every exhibitor. Embedded into HTML <img alt='...'> tag for image SEO and screen readers."
             />
           </div>
@@ -2020,7 +2020,7 @@ export default function ExhibitorListPage() {
               required
               value={bulkAltText}
               onChange={(e) => setBulkAltText(e.target.value)}
-              placeholder="e.g. Exhibitor Brand Logo - Bharat Organic Expo"
+              placeholder="e.g. Exhibitor Brand Logo - Vaidhyashala"
               hint="Every logo in this batch gets this alt text. You can make it unique per exhibitor later from Edit."
             />
 

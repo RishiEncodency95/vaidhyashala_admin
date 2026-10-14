@@ -518,7 +518,7 @@ function mockOverview(): SeoOverview {
     site: {
       id: "boe-site-1",
       url: "https://bharatorganicexpo.com",
-      label: "Bharat Organic Expo 2027",
+      label: "Vaidhyashala",
       type: "production",
       crawlSettings: {},
       schedule: {},
@@ -593,7 +593,7 @@ function mockPageDetail(id: string): SeoPageDetail {
     PAGE_INVENTORY.find((page) => page.path.replace(/^\//, "") === cleanId);
   const label = inv?.label ?? cleanId.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
-  const pageTitle = inv?.title ?? `${label} | Bharat Organic Expo 2027`;
+  const pageTitle = inv?.title ?? `${label} | Vaidhyashala`;
   const score = capScore(inv?.score ?? 0);
   const wordCount = inv?.words ?? 0;
   const inLinks = inv?.inLinks ?? 0;
@@ -670,13 +670,13 @@ function mockPageDetail(id: string): SeoPageDetail {
       canonicalNormalized: `https://bharatorganicexpo.com/${cleanId === "home" ? "" : cleanId}`,
       canonicalCount: 1,
       ogTitle: pageTitle,
-      ogDescription: `Official ${cleanId.replace(/-/g, " ")} details for Bharat Organic Expo 2027.`,
+      ogDescription: `Official ${cleanId.replace(/-/g, " ")} details for Vaidhyashala.`,
       ogImage: "https://bharatorganicexpo.com/assets/images/og-banner.png",
       ogType: "website",
       ogUrl: `https://bharatorganicexpo.com/${cleanId === "home" ? "" : cleanId}`,
       twitterCard: "summary_large_image",
       twitterTitle: pageTitle,
-      twitterDescription: `Official ${cleanId.replace(/-/g, " ")} details for Bharat Organic Expo 2027.`,
+      twitterDescription: `Official ${cleanId.replace(/-/g, " ")} details for Vaidhyashala.`,
       twitterImage: "https://bharatorganicexpo.com/assets/images/og-banner.png",
       metaKeywords: "",
       metaKeywordCount: 0,
@@ -784,7 +784,7 @@ function mockPageDetail(id: string): SeoPageDetail {
       metric: "Daily Search Console Data",
       totals: { clicks: 120, impressions: 3400, ctr: 3.5, position: 4.2 },
       topQueries: [
-        { query: "bharat organic expo 2027", clicks: 85, impressions: 1800, ctr: 4.7, position: 1.2 },
+        { query: "vaidhyashala", clicks: 85, impressions: 1800, ctr: 4.7, position: 1.2 },
         { query: "organic food exhibition new delhi", clicks: 35, impressions: 1600, ctr: 2.1, position: 3.8 }
       ]
     },
@@ -928,7 +928,7 @@ export const seoAuditApi = {
         contentGaps: [
           { query: "organic agriculture expo new delhi", clicks: 45, impressions: 1200, ctr: 3.75, position: 4.2, bestPage: "/why-visit", bestPageTitle: "Why Visit", reason: "High impressions" },
         ],
-        risingQueries: [{ query: "bharat organic expo stall booking", clicks: 120, clicksChange: 45 }],
+        risingQueries: [{ query: "vaidhyashala stall booking", clicks: 120, clicksChange: 45 }],
         fallingQueries: [],
         highImpressionLowCtr: [],
         strikingDistance: [{ query: "organic food exhibition 2027", position: 5.4, impressions: 890 }],
@@ -948,7 +948,7 @@ export const seoAuditApi = {
     } catch {
       return {
         primary: {
-          label: "Bharat Organic Expo 2027",
+          label: "Vaidhyashala",
           url: "https://bharatorganicexpo.com",
           observed: { pagesCrawled: inventoryTotals().total, averageWordCount: inventoryTotals().avgWords },
         },
@@ -978,7 +978,7 @@ export const seoAuditApi = {
         id: "rec-site-1",
         scope: "site",
         url: null,
-        summary: "AI Audit Summary for Bharat Organic Expo 2027: Enhance meta tags, heading hierarchies, and internal link structure for higher organic visibility.",
+        summary: "AI Audit Summary for Vaidhyashala: Enhance meta tags, heading hierarchies, and internal link structure for higher organic visibility.",
         items: [
           {
             ruleId: "meta_desc_length",
@@ -987,9 +987,9 @@ export const seoAuditApi = {
             whyItMatters: "Meta descriptions between 120-155 characters boost CTR in Google SERPs.",
             recommendedFix: "Shorten meta descriptions over 160 characters and add primary keywords like 'Organic Expo 2027'.",
             implementation: "Update metaDescription field in SEO Settings for /why-visit and /registration.",
-            suggestedTitle: "Bharat Organic Expo 2027 | Premier B2B Exhibition",
-            suggestedDescription: "Join Bharat Organic Expo 2027 at Pragati Maidan. Explore certified organic food, herbal wellness, and bio-agriculture innovations.",
-            headingSuggestions: ["Why Visit Bharat Organic Expo 2027", "Key Exhibition Highlights"],
+            suggestedTitle: "Vaidhyashala | Premier B2B Exhibition",
+            suggestedDescription: "Join Vaidhyashala at Pragati Maidan. Explore certified organic food, herbal wellness, and bio-agriculture innovations.",
+            headingSuggestions: ["Why Visit Vaidhyashala", "Key Exhibition Highlights"],
             contentSuggestions: ["Enhance B2B matchmaking details.", "Add certified organic product categories."],
             internalLinkSuggestions: [{ anchorText: "Register as Exhibitor", fromOrTo: "/participate-as-exhibitor", reason: "Direct conversion link" }],
             schemaSuggestion: "Event",

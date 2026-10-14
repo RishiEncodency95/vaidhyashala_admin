@@ -64,7 +64,7 @@ export function mergeSectionWithSavedData(
     // The old admin-only hero (subtitle + stats) never matched the live page.
     delete merged.subtitle;
     delete merged.items;
-    if (!merged.title || merged.title === "Meet Leading Exhibitors at Bharat Organic Expo") {
+    if (!merged.title || merged.title === "Meet Leading Exhibitors at Vaidhyashala") {
       merged.title = fallbackItem.title;
     }
     if (!merged.description || String(merged.description).startsWith("Browse our exhibitors across")) {
@@ -86,7 +86,7 @@ export function mergeSectionWithSavedData(
     if (!merged.date || String(merged.date).includes("T")) merged.date = fallbackItem.date;
     if (typeof merged.image === "string" && merged.image.includes("og-banner.png")) merged.image = "";
     if (merged.title === "Official Expo Partner") merged.title = "";
-    if (String(merged.subtitle || "").startsWith("Collaborate with Bharat Organic Expo 2027 to expand")) merged.subtitle = "";
+    if (String(merged.subtitle || "").startsWith("Collaborate with Vaidhyashala to expand")) merged.subtitle = "";
     if (String(merged.description || "").startsWith("Access direct networking, exclusive brand")) merged.description = "";
     if (merged.location === "Bharat Mandapam, New Delhi") merged.location = fallbackItem.location;
     if (merged.imageAlt === undefined) merged.imageAlt = "";
@@ -249,7 +249,7 @@ export function mergeSectionWithSavedData(
     delete merged.titleSecondary;
     if (!merged.description2) {
       merged.description2 =
-        "Designed to foster business growth, knowledge sharing, innovation, and international collaboration, Bharat Organic Expo serves as the perfect destination for discovering new products, building strategic partnerships, expanding global markets, and promoting a sustainable future.";
+        "Designed to foster business growth, knowledge sharing, innovation, and international collaboration, Vaidhyashala serves as the perfect destination for discovering new products, building strategic partnerships, expanding global markets, and promoting a sustainable future.";
     }
     if (!merged.timerTitle) merged.timerTitle = "EVENT BEGINS IN";
     if (!merged.eventDate) merged.eventDate = "2027-02-19T00:00:00";
@@ -321,7 +321,7 @@ export function mergeSectionWithSavedData(
     if (!merged.titleMain) merged.titleMain = "Explore Diverse";
     if (!merged.titleHighlight) merged.titleHighlight = "Exhibition Sectors";
     if (!merged.descriptionPrefix) merged.descriptionPrefix = "One Platform. Every Opportunity.";
-    if (!merged.description) merged.description = "Bharat Organic Expo brings together the entire organic ecosystem under one roof. Explore a wide range of sectors driving sustainable living, natural wellness, ethical production and global trade.";
+    if (!merged.description) merged.description = "Vaidhyashala brings together the entire organic ecosystem under one roof. Explore a wide range of sectors driving sustainable living, natural wellness, ethical production and global trade.";
     if (!merged.buttonText) merged.buttonText = "VIEW ALL CATEGORIES";
     if (!merged.buttonHref) merged.buttonHref = "/exhibition-categories";
     if (!merged.exploreText) merged.exploreText = "Explore";

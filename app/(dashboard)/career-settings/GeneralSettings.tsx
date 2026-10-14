@@ -36,7 +36,7 @@ export default function GeneralSettings() {
 
           <div className="flex items-center justify-between">
             <span className="text-[9px] font-bold text-[#172762] w-[110px]">Career Page Title</span>
-            <input type="text" defaultValue="Careers at Bharat Organic Expo" className="flex-1 border border-[#E1E6EC] rounded-[4px] px-[6px] py-[3px] text-[9px] font-semibold text-[#172762] outline-none" />
+            <input type="text" defaultValue="Careers at Vaidhyashala" className="flex-1 border border-[#E1E6EC] rounded-[4px] px-[6px] py-[3px] text-[9px] font-semibold text-[#172762] outline-none" />
           </div>
 
           <div className="flex items-start justify-between">

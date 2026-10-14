@@ -69,11 +69,11 @@ export const demoReviewsData: ReviewsData = {
     { stars: 1, count: 23, percent: 2, color: BAR_COLORS[1] },
   ],
   locationRatings: [
-    { name: "Bharat Organic Expo - Yashobhoomi (Delhi)", rating: "4.9", count: 642 },
-    { name: "Bharat Organic Expo - Pavilion Hall 1", rating: "4.7", count: 298 },
-    { name: "Bharat Organic Expo - Pavilion Hall 2", rating: "4.6", count: 184 },
-    { name: "Bharat Organic Expo - B2B Buyer Lounge", rating: "4.8", count: 118 },
-    { name: "Bharat Organic Expo - Agri Innovation Hub", rating: "4.7", count: 42 },
+    { name: "Vaidhyashala - Yashobhoomi (Delhi)", rating: "4.9", count: 642 },
+    { name: "Vaidhyashala - Pavilion Hall 1", rating: "4.7", count: 298 },
+    { name: "Vaidhyashala - Pavilion Hall 2", rating: "4.6", count: 184 },
+    { name: "Vaidhyashala - B2B Buyer Lounge", rating: "4.8", count: 118 },
+    { name: "Vaidhyashala - Agri Innovation Hub", rating: "4.7", count: 42 },
   ],
   trend: [
     { label: "Jan", value: 3.8 }, { label: "Feb", value: 4.1 }, { label: "Mar", value: 4.1 },

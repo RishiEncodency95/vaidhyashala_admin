@@ -212,7 +212,7 @@ export async function saveWhyExhibitSections(sectionsDraft: SectionsDraft): Prom
   if (reasonsSec && Array.isArray(reasonsSec.items)) {
     try {
       await api.put("/website/participate/why-exhibit/reasons", {
-        title: reasonsSec.title || "Top Reasons to Exhibit at Bharat Organic Expo 2027",
+        title: reasonsSec.title || "Top Reasons to Exhibit at Vaidhyashala",
         items: reasonsSec.items.map((it: CmsJson, idx: number) => {
           const defaultIcons = [
             "/uploads/icons/11og.webp",

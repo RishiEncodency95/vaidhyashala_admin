@@ -46,7 +46,7 @@ const VARIABLES = [
   { name: "{{candidate_name}}", desc: "Candidate's full name", sample: "Vansh Chaudhary" },
   { name: "{{first_name}}", desc: "Candidate's first name", sample: "Vansh" },
   { name: "{{job_title}}", desc: "Job position title", sample: "Full Stack Developer" },
-  { name: "{{company_name}}", desc: "Bharat Organic Expo", sample: "Bharat Organic Expo" },
+  { name: "{{company_name}}", desc: "Vaidhyashala", sample: "Vaidhyashala" },
   { name: "{{current_ctc}}", desc: "Candidate's current CTC (if provided)", sample: "₹45,000 / month" },
   { name: "{{expected_ctc}}", desc: "Candidate's expected CTC (if provided)", sample: "₹55,000 / month" },
   { name: "{{total_experience}}", desc: "Total work experience", sample: "3 Years" },
@@ -367,7 +367,7 @@ export default function ResultMessagesTab() {
                   <p className="text-[8.5px] font-medium text-[#172762] leading-tight mb-[6px] whitespace-pre-wrap">
                     {fillSample(preview.web, messages)}
                   </p>
-                  <p className="text-[8px] italic text-[#164232] mb-[8px]">— Talent Acquisition Team, Bharat Organic Expo</p>
+                  <p className="text-[8px] italic text-[#164232] mb-[8px]">— Talent Acquisition Team, Vaidhyashala</p>
                   {previewType !== "notEligible" && (
                     <div>
                       <span className="inline-flex bg-[#148943] text-white px-[12px] py-[6px] rounded-[4px] text-[9px] font-bold items-center gap-[4px]">

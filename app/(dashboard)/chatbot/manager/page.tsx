@@ -885,7 +885,7 @@ function ManagerEditor({ initial, onReload }: { initial: ManagerData; onReload: 
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="text-[19.5px] font-semibold leading-tight">Organic Mitra</p>
-                    <p className="mt-[2px] text-[14.1px] text-white/90">Bharat Organic Expo Assistant</p>
+                    <p className="mt-[2px] text-[14.1px] text-white/90">Vaidhyashala Assistant</p>
                   </div>
                   <Minus className="h-[22px] w-[22px]" />
                   <button type="button" onClick={() => setPreview(null)} aria-label="Restart preview" title="Restart preview" className="ml-[16px] rounded-full transition hover:bg-white/10">

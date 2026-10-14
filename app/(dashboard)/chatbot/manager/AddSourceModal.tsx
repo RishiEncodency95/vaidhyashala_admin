@@ -114,10 +114,10 @@ export default function AddSourceModal({ kind, onClose, onImport }: Props) {
   const [dragging, setDragging] = useState(false);
   // Text / FAQ
   const [textMode, setTextMode] = useState<"faq" | "text">("faq");
-  const [question, setQuestion] = useState("When and where is Bharat Organic Expo 2027?");
+  const [question, setQuestion] = useState("When and where is Vaidhyashala?");
   const [answerLang, setAnswerLang] = useState<"en" | "hi">("en");
   const [answer, setAnswer] = useState({
-    en: "Bharat Organic Expo 2027 will be held from 19–21 February 2027 at Bharat Mandapam, New Delhi.",
+    en: "Vaidhyashala will be held from 19–21 February 2027 at Bharat Mandapam, New Delhi.",
     hi: "भारत ऑर्गेनिक एक्सपो 2027, 19–21 फ़रवरी 2027 को भारत मंडपम, नई दिल्ली में होगा।",
   });
   const [phrases, setPhrases] = useState(["Expo kab hai?", "Where is the expo?"]);

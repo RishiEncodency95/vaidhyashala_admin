@@ -8,7 +8,7 @@ export const defaultWhyExhibitSections: LandingSectionContent[] = [
     eyebrow: "INDIA'S PREMIER ORGANIC & WELLNESS EVENT",
     // Single H1. The website shows the first two words on the green line, the rest maroon.
     title: "CONNECT. COLLABORATE. CULTIVATE A HEALTHIER TOMORROW.",
-    description: "Bharat Organic Expo brings together global innovators, brands, buyers & experts to promote sustainable living and natural well-being.",
+    description: "Vaidhyashala brings together global innovators, brands, buyers & experts to promote sustainable living and natural well-being.",
     buttonLabel: "Book Your Stall",
     buttonHref: "/registration/book-a-stand",
     secondaryButtonLabel: "Download Brochure",
@@ -38,7 +38,7 @@ export const defaultWhyExhibitSections: LandingSectionContent[] = [
     key: "reasons-to-exhibit",
     name: "ReasonsSection",
     enabled: true,
-    title: "Top Reasons to Exhibit at Bharat Organic Expo 2027",
+    title: "Top Reasons to Exhibit at Vaidhyashala",
     items: [
       {
         title1: "GLOBAL",

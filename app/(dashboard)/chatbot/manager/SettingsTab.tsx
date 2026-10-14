@@ -100,7 +100,7 @@ type SavedSettings = {
 export default function SettingsTab({ onChange, onOpenHistory, notify, ref }: Props) {
   const saved = useDraftSection<SavedSettings>("settings");
   const store = useContext(ManagerStoreContext);
-  const [identity, setIdentity] = useState(saved?.identity ?? { name: "Organic Mitra", subtitle: "Bharat Organic Expo Assistant", launcher: "Ask Organic Mitra" });
+  const [identity, setIdentity] = useState(saved?.identity ?? { name: "Organic Mitra", subtitle: "Vaidhyashala Assistant", launcher: "Ask Organic Mitra" });
   const [avatar, setAvatar] = useState(saved?.identity?.avatar || LOGO);
   const [uploading, setUploading] = useState(false);
   const [languages, setLanguages] = useState<Language[]>(saved?.languages ?? [...LANGUAGES]);

@@ -5,13 +5,13 @@ export const defaultBlogSections: LandingSectionContent[] = [
     key: "blog-hero",
     name: "BlogHero",
     enabled: true,
-    eyebrow: "BHARAT ORGANIC EXPO",
+    eyebrow: "VAIDHYASHALA",
     // Single H1: the website shows the last word on the orange line, the rest green.
     title: "BLOGS & NEWS",
     subtitle: "Insights. Innovation. Impact.",
     description: "Stay updated with the latest trends, expert perspectives, innovations and success stories shaping India's organic food, agriculture and sustainable products industry.",
     image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791010203/bharat-organic/blog/hero-bg.webp",
-    imageAlt: "Bharat Organic Expo Blog Banner",
+    imageAlt: "Vaidhyashala Blog Banner",
   },
   {
     key: "blog-featured",
@@ -23,8 +23,8 @@ export const defaultBlogSections: LandingSectionContent[] = [
     items: [
       {
         tag: "Expo News",
-        title: "Bharat Organic Expo 2026: India's Organic Industry Comes Together",
-        description: "Discover the brands, farmers, buyers and innovators bringing India's organic ecosystem together at Bharat Organic Expo 2026.",
+        title: "Vaidhyashala: India's Organic Industry Comes Together",
+        description: "Discover the brands, farmers, buyers and innovators bringing India's organic ecosystem together at Vaidhyashala.",
         date: "May 8, 2026",
         readTime: "5 min read",
         image: ""
@@ -83,13 +83,13 @@ export const defaultBlogSections: LandingSectionContent[] = [
     key: "blog-latest",
     name: "BlogLatest",
     enabled: true,
-    eyebrow: "LATEST FROM BHARAT ORGANIC EXPO",
-    title: "Latest from Bharat Organic Expo",
+    eyebrow: "LATEST FROM VAIDHYASHALA",
+    title: "Latest from Vaidhyashala",
     buttonLabel: "View all",
     items: [
       {
         tag: "Expo Update",
-        title: "Inside Bharat Organic Expo 2026",
+        title: "Inside Vaidhyashala",
         description: "A glimpse into grand launches, leading brands, knowledge sessions and business networking at India's biggest organic expo.",
         date: "May 7, 2026",
         readTime: "3 min read",
@@ -114,7 +114,7 @@ export const defaultBlogSections: LandingSectionContent[] = [
     buttonLabel: "View all",
     items: [
       { title: "The Future of Organic Farming in India", duration: "6:24", image: "" },
-      { title: "Inside Bharat Organic Expo", duration: "4:18", image: "" },
+      { title: "Inside Vaidhyashala", duration: "4:18", image: "" },
       { title: "Organic Brands & Sustainable Innovation", duration: "5:10", image: "" },
     ],
   },

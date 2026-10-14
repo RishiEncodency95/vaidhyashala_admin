@@ -8,7 +8,7 @@ export const defaultExhibitionCategoriesSections: LandingSectionContent[] = [
     enabled: true,
     title: "EXHIBITION CATEGORIES",
     subtitle: "EXPLORE THE COMPLETE ORGANIC ECOSYSTEM",
-    description: "From farm inputs and organic production to finished products, technology, certification and global trade—discover every opportunity to grow your business at Bharat Organic Expo 2027.",
+    description: "From farm inputs and organic production to finished products, technology, certification and global trade—discover every opportunity to grow your business at Vaidhyashala.",
     image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791006354/bharat-organic/exhibition-categories/hero-bg.webp",
     // Stats bar features: title = value ("200+"), subtitle = label ("Exhibitors Expected").
     items: [
@@ -23,7 +23,7 @@ export const defaultExhibitionCategoriesSections: LandingSectionContent[] = [
     name: "Sector Showcase Overview",
     enabled: true,
     title: "EXHIBITION SECTOR HIGHLIGHTS",
-    description: "Key product segments represented at Bharat Organic Expo 2027.",
+    description: "Key product segments represented at Vaidhyashala.",
     items: [
       { title: "Organic Agriculture & Farming Inputs", icon: "Sprout", description: "Bio-fertilizers, organic seeds, pest management, soil health solutions" },
       { title: "Organic Food & Beverages", icon: "Leaf", description: "Certified organic staples, health drinks, processed foods, snacks" },
@@ -41,7 +41,7 @@ export const defaultExhibitionCategoriesSections: LandingSectionContent[] = [
     name: "Exhibition Call to Action",
     enabled: true,
     title: "READY TO SHOWCASE YOUR PRODUCTS TO THOUSANDS OF BUYERS?",
-    description: "Reserve your stall space today at Bharat Organic Expo 2027.",
+    description: "Reserve your stall space today at Vaidhyashala.",
     buttonLabel: "BOOK YOUR STALL NOW",
     buttonHref: "/registration/book-a-stand",
   },

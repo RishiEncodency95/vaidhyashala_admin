@@ -182,7 +182,7 @@ const generateInstagramCover = (title: string, reelId?: string | null): string =
       <text x="0" y="5" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="1">${tagText}</text>
     </g>
     <text x="640" y="545" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800" text-anchor="middle" filter="url(#glow)">${safeTitle}</text>
-    <text x="640" y="595" fill="rgba(255,255,255,0.7)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="600" text-anchor="middle" letter-spacing="2">BHARAT ORGANIC EXPO • TESTIMONIAL</text>
+    <text x="640" y="595" fill="rgba(255,255,255,0.7)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="600" text-anchor="middle" letter-spacing="2">VAIDHYASHALA • TESTIMONIAL</text>
   </svg>`;
 
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
@@ -1578,7 +1578,7 @@ export default function TestimonialVideosManagementPage() {
                     setFormThumbnail(generateInstagramCover(val, igId));
                   }
                 }}
-                placeholder="e.g. Bharat Organic Expo 2027: A New Era"
+                placeholder="e.g. Vaidhyashala: A New Era"
                 className="h-[32px] w-full rounded-[6px] border border-slate-300 bg-white px-3 text-[10px] font-medium text-slate-800 placeholder-slate-400 outline-none focus:border-[#4B1426]"
               />
             </div>

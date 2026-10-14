@@ -75,7 +75,7 @@ export const defaultExhibitorsSections: LandingSectionContent[] = [
     eyebrow: "TRUSTED BY",
     // Single H1: the website shows word 1 dark + word 2 green on line 1, the rest on line 2.
     title: "150+ Leading Health & Wellness Brands",
-    description: "India's most influential health, Ayurveda, fitness and wellness companies have chosen Bharat Organic Expo as the platform to showcase, connect and grow.",
+    description: "India's most influential health, Ayurveda, fitness and wellness companies have chosen Vaidhyashala as the platform to showcase, connect and grow.",
     date: "19-21 February 2027",
     location: "Hall 12, Bharat Mandapam, New Delhi",
     buttonLabel: "REGISTER AS A BUYER",
@@ -83,7 +83,7 @@ export const defaultExhibitorsSections: LandingSectionContent[] = [
     secondaryButtonLabel: "PARTICIPATE AS AN EXHIBITOR",
     secondaryButtonHref: "/registration/book-a-stand",
     image: "https://res.cloudinary.com/ldlcnnhz/image/upload/v1791010810/bharat-organic/exhibitors/hero-bg.webp",
-    imageAlt: "Bharat Organic Expo exhibitors",
+    imageAlt: "Vaidhyashala exhibitors",
   },
   {
     key: "exhibitors-list",

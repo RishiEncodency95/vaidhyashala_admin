@@ -192,7 +192,7 @@ export default function LoginPage() {
         }
 
         if (result.user.userType !== "INTERNAL") {
-          const msg = "This portal is for Bharat Organic Expo staff accounts only.";
+          const msg = "This portal is for Vaidhyashala staff accounts only.";
           setError(msg);
           showToast("error", msg);
           return;
@@ -472,8 +472,8 @@ export default function LoginPage() {
           { }
 
           <img
-            src="/bharat-organic-logo.png"
-            alt="Bharat Organic"
+            src="/vaidhyashala-logo.png"
+            alt="Vaidhyashala"
           />
         </div>
 
@@ -507,9 +507,7 @@ export default function LoginPage() {
         {/* TITLE */}
 
         <h1 style={{ WebkitTextStroke: "none", textShadow: "none", border: "none" }}>
-          <span style={{ color: "#14532d", fontWeight: 600 }}>Bharat</span>{" "}
-          <span style={{ color: "#3A6806", fontWeight: 600 }}>Organic</span>{" "}
-          <span style={{ color: "#4B1426", fontWeight: 600 }}>Expo</span>
+          <span style={{ color: "#14532d", fontWeight: 600 }}>Vaidhyashala</span>
           <br />
 
           <span style={{ color: "#ffffff", WebkitTextStroke: "none", textShadow: "none" }}>
@@ -552,9 +550,9 @@ export default function LoginPage() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/admin.png"
-                alt="Bharat Organic"
-                style={{ width: "100%", height: "100%", objectFit: "contain", transform: "scale(2.2)" }}
+                src="/vaidhyashala-logo.png"
+                alt="Vaidhyashala"
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
               />
             </div>
 

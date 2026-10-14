@@ -2236,7 +2236,7 @@ export default function FeedbackReviewsPage() {
           <div className="flex items-center gap-2">
             <span className="text-[#ea580c] font-bold">⊙</span>
             <span>Together, we bring dignity to every final journey.</span>
-            <span className="font-semibold text-slate-700">© 2026 Bharat Organic Expo. All rights reserved.</span>
+            <span className="font-semibold text-slate-700">© 2026 Vaidhyashala. All rights reserved.</span>
           </div>
 
           <div className="flex items-center gap-4">

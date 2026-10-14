@@ -3910,7 +3910,7 @@ export default function DashboardPage() {
                 {new Date().getFullYear()}{" "}
 
                 <span className="font-semibold text-slate-900">
-                  Bharat Organic Expo
+                  Vaidhyashala
                 </span>{" "}
 
                 — Admin Panel. All rights

@@ -260,7 +260,7 @@ function WebsitePreview() {
       >
         <div className="flex w-[205px] shrink-0 items-center">
           <span className="text-[14px] font-bold tracking-tight text-[#164e2a]">
-            BHARAT ORGANIC EXPO
+            VAIDHYASHALA
           </span>
         </div>
 
@@ -395,7 +395,7 @@ function WebsitePreview() {
               text-[#58625f]
             "
           >
-            Bharat Organic Expo brings together organic producers, farmers, global B2B buyers, retailers, and sustainable brands under one roof at Yashobhoomi, New Delhi.
+            Vaidhyashala brings together organic producers, farmers, global B2B buyers, retailers, and sustainable brands under one roof at Yashobhoomi, New Delhi.
           </p>
 
           <div className="mt-[13px] flex items-center gap-[8px]">

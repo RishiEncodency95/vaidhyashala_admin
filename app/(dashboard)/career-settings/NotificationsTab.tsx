@@ -161,7 +161,7 @@ export default function NotificationsTab() {
 
           <div className="bg-white border border-[#E1E6EC] rounded-[6px] p-[8px] shadow-sm flex-1 overflow-y-auto">
             <div className="text-[8.5px] font-bold text-[#172762] mb-[6px] pb-[6px] border-b border-[#E1E6EC]">
-              Subject: Congratulations! You are eligible for the position at Bharat Organic Expo
+              Subject: Congratulations! You are eligible for the position at Vaidhyashala
             </div>
             
             <div className="mb-[8px] rounded-[4px] overflow-hidden h-[45px]">
@@ -170,14 +170,14 @@ export default function NotificationsTab() {
 
             <div className="text-[8.5px] font-medium text-[#172762] leading-[1.6] space-y-[6px]">
               <p>Dear {"{{candidate_name}}"},</p>
-              <p>Congratulations! Based on your information, you appear to be eligible for the position of &quot;{"{{job_title}}"}&quot; at Bharat Organic Expo.</p>
+              <p>Congratulations! Based on your information, you appear to be eligible for the position of &quot;{"{{job_title}}"}&quot; at Vaidhyashala.</p>
               <p>Please complete and submit the application form to proceed further.</p>
               <button className="bg-[#148943] text-white px-[12px] py-[6px] rounded-[4px] text-[9px] font-bold mt-[4px]">
                 Continue Application →
               </button>
               <div className="pt-[6px]">
                 <p>Best regards,</p>
-                <p>Bharat Organic Expo Team</p>
+                <p>Vaidhyashala Team</p>
               </div>
             </div>
           </div>

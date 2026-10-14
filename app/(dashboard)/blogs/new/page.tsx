@@ -73,7 +73,7 @@ function AddNewPostContent() {
     excerpt: "",
     content: "",
     category: "Expo News",
-    author: "Bharat Organic Expo Admin",
+    author: "Vaidhyashala Admin",
     tags: "organic expo, sustainable agriculture, ayurveda",
     status: "published",
     featured: false,
@@ -166,7 +166,7 @@ function AddNewPostContent() {
       if (!blogData.imageAlt && blogData.title) {
         setBlogData((prev) => ({
           ...prev,
-          imageAlt: `${blogData.title} - Bharat Organic Expo`,
+          imageAlt: `${blogData.title} - Vaidhyashala`,
         }));
       }
       // Upload immediately so real URL is available
@@ -243,7 +243,7 @@ function AddNewPostContent() {
               excerpt: item.excerpt || "",
               content: item.content || "",
               category: item.category || "Expo News",
-              author: item.author || "Bharat Organic Expo Admin",
+              author: item.author || "Vaidhyashala Admin",
               tags: Array.isArray(item.tags) ? item.tags.join(", ") : (item.tags || ""),
               status: item.status || "published",
               featured: Boolean(item.showOnHome ?? item.featured),
@@ -277,7 +277,7 @@ function AddNewPostContent() {
               setBlogData((prev) => ({
                 ...prev,
                 ...found,
-                author: "Bharat Organic Expo Admin",
+                author: "Vaidhyashala Admin",
               }));
               if (found.image) setImagePreview(found.image);
             }
@@ -386,7 +386,7 @@ function AddNewPostContent() {
         excerpt: autoExcerpt,
         content: normalizedContent,
         category: blogData.category.trim(),
-        author: "Bharat Organic Expo Admin",
+        author: "Vaidhyashala Admin",
         tags: blogData.tags
           ? typeof blogData.tags === "string"
             ? blogData.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
@@ -405,7 +405,7 @@ function AddNewPostContent() {
             : new Date().toISOString(),
         readTime: blogData.readTime || "4 min read",
         image: finalImageUrl,
-        imageAlt: blogData.imageAlt.trim() || `${blogData.title} - Bharat Organic Expo`,
+        imageAlt: blogData.imageAlt.trim() || `${blogData.title} - Vaidhyashala`,
 
         // SEO Fields
         metaTitle: blogData.metaTitle.trim() || blogData.title.trim(),

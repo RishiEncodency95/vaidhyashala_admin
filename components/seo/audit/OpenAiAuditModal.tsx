@@ -80,11 +80,11 @@ export function OpenAiAuditModal({
       
       const newTitle = item.suggestedTitle && !item.suggestedTitle.startsWith("<")
         ? item.suggestedTitle
-        : `Bharat Organic Expo 2027 | ${cleanTitleName} & Bio-Agriculture`;
+        : `Vaidhyashala | ${cleanTitleName} & Bio-Agriculture`;
 
       const newDesc = item.suggestedDescription && !item.suggestedDescription.startsWith("<")
         ? item.suggestedDescription
-        : `Discover official ${cleanTitleName.toLowerCase()} details for Bharat Organic Expo 2027 at Pragati Maidan, New Delhi. Connect with certified organic food exporters and bio brands from India!`;
+        : `Discover official ${cleanTitleName.toLowerCase()} details for Vaidhyashala at Pragati Maidan, New Delhi. Connect with certified organic food exporters and bio brands from India!`;
 
       await seoAuditApi.updateSeo(targetPageId, {
         metaTitle: newTitle,
@@ -266,7 +266,7 @@ export function OpenAiAuditModal({
                     <span>› {page?.path?.replace(/^\//, "") || "route"}</span>
                   </div>
                   <h4 className="text-[15px] font-bold text-[#8ab4f8] hover:underline cursor-pointer truncate">
-                    {page?.title || "Bharat Organic Expo 2027"}
+                    {page?.title || "Vaidhyashala"}
                   </h4>
                   <p className="text-[12px] text-slate-300 leading-normal line-clamp-2">
                     {serpDescription}
@@ -457,7 +457,7 @@ export function OpenAiAuditModal({
                           <CheckCircle2 className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
                           <div>
                             <strong className="text-white font-bold block">1. Title Tag & Keyword Placement Audit:</strong>
-                            <span>Front-load targeted search keywords (&apos;Bharat Organic Expo 2027&apos;, &apos;Bio-Agriculture&apos;) within the opening 50 characters. Keep total length strictly between 50 and 60 characters to eliminate SERP truncation.</span>
+                            <span>Front-load targeted search keywords (&apos;Vaidhyashala&apos;, &apos;Bio-Agriculture&apos;) within the opening 50 characters. Keep total length strictly between 50 and 60 characters to eliminate SERP truncation.</span>
                           </div>
                         </div>
                         <div className="flex items-start gap-2">

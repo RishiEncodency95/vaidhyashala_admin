@@ -327,8 +327,8 @@ function SidebarContent({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/admin.png"
-            alt="Bharat Organic Expo Admin"
+            src="/vaidhyashala-logo.png"
+            alt="Vaidhyashala Admin"
             className="
               h-full
               max-h-[70px]

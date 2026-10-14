@@ -423,7 +423,7 @@ export default function NavigationMenusPage() {
             iconClass="bg-emerald-50 text-emerald-700"
             label="Total Menus"
             value={MENUS.length.toString()}
-            note="Bharat Organic Expo menus"
+            note="Vaidhyashala menus"
           />
 
           <MetricCard
@@ -710,7 +710,7 @@ export default function NavigationMenusPage() {
 
             <div>
               <h3 className="text-[11.5px] font-semibold text-[#285039]">
-                Bharat Organic Expo Menu Structure Tips
+                Vaidhyashala Menu Structure Tips
               </h3>
 
               <div className="mt-[6px] space-y-[4px]">

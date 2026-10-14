@@ -50,7 +50,7 @@ type FAQ = {
 const FAQS: FAQ[] = [
   {
     id: 1,
-    question: "What is Bharat Organic Expo 2027?",
+    question: "What is Vaidhyashala?",
     summary: "Learn about India's premier organic food, agriculture & herbal exposition.",
     category: "General",
     status: "Published",
@@ -98,7 +98,7 @@ const FAQS: FAQ[] = [
   },
   {
     id: 5,
-    question: "Where is the Bharat Organic Expo 2027 venue?",
+    question: "Where is the Vaidhyashala venue?",
     summary: "Yashobhoomi (IICC), Dwarka, Sector 25, New Delhi.",
     category: "Services",
     status: "Published",
@@ -188,8 +188,8 @@ const categoryData = [
 ];
 
 const topViewedFaqs = [
-  ["What is Bharat Organic Expo 2027?", "1,245"],
-  ["Where is the Bharat Organic Expo venue?", "1,876"],
+  ["What is Vaidhyashala?", "1,245"],
+  ["Where is the Vaidhyashala venue?", "1,876"],
   ["How can I register as an Exhibitor?", "1,135"],
   ["What are B2B Buyer Registration requirements?", "987"],
   ["How do I get a Visitor Trade Pass?", "856"],
@@ -565,7 +565,7 @@ export default function FAQsManagementPage() {
 
                                   <div className="mt-[10px] pl-[30px]">
                                     <p className="text-[10px] font-semibold leading-[1.6] text-[#34435e]">
-                                      {item.summary} Bharat Organic Expo is India&apos;s premier international trade show bringing together organic farmers, producers, global B2B buyers, food processors and herbal brands at Yashobhoomi (IICC), New Delhi.
+                                      {item.summary} Vaidhyashala is India&apos;s premier international trade show bringing together organic farmers, producers, global B2B buyers, food processors and herbal brands at Yashobhoomi (IICC), New Delhi.
                                     </p>
 
                                     <div className="mt-[12px] flex items-center justify-between border-t border-[#f0f4f2] pt-[10px]">

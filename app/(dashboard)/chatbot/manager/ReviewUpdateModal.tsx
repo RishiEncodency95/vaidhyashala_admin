@@ -21,7 +21,7 @@ type Props = {
   onKeep: (note: string) => void;
 };
 
-const CURRENT = "Visitors can register online to attend Bharat Organic Expo.";
+const CURRENT = "Visitors can register online to attend Vaidhyashala.";
 const ADDED = "Show your registration confirmation at entry.";
 
 export default function ReviewUpdateModal({ source, onClose, onApprove, onKeep }: Props) {

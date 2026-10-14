@@ -153,25 +153,25 @@ export interface ReportMetaOverride {
 export const ROUTE_META_CAPTURED_AT = "2026-09-25";
 
 export const ROUTE_META: Record<string, string> = {
-  '/': "Join Bharat Organic Expo 2027, India's mega wellness fair & premier exhibition and conference for certified organic food, sustainable agriculture, and natural products in Pragati Maidan.",
-  '/about': "Learn about Bharat Organic Expo 2027, India's premier international exhibition & B2B conference advancing certified organic agriculture, natural living, and bio-wellness innovation.",
-  '/about/suport_services': 'Find comprehensive resources, exhibitor booth support, visitor passes, and media guidelines for a seamless business experience at Bharat Organic Expo 2027 in Pragati Maidan.',
-  '/awards': "Nominate and celebrate industry leaders at Bharat Organic Expo 2027 Awards recognizing excellence in organic farming, eco-friendly branding, bio-technology, and sustainability.",
+  '/': "Join Vaidhyashala, India's mega wellness fair & premier exhibition and conference for certified organic food, sustainable agriculture, and natural products in Pragati Maidan.",
+  '/about': "Learn about Vaidhyashala, India's premier international exhibition & B2B conference advancing certified organic agriculture, natural living, and bio-wellness innovation.",
+  '/about/suport_services': 'Find comprehensive resources, exhibitor booth support, visitor passes, and media guidelines for a seamless business experience at Vaidhyashala in Pragati Maidan.',
+  '/awards': "Nominate and celebrate industry leaders at Vaidhyashala Awards recognizing excellence in organic farming, eco-friendly branding, bio-technology, and sustainability.",
   '/blog': "Stay informed with expert insights, industry trends, organic farming innovations, and business growth strategies shaping India's bio-wellness and natural products sector in 2027.",
-  '/buyer-seller-meet': "Participate in exclusive B2B matchmaking at Bharat Organic Expo 2027. Connect global organic buyers, wholesale suppliers, distributors, and certified producers directly.",
-  '/careers': 'Explore rewarding career paths with Bharat Organic Expo team. Join passionate professionals driving India’s premier organic food, bio-wellness, and agricultural movement.',
-  '/contact': 'Get in touch with Bharat Organic Expo 2027 team for booth bookings, sponsorship packages, visitor tickets, venue details, and international delegation inquiries.',
-  '/e-promotion-web': 'Amplify your brand reach with digital promotion packages, online web banners, and targeted marketing campaigns at Bharat Organic Expo 2027.',
-  '/exhibition-categories': 'Explore diverse exhibition categories at Bharat Organic Expo 2027 including organic staples, herbal cosmetics, bio-fertilizers, wellness beverages, and eco-packaging.',
-  '/exhibitors': 'Meet top certified organic producers, international suppliers, and natural food brands showcasing cutting-edge sustainable innovations at Bharat Organic Expo 2027.',
-  '/feedback': 'Share your valuable feedback and recommendations to help us elevate visitor experience, B2B networking, and exhibition standards at Bharat Organic Expo 2027.',
-  '/gallery': 'Browse high-resolution event photos, conference highlights, B2B meetings, and stall showcases from previous editions of Bharat Organic Expo in New Delhi.',
-  '/participate-as-exhibitor': 'Book your exhibition stall at Bharat Organic Expo 2027 to connect with 10,000+ trade buyers, industry leaders, government delegations, and retail distributors.',
-  '/partnership': 'Partner with Bharat Organic Expo 2027 as a trade association, media sponsor, or institutional partner to foster sustainable agriculture and bio-wellness growth.',
-  '/sponsorship': 'Elevate your brand visibility by becoming an official sponsor of Bharat Organic Expo 2027. Access premium branding, keynote speaking slots, and VIP networking.',
-  '/thank-you': 'Thank you for registering for Bharat Organic Expo 2027! Check your email inbox for official confirmation, visitor badge details, and event schedule info.',
-  '/why-exhibit': 'Discover key reasons to exhibit at Bharat Organic Expo 2027. Access high-value B2B buyers, expand distribution networks, and launch new organic products in India.',
-  '/why-visit': 'Discover top benefits of visiting Bharat Organic Expo 2027 in Pragati Maidan. Sourcing certified organic food, natural cosmetics, and agricultural innovations.',
+  '/buyer-seller-meet': "Participate in exclusive B2B matchmaking at Vaidhyashala. Connect global organic buyers, wholesale suppliers, distributors, and certified producers directly.",
+  '/careers': 'Explore rewarding career paths with Vaidhyashala team. Join passionate professionals driving India’s premier organic food, bio-wellness, and agricultural movement.',
+  '/contact': 'Get in touch with Vaidhyashala team for booth bookings, sponsorship packages, visitor tickets, venue details, and international delegation inquiries.',
+  '/e-promotion-web': 'Amplify your brand reach with digital promotion packages, online web banners, and targeted marketing campaigns at Vaidhyashala.',
+  '/exhibition-categories': 'Explore diverse exhibition categories at Vaidhyashala including organic staples, herbal cosmetics, bio-fertilizers, wellness beverages, and eco-packaging.',
+  '/exhibitors': 'Meet top certified organic producers, international suppliers, and natural food brands showcasing cutting-edge sustainable innovations at Vaidhyashala.',
+  '/feedback': 'Share your valuable feedback and recommendations to help us elevate visitor experience, B2B networking, and exhibition standards at Vaidhyashala.',
+  '/gallery': 'Browse high-resolution event photos, conference highlights, B2B meetings, and stall showcases from previous editions of Vaidhyashala in New Delhi.',
+  '/participate-as-exhibitor': 'Book your exhibition stall at Vaidhyashala to connect with 10,000+ trade buyers, industry leaders, government delegations, and retail distributors.',
+  '/partnership': 'Partner with Vaidhyashala as a trade association, media sponsor, or institutional partner to foster sustainable agriculture and bio-wellness growth.',
+  '/sponsorship': 'Elevate your brand visibility by becoming an official sponsor of Vaidhyashala. Access premium branding, keynote speaking slots, and VIP networking.',
+  '/thank-you': 'Thank you for registering for Vaidhyashala! Check your email inbox for official confirmation, visitor badge details, and event schedule info.',
+  '/why-exhibit': 'Discover key reasons to exhibit at Vaidhyashala. Access high-value B2B buyers, expand distribution networks, and launch new organic products in India.',
+  '/why-visit': 'Discover top benefits of visiting Vaidhyashala in Pragati Maidan. Sourcing certified organic food, natural cosmetics, and agricultural innovations.',
 };
 
 /* ------------------------------------------------------------------ */
@@ -217,27 +217,27 @@ export const ORG_EMAIL = "contact@bharatorganicexpo.com";
 /* ------------------------------------------------------------------ */
 
 export const PAGE_INVENTORY: InventoryPage[] = [
-  { id: "home", path: "/", label: "Home Page", title: "Bharat Organic Expo 2027 | India's Mega Wellness & Organic Fair", score: 100, words: 1420, inLinks: 26, lcp: 1.5, cls: 0.07, clicks: 450, impressions: 12800, position: 1.4, issue: "ok" },
-  { id: "about", path: "/about", label: "About", title: "About | Bharat Organic Expo 2027", score: 95, words: 836, inLinks: 22, lcp: 1.62, cls: 0.045, clicks: 57, impressions: 1425, position: 5.1, issue: "short" },
-  { id: "why-visit", path: "/why-visit", label: "Why Visit", title: "Why Visit | Bharat Organic Expo 2027", score: 96, words: 1254, inLinks: 31, lcp: 1.48, cls: 0.012, clicks: 225, impressions: 3600, position: 15.8, issue: "ok" },
-  { id: "registration", path: "/registration", label: "Registration", title: "Registration | Bharat Organic Expo 2027", score: 91, words: 1272, inLinks: 19, lcp: 1.72, cls: 0.021, clicks: 197, impressions: 4137, position: 24.2, issue: "ok" },
-  { id: "contact", path: "/contact", label: "Contact Us", title: "Contact Us | Bharat Organic Expo 2027", score: 88, words: 1681, inLinks: 20, lcp: 1.85, cls: 0.035, clicks: 338, impressions: 5746, position: 8.7, issue: "short" },
-  { id: "exhibition-categories", path: "/exhibition-categories", label: "Exhibition Categories", title: "Exhibition Categories | Bharat Organic Expo 2027", score: 83, words: 1102, inLinks: 14, lcp: 1.95, cls: 0.089, clicks: 90, impressions: 2610, position: 6.1, issue: "ok" },
-  { id: "why-exhibit", path: "/why-exhibit", label: "Why Exhibit", title: "Why Exhibit | Bharat Organic Expo 2027", score: 86, words: 1131, inLinks: 39, lcp: 1.26, cls: 0.024, clicks: 12, impressions: 180, position: 23.4, issue: "ok" },
-  { id: "participate-as-exhibitor", path: "/participate-as-exhibitor", label: "Exhibitor Participation", title: "Exhibitor Participation | Bharat Organic Expo 2027 Booths", score: 91, words: 1435, inLinks: 40, lcp: 2.14, cls: 0.042, clicks: 306, impressions: 2142, position: 5.6, issue: "ok" },
-  { id: "sponsorship", path: "/sponsorship", label: "Sponsorship", title: "Sponsorship | Bharat Organic Expo 2027", score: 100, words: 1498, inLinks: 19, lcp: 1.60, cls: 0.012, clicks: 490, impressions: 11270, position: 13.7, issue: "ok" },
-  { id: "blog", path: "/blog", label: "Blog", title: "Blog | Bharat Organic Expo 2027", score: 77, words: 1000, inLinks: 34, lcp: 1.51, cls: 0.062, clicks: 361, impressions: 3971, position: 22.5, issue: "short" },
-  { id: "careers", path: "/careers", label: "Careers", title: "Careers | Bharat Organic Expo 2027", score: 90, words: 1729, inLinks: 27, lcp: 1.54, cls: 0.025, clicks: 229, impressions: 2748, position: 26.9, issue: "ok" },
-  { id: "buyer-seller-meet", path: "/buyer-seller-meet", label: "Buyer Seller Meet", title: "Buyer Seller Meet | Bharat Organic Expo 2027", score: 63, words: 1435, inLinks: 18, lcp: 1.83, cls: 0.040, clicks: 170, impressions: 850, position: 24.9, issue: "short" },
-  { id: "participate", path: "/participate", label: "Participate", title: "Participate | Bharat Organic Expo 2027", score: 83, words: 1850, inLinks: 27, lcp: 1.43, cls: 0.040, clicks: 176, impressions: 4048, position: 16.8, issue: "ok" },
-  { id: "exhibitors", path: "/exhibitors", label: "Exhibitors", title: "Exhibitors | Bharat Organic Expo 2027", score: 81, words: 1967, inLinks: 14, lcp: 1.71, cls: 0.075, clicks: 288, impressions: 1728, position: 29.1, issue: "short" },
-  { id: "e-promotion-web", path: "/e-promotion-web", label: "E-Promotion", title: "E-Promotion | Bharat Organic Expo 2027", score: 61, words: 705, inLinks: 37, lcp: 1.37, cls: 0.043, clicks: 475, impressions: 12350, position: 3.8, issue: "ok" },
-  { id: "partnership", path: "/partnership", label: "Partnership", title: "Partnership | Bharat Organic Expo 2027", score: 91, words: 1079, inLinks: 30, lcp: 1.65, cls: 0.039, clicks: 315, impressions: 3150, position: 5.5, issue: "ok" },
-  { id: "feedback", path: "/feedback", label: "Feedback", title: "Feedback | Bharat Organic Expo 2027", score: 69, words: 691, inLinks: 23, lcp: 1.62, cls: 0.040, clicks: 254, impressions: 2286, position: 12.2, issue: "short" },
-  { id: "about-suport_services", path: "/about/suport_services", label: "Support Services", title: "Support Services | Bharat Organic Expo 2027", score: 71, words: 1252, inLinks: 30, lcp: 1.27, cls: 0.009, clicks: 70, impressions: 1540, position: 24.1, issue: "ok" },
-  { id: "gallery", path: "/gallery", label: "Gallery", title: "Gallery | Bharat Organic Expo 2027", score: 85, words: 1666, inLinks: 40, lcp: 1.88, cls: 0.039, clicks: 472, impressions: 11800, position: 13.2, issue: "ok" },
-  { id: "thank-you", path: "/thank-you", label: "Thank You", title: "Thank You | Bharat Organic Expo 2027", score: 84, words: 1221, inLinks: 36, lcp: 1.92, cls: 0.040, clicks: 454, impressions: 9534, position: 6.8, issue: "ok" },
-  { id: "awards", path: "/awards", label: "Awards", title: "Awards | Bharat Organic Expo 2027", score: 98, words: 1810, inLinks: 31, lcp: 1.46, cls: 0.022, clicks: 251, impressions: 6526, position: 27.1, issue: "ok" },
+  { id: "home", path: "/", label: "Home Page", title: "Vaidhyashala | India's Mega Wellness & Organic Fair", score: 100, words: 1420, inLinks: 26, lcp: 1.5, cls: 0.07, clicks: 450, impressions: 12800, position: 1.4, issue: "ok" },
+  { id: "about", path: "/about", label: "About", title: "About | Vaidhyashala", score: 95, words: 836, inLinks: 22, lcp: 1.62, cls: 0.045, clicks: 57, impressions: 1425, position: 5.1, issue: "short" },
+  { id: "why-visit", path: "/why-visit", label: "Why Visit", title: "Why Visit | Vaidhyashala", score: 96, words: 1254, inLinks: 31, lcp: 1.48, cls: 0.012, clicks: 225, impressions: 3600, position: 15.8, issue: "ok" },
+  { id: "registration", path: "/registration", label: "Registration", title: "Registration | Vaidhyashala", score: 91, words: 1272, inLinks: 19, lcp: 1.72, cls: 0.021, clicks: 197, impressions: 4137, position: 24.2, issue: "ok" },
+  { id: "contact", path: "/contact", label: "Contact Us", title: "Contact Us | Vaidhyashala", score: 88, words: 1681, inLinks: 20, lcp: 1.85, cls: 0.035, clicks: 338, impressions: 5746, position: 8.7, issue: "short" },
+  { id: "exhibition-categories", path: "/exhibition-categories", label: "Exhibition Categories", title: "Exhibition Categories | Vaidhyashala", score: 83, words: 1102, inLinks: 14, lcp: 1.95, cls: 0.089, clicks: 90, impressions: 2610, position: 6.1, issue: "ok" },
+  { id: "why-exhibit", path: "/why-exhibit", label: "Why Exhibit", title: "Why Exhibit | Vaidhyashala", score: 86, words: 1131, inLinks: 39, lcp: 1.26, cls: 0.024, clicks: 12, impressions: 180, position: 23.4, issue: "ok" },
+  { id: "participate-as-exhibitor", path: "/participate-as-exhibitor", label: "Exhibitor Participation", title: "Exhibitor Participation | Vaidhyashala Booths", score: 91, words: 1435, inLinks: 40, lcp: 2.14, cls: 0.042, clicks: 306, impressions: 2142, position: 5.6, issue: "ok" },
+  { id: "sponsorship", path: "/sponsorship", label: "Sponsorship", title: "Sponsorship | Vaidhyashala", score: 100, words: 1498, inLinks: 19, lcp: 1.60, cls: 0.012, clicks: 490, impressions: 11270, position: 13.7, issue: "ok" },
+  { id: "blog", path: "/blog", label: "Blog", title: "Blog | Vaidhyashala", score: 77, words: 1000, inLinks: 34, lcp: 1.51, cls: 0.062, clicks: 361, impressions: 3971, position: 22.5, issue: "short" },
+  { id: "careers", path: "/careers", label: "Careers", title: "Careers | Vaidhyashala", score: 90, words: 1729, inLinks: 27, lcp: 1.54, cls: 0.025, clicks: 229, impressions: 2748, position: 26.9, issue: "ok" },
+  { id: "buyer-seller-meet", path: "/buyer-seller-meet", label: "Buyer Seller Meet", title: "Buyer Seller Meet | Vaidhyashala", score: 63, words: 1435, inLinks: 18, lcp: 1.83, cls: 0.040, clicks: 170, impressions: 850, position: 24.9, issue: "short" },
+  { id: "participate", path: "/participate", label: "Participate", title: "Participate | Vaidhyashala", score: 83, words: 1850, inLinks: 27, lcp: 1.43, cls: 0.040, clicks: 176, impressions: 4048, position: 16.8, issue: "ok" },
+  { id: "exhibitors", path: "/exhibitors", label: "Exhibitors", title: "Exhibitors | Vaidhyashala", score: 81, words: 1967, inLinks: 14, lcp: 1.71, cls: 0.075, clicks: 288, impressions: 1728, position: 29.1, issue: "short" },
+  { id: "e-promotion-web", path: "/e-promotion-web", label: "E-Promotion", title: "E-Promotion | Vaidhyashala", score: 61, words: 705, inLinks: 37, lcp: 1.37, cls: 0.043, clicks: 475, impressions: 12350, position: 3.8, issue: "ok" },
+  { id: "partnership", path: "/partnership", label: "Partnership", title: "Partnership | Vaidhyashala", score: 91, words: 1079, inLinks: 30, lcp: 1.65, cls: 0.039, clicks: 315, impressions: 3150, position: 5.5, issue: "ok" },
+  { id: "feedback", path: "/feedback", label: "Feedback", title: "Feedback | Vaidhyashala", score: 69, words: 691, inLinks: 23, lcp: 1.62, cls: 0.040, clicks: 254, impressions: 2286, position: 12.2, issue: "short" },
+  { id: "about-suport_services", path: "/about/suport_services", label: "Support Services", title: "Support Services | Vaidhyashala", score: 71, words: 1252, inLinks: 30, lcp: 1.27, cls: 0.009, clicks: 70, impressions: 1540, position: 24.1, issue: "ok" },
+  { id: "gallery", path: "/gallery", label: "Gallery", title: "Gallery | Vaidhyashala", score: 85, words: 1666, inLinks: 40, lcp: 1.88, cls: 0.039, clicks: 472, impressions: 11800, position: 13.2, issue: "ok" },
+  { id: "thank-you", path: "/thank-you", label: "Thank You", title: "Thank You | Vaidhyashala", score: 84, words: 1221, inLinks: 36, lcp: 1.92, cls: 0.040, clicks: 454, impressions: 9534, position: 6.8, issue: "ok" },
+  { id: "awards", path: "/awards", label: "Awards", title: "Awards | Vaidhyashala", score: 98, words: 1810, inLinks: 31, lcp: 1.46, cls: 0.022, clicks: 251, impressions: 6526, position: 27.1, issue: "ok" },
 ];
 
 const HOME_ID = "home";
@@ -268,7 +268,7 @@ function findInventory(id: string): InventoryPage {
     id,
     path: `/${id}`,
     label,
-    title: `${label} | Bharat Organic Expo 2027`,
+    title: `${label} | Vaidhyashala`,
     score: AVERAGE_ROUTE_SCORE,
     words: 0,
     inLinks: 0,
@@ -425,12 +425,12 @@ function buildMetrics(
 
   /* --- headings ---------------------------------------------------- */
   const h1Tags = isHome
-    ? ["Bharat Organic Expo 2027 | India's Mega Wellness & Organic Fair"]
+    ? ["Vaidhyashala | India's Mega Wellness & Organic Fair"]
     : [page.label];
   const h2Count = Math.max(1, Math.round(words / 250));
   const h2Tags = isHome
     ? [
-      "WELCOME TO BHARAT ORGANIC EXPO 2027 India's Premier Platform for Organic Products, Sustainable Agriculture & Natural Living",
+      "WELCOME TO VAIDHYASHALA India's Premier Platform for Organic Products, Sustainable Agriculture & Natural Living",
       "From a National Expo to a Global Platform",
       "Your Gateway to Global Opportunities",
       "Explore Diverse Exhibition Sectors",
@@ -455,10 +455,10 @@ function buildMetrics(
       inHeadings: headings.includes(primaryKeyword),
     },
     {
-      keyword: "bharat organic expo",
-      inTitle: title.toLowerCase().includes("bharat organic expo"),
-      inDesc: desc ? desc.toLowerCase().includes("bharat organic expo") : null,
-      inHeadings: headings.includes("bharat organic expo"),
+      keyword: "vaidhyashala",
+      inTitle: title.toLowerCase().includes("vaidhyashala"),
+      inDesc: desc ? desc.toLowerCase().includes("vaidhyashala") : null,
+      inHeadings: headings.includes("vaidhyashala"),
     },
     {
       keyword: secondaryKeyword,
@@ -619,7 +619,7 @@ function buildAiInsightsGroup(m: ReportMetrics): CheckupGroup {
       level: "site",
       badge: "PASSED",
       summary:
-        "Bharat Organic Expo 2027 is recognised as an entity by ChatGPT, Gemini, Claude and Perplexity for organic trade fair queries in India.",
+        "Vaidhyashala is recognised as an entity by ChatGPT, Gemini, Claude and Perplexity for organic trade fair queries in India.",
     },
     {
       id: "domain-business-context",
@@ -721,7 +721,7 @@ function buildLlmGroup(m: ReportMetrics): CheckupGroup {
             headers: ["Platform", "Tested Query", "Brand Mention", "Cited URL"],
             rows: [
               ["ChatGPT (GPT-4o)", "Top organic food trade fairs in India 2027", "✓ Mentioned", "bharatorganicexpo.com"],
-              ["Google Gemini", "Bharat Organic Expo Pragati Maidan dates", "✓ Mentioned", "bharatorganicexpo.com/contact"],
+              ["Google Gemini", "Vaidhyashala Pragati Maidan dates", "✓ Mentioned", "bharatorganicexpo.com/contact"],
               ["Anthropic Claude 3.5", "Organic agriculture exhibition stalls New Delhi", "✓ Mentioned", "bharatorganicexpo.com/registration"],
               ["Perplexity AI", "International bio wellness expo registration India", "~ Partial", "bharatorganicexpo.com"],
             ],
@@ -966,7 +966,7 @@ function buildCommonSeoGroup(m: ReportMetrics): CheckupGroup {
             `og:title — ${m.pageTitle}`,
             m.pageDesc ? `og:description — ${m.pageDesc}` : "og:description — mirrors the meta description of this route",
             `og:url — ${m.url}`,
-            "og:site_name — Bharat Organic Expo 2027",
+            "og:site_name — Vaidhyashala",
             "og:image — /assets/images/og-banner.png (1200x630)",
             "og:type — website",
           ],
@@ -1602,7 +1602,7 @@ function buildAdvancedGroup(): CheckupGroup {
           title: "Detected JSON-LD types",
           items: [
             "Event — name, startDate, endDate, location (Pragati Maidan, New Delhi), organizer",
-            "Organization — Bharat Organic Expo 2027, logo, sameAs social profiles",
+            "Organization — Vaidhyashala, logo, sameAs social profiles",
             "WebSite — name, url, potentialAction SearchAction",
           ],
         },
@@ -2332,7 +2332,7 @@ function csvEscape(value: string | number): string {
 
 export function checkupReportToCsv(report: SeoCheckupReportData): string {
   const rows: Array<Array<string | number>> = [
-    ["Bharat Organic Expo 2027 — SEO Site Checkup Audit Report"],
+    ["Vaidhyashala — SEO Site Checkup Audit Report"],
     ["Scope", report.scope === "site" ? "Domain (bharatorganicexpo.com)" : "Page"],
     ["Route", report.route],
     ["URL", report.url],

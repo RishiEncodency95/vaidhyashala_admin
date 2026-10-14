@@ -236,7 +236,7 @@ export default function SeoDashboardPage() {
           <div className="mt-1 flex flex-wrap items-center gap-3 text-xs font-medium text-slate-600">
             <span>Website: <a href="https://bharatorganicexpo.com" target="_blank" rel="noreferrer" className="text-blue-600 font-mono underline font-semibold">https://bharatorganicexpo.com</a></span>
             <span>·</span>
-            <span>Event: <strong className="text-slate-900">Bharat Organic Expo 2027</strong></span>
+            <span>Event: <strong className="text-slate-900">Vaidhyashala</strong></span>
           </div>
         </div>
 
@@ -722,7 +722,7 @@ export default function SeoDashboardPage() {
       {tab === "Search insights" && (
         <Panel title="Google Search Console Insights">
           <div className="space-y-3 text-xs text-slate-600">
-            <p>Direct Search Console API Integration active for Bharat Organic Expo 2027.</p>
+            <p>Direct Search Console API Integration active for Vaidhyashala.</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <span className="block text-lg font-bold text-slate-900">{totals.clicks.toLocaleString("en-US")}</span>
@@ -805,7 +805,7 @@ export default function SeoDashboardPage() {
       {tab === "AI plan" && (
         <Panel title="AI SEO Strategic Execution Plan">
           <p className="text-xs text-slate-600 leading-relaxed">
-            Automated execution roadmap powered by Gemini 2.5 Flash & GPT-4o Mini for Bharat Organic Expo 2027.
+            Automated execution roadmap powered by Gemini 2.5 Flash & GPT-4o Mini for Vaidhyashala.
           </p>
         </Panel>
       )}

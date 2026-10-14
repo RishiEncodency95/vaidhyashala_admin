@@ -212,7 +212,7 @@ export const dashboardApi = {
           position: 8.4,
           growth: { clicks: 14.2, impressions: 21.0, ctr: 1.8, position: -1.2 },
           queries: [
-            { query: "bharat organic expo 2027", clicks: 3200, impressions: 24000, ctr: 13.3, position: 1.2 },
+            { query: "vaidhyashala", clicks: 3200, impressions: 24000, ctr: 13.3, position: 1.2 },
             { query: "organic food exhibition india", clicks: 1850, impressions: 19800, ctr: 9.3, position: 2.4 },
             { query: "book stall organic expo", clicks: 1420, impressions: 12500, ctr: 11.4, position: 1.8 },
             { query: "herbal ayush expo registration", clicks: 980, impressions: 11200, ctr: 8.75, position: 3.1 }
