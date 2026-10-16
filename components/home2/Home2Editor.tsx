@@ -105,7 +105,7 @@ function fromDraft(draft: CmsRecord): { key: Home2SectionKey; data: CmsRecord } 
   return { key: String(key).slice(DRAFT_PREFIX.length) as Home2SectionKey, data };
 }
 
-/** Pages & CMS → Home 2: the website "/home" page, in the same layout as every other page editor */
+/** Pages & CMS → Home: the website "/home" page, in the same layout as every other page editor */
 export default function Home2Editor() {
   const [page, setPage] = useState<Home2Page | null>(null);
   const [loadError, setLoadError] = useState("");
@@ -119,7 +119,7 @@ export default function Home2Editor() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- initial fetch
-    loadAll().catch((err) => setLoadError(errorMessage(err, "Could not load Home 2.")));
+    loadAll().catch((err) => setLoadError(errorMessage(err, "Could not load the Home page.")));
   }, [loadAll]);
 
   const resetToWebsiteDefaults = async () => {
@@ -170,7 +170,7 @@ export default function Home2Editor() {
         .filter(Boolean)
         .join(" ")}
       defaultBreadcrumb="Home"
-      template="Home 2"
+      template="Home"
       sectionsDraft={sectionsDraft}
       setSectionsDraft={setSectionsDraft}
       blankItem={(section) => ({ ...(sectionDef(section)?.blank ?? {}) })}

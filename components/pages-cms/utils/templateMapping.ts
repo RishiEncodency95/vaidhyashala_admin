@@ -1,8 +1,8 @@
 import type { CmsPage } from "@/lib/cmsPages";
 
 export function getTemplateForPage(p: { type?: string; configKey?: string; title: string }): string {
-  // Only the main home page is "Homepage"; Home 2 is its own template
-  if (p.configKey === "landingPage") return "Homepage";
+  // Website "/" is the Blog page; the Home page (website "/home") uses its own title
+  if (p.configKey === "landingPage") return "Blog";
   // "Talk to Expo Advisor" and "Contact Us" are the same page; only "Contact Us" is offered as a template.
   if (p.configKey === "contactPage") return "Contact Us";
   return p.title;
@@ -10,7 +10,10 @@ export function getTemplateForPage(p: { type?: string; configKey?: string; title
 
 export function getPageForTemplate(templateName: string, allPages: CmsPage[]): CmsPage | undefined {
   if (templateName === "Homepage" || templateName === "Home") {
-    return allPages.find((p) => p.configKey === "landingPage") ?? allPages[0];
+    return allPages.find((p) => p.configKey === "home2Page") ?? allPages[0];
+  }
+  if (templateName === "Blog") {
+    return allPages.find((p) => p.configKey === "landingPage");
   }
   const byExactTitle = allPages.find((p) => p.title.toLowerCase() === templateName.toLowerCase());
   if (byExactTitle) return byExactTitle;

@@ -5,8 +5,8 @@ import { SectionTitle } from "../section-editor";
 import type { FormState } from "../types";
 
 const TEMPLATE_OPTIONS = [
-  "Homepage",
-  "Home 2",
+  "Home",
+  "Blog",
   "About Us",
   "About Story",
   "Treatments",
@@ -59,7 +59,7 @@ const TEMPLATE_OPTIONS = [
 const BASE_PARENT_OPTIONS = [
   "— No Parent (Top Level) —",
   "Home",
-  "Home 2",
+  "Blog",
   "About Us",
   "About Story",
   "Treatments",

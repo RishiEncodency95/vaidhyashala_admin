@@ -239,7 +239,7 @@ function FilterSelect({
    MAIN PAGE
 ========================================================= */
 
-/** A home page row (Home / Home 2) with SEO, score, status and last update from its own editor's data */
+/** The Blog ("/") and Home ("/home") rows with SEO, score, status and last update from its own editor's data */
 function withHomeData(
   page: CmsPage,
   home: CmsPageMeta & { sections: object },
@@ -378,7 +378,7 @@ export default function PagesCmsPage() {
       const realPages = cmsPagesFromSettings(raw).filter((p) => p.configKey !== "supportServicesPage");
       setPages(realPages);
       setSelectedPage(realPages[0] ?? null);
-      // Home ("/") and Home 2 ("/home") have their own editors: show their SEO, status and last update
+      // Blog ("/") and Home ("/home") have their own editors: show their SEO, status and last update
       const patchRow = (configKey: string, home: Parameters<typeof withHomeData>[1]) => {
         if (!active) return;
         const patch = (p: CmsPage) => (p.configKey === configKey ? withHomeData(p, home) : p);

@@ -83,7 +83,7 @@ const sectionContent = (draft: CmsRecord) => JSON.stringify(fromDraft(draft).dat
 const draftItems = (drafts: CmsRecord[], key: Home1SectionKey): CmsRecord[] =>
   (drafts.find((d) => d.key === `${DRAFT_PREFIX}${key}`)?.items as CmsRecord[] | undefined) ?? [];
 
-/** Pages & CMS → Home: the website home page ("/"), in the same layout as every other page editor */
+/** Pages & CMS → Blog: the website "/" (Health Journal), in the same layout as every other page editor */
 export default function Home1Editor() {
   const [page, setPage] = useState<Home1Page | null>(null);
   const [loadError, setLoadError] = useState("");
@@ -231,6 +231,7 @@ export default function Home1Editor() {
       cmsPage={homePage}
       websitePath="/"
       seoPageKey="home"
+      template="Blog"
       meta={page}
       loadError={loadError}
       defaultH1={[page?.sections.hero?.titleLine1, page?.sections.hero?.titleLine2].filter(Boolean).join(" ")}

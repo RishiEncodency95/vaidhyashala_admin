@@ -47,8 +47,9 @@ export function getCmsPageRouteKey(page: Pick<CmsPage, "title">): string {
 }
 
 const routeAliases: Record<string, string> = {
-  "home": "landingPage",
-  "homepage": "landingPage",
+  "home": "home2Page",
+  "homepage": "home2Page",
+  "health-journal": "landingPage",
   "about": "aboutPage",
   "about-us": "aboutPage",
   "about-expo": "aboutPage",
@@ -248,7 +249,8 @@ export function formatPublishDate(dateString?: string | Date): string {
 }
 
 const pageDefinitions = [
-  ["landingPage", "Home", "/", "home"],
+  // Website "/" (Health Journal) — called Blog in the admin, edited by components/home1
+  ["landingPage", "Blog", "/", "page"],
   ["aboutPage", "About Us", "/about", "page"],
   ["advisoryPage", "Advisory Board Members", "/about/advisory_board_member", "page"],
   ["nominateAdvisoryPage", "Nominate Advisory Board Member", "/about/nominate_advisory_board", "page"],
@@ -292,8 +294,8 @@ const pageDefinitions = [
   ["hotelStayPartnerPage", "Hotel & Stay Partner", "/partnership/hotel-stay-partner", "page"],
   // Appended last: page ids are list positions, so new pages must not shift existing ones.
   ["careersPage", "Careers", "/careers", "page"],
-  // Website "/home" — edited by the Home 2 editor (components/home2)
-  ["home2Page", "Home 2", "/home", "home"],
+  // Website "/home" — the Home page in the admin, edited by components/home2
+  ["home2Page", "Home", "/home", "home"],
   // Edited by the generic content editor (components/cms-content)
   ["aboutStoryPage", "About Story", "/about/our-story", "page"],
   ["treatmentsPage", "Treatments", "/treatments", "page"],
@@ -320,7 +322,10 @@ export function cmsPagesFromSettings(settings: Record<string, unknown>): CmsPage
   // Pages appended later are listed next to the page they belong with; ids still come from
   // their definition position, so existing ids never shift
   const pages = buildCmsPages(settings);
-  for (const [configKey, afterKey] of [["home2Page", "landingPage"], ["aboutStoryPage", "aboutPage"], ["treatmentsPage", "aboutStoryPage"], ["panchakarmaPage", "treatmentsPage"], ["productsPage", "panchakarmaPage"], ["contactPage", "productsPage"], ["privacyPolicyPage", "contactPage"], ["termsAndConditionsPage", "privacyPolicyPage"], ["testimonialsPage", "termsAndConditionsPage"]]) {
+  // Home leads the list, followed by Blog
+  const home = pages.findIndex((p) => p.configKey === "home2Page");
+  if (home > 0) pages.unshift(...pages.splice(home, 1));
+  for (const [configKey, afterKey] of [["landingPage", "home2Page"], ["aboutStoryPage", "aboutPage"], ["treatmentsPage", "aboutStoryPage"], ["panchakarmaPage", "treatmentsPage"], ["productsPage", "panchakarmaPage"], ["contactPage", "productsPage"], ["privacyPolicyPage", "contactPage"], ["termsAndConditionsPage", "privacyPolicyPage"], ["testimonialsPage", "termsAndConditionsPage"]]) {
     const from = pages.findIndex((p) => p.configKey === configKey);
     if (from < 0) continue;
     const [moved] = pages.splice(from, 1);
@@ -375,19 +380,19 @@ export function getCmsPageDefinition(id: number) {
 
 export const cmsPages: CmsPage[] = cmsPagesFromSettings({});
 
-/** True when a /pages/<routeKey> URL points at the website home page (edited by the Home 1 editor) */
+/** True when a /pages/<routeKey> URL points at the Blog page — website "/" (edited by the Home 1 editor) */
 export function isHomePageRoute(routeKey?: string): boolean {
   if (!routeKey) return false;
   // Exact keys only: the loose matching in findCmsPageByRouteKey would also catch typos like "/pages/o"
-  return ["1", "home", "homepage", "landingpage"].includes(decodeURIComponent(routeKey).toLowerCase().trim());
+  return ["1", "blog", "landingpage", "health-journal"].includes(decodeURIComponent(routeKey).toLowerCase().trim());
 }
 
-/** True when a /pages/<routeKey> URL points at the website "/home" page (edited by the Home 2 editor) */
+/** True when a /pages/<routeKey> URL points at the Home page — website "/home" (edited by the Home 2 editor) */
 export function isHome2PageRoute(routeKey?: string): boolean {
   if (!routeKey) return false;
   const key = decodeURIComponent(routeKey).toLowerCase().trim();
   const home2 = cmsPages.find((p) => p.configKey === "home2Page");
-  return ["home-2", "home2", "home2page"].includes(key) || (!!home2 && key === String(home2.id));
+  return ["home", "homepage", "home-2", "home2", "home2page"].includes(key) || (!!home2 && key === String(home2.id));
 }
 
 /**
