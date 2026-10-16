@@ -122,10 +122,11 @@ export function PageSectionsPanel({
                     className={`h-4 w-4 text-[#4B1426] transition-transform ${isOpen ? "rotate-90 text-[#3b0f1e]" : ""
                       }`}
                   />
-                  <span className="font-mono text-[10px] font-bold text-[#64748b]">
-                    {sectionIndex + 1}.
+                  <span className="grid h-[20px] min-w-[20px] place-items-center rounded-full bg-[#ecf5eb] px-[5px] text-[10px] font-semibold text-[#2f7950]">
+                    {sectionIndex + 1}
                   </span>
-                  <span className="text-[12px] font-bold text-[#4B1426]">
+                  {/* 13px / 11px: sizes PagesTypography does not enlarge */}
+                  <span className="text-[13px] font-semibold tracking-[0.01em] text-[#23471d]">
                     {section.name ?? section.key}
                   </span>
                   {section.enabled === false && (
@@ -138,7 +139,7 @@ export function PageSectionsPanel({
                 <div className="flex items-center gap-[10px]" onClick={(e) => e.stopPropagation()}>
                   <div className="flex items-center gap-[6px]">
                     <span
-                      className={`text-[9.5px] font-bold ${section.enabled !== false ? "text-[#16a34a]" : "text-[#dc2626]"
+                      className={`text-[11px] font-medium ${section.enabled !== false ? "text-[#16a34a]" : "text-[#dc2626]"
                         }`}
                     >
                       {section.enabled !== false ? "Enabled" : "Disabled"}

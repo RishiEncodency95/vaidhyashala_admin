@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   usePathname,
@@ -8,6 +8,8 @@ import {
 } from "next/navigation";
 
 import { ChevronDown, Headphones } from "lucide-react";
+
+const SECTIONS_STORAGE_KEY = "admin_sidebar_sections";
 
 import {
   NAV_SECTIONS,
@@ -57,6 +59,31 @@ function SidebarContent({
   // Dropdown groups the admin opened/closed by hand; otherwise a group is open while one of its pages is
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
 
+  // Sections the admin collapsed/expanded by hand (remembered in this browser); otherwise a
+  // section is open while it holds the current page, and Main Navigation is always open
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(SECTIONS_STORAGE_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage is readable only after mount
+      if (saved) setOpenSections(JSON.parse(saved));
+    } catch {
+      // Storage unavailable: sections just follow the current page
+    }
+  }, []);
+  const toggleSection = (title: string, open: boolean) =>
+    setOpenSections((prev) => {
+      const next = { ...prev, [title]: !open };
+      try {
+        window.localStorage.setItem(SECTIONS_STORAGE_KEY, JSON.stringify(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  const itemIsActive = (item: NavItem): boolean =>
+    isActive(pathname, item.href, searchParams) || (item.children ?? []).some(itemIsActive);
+
   const renderItem = (item: NavItem) => {
     const Icon = item.icon;
 
@@ -69,8 +96,9 @@ function SidebarContent({
             type="button"
             onClick={() => setOpenGroups((g) => ({ ...g, [item.label]: !open }))}
             aria-expanded={open}
-            className={`flex h-[31px] w-full items-center gap-[6px] rounded-[7px] px-[9px] text-left text-[12px] font-medium transition-all duration-150 ${
-              childActive ? "text-white" : "text-[#F2F5F7] hover:bg-white/[0.07] hover:text-white"
+            title={item.label}
+            className={`flex h-[31px] w-full items-center gap-[7px] rounded-[7px] px-[9px] text-left text-[12px] font-medium transition-all duration-150 ${
+              childActive ? "text-white" : "text-[#E8EFE9] hover:bg-white/[0.07] hover:text-white"
             }`}
           >
             <span className="grid h-[21px] w-[21px] shrink-0 place-items-center">
@@ -139,68 +167,25 @@ function SidebarContent({
             </span>
           )}
 
-        {item.badge === "NEW" && (
-          <span
-            className="
-              flex
-              h-[19px]
-              shrink-0
-              items-center
-              justify-center
-              rounded-[6px]
-              bg-[linear-gradient(180deg,#3AAA63_0%,#25844C_100%)]
-              px-[7px]
-              text-[8px]
-              font-bold
-              leading-none
-              text-white
-              shadow-[0_2px_5px_rgba(0,0,0,0.22)]
-            "
-          >
-            NEW
-          </span>
-        )}
       </>
     );
 
-    if (
-      item.disabled ||
-      !item.href
-    ) {
-      return (
-        <div
-          key={item.label}
-          aria-disabled="true"
-          title="This module is not available yet"
-          className="
-            flex
-            h-[29px]
-            cursor-not-allowed
-            items-center
-            gap-[6px]
-            rounded-[6px]
-            px-[9px]
-            text-[12px]
-            font-medium
-            text-white/35
-          "
-        >
-          {content}
-        </div>
-      );
-    }
+    // Modules that are not available yet are not listed
+    if (item.disabled || !item.href) return null;
 
     return (
       <Link
         key={item.label}
         href={item.href}
         onClick={onNavigate}
+        title={item.label}
+        aria-current={active ? "page" : undefined}
         className={`
           relative
           flex
           h-[31px]
           items-center
-          gap-[6px]
+          gap-[7px]
           overflow-hidden
           rounded-[7px]
           px-[9px]
@@ -211,12 +196,13 @@ function SidebarContent({
 
           ${active
             ? `
-                bg-[linear-gradient(90deg,#1b5e20_0%,#2e7d32_45%,#4f9a2f_75%,#7cb342_100%)]
+                bg-[linear-gradient(90deg,#2a6b30_0%,#2e7d32_55%,#4c8f35_100%)]
+                font-semibold
                 text-white
-                shadow-[0_3px_10px_rgba(0,0,0,0.32)]
+                shadow-[0_3px_10px_rgba(0,0,0,0.28)]
               `
             : `
-                text-[#F2F5F7]
+                text-[#E8EFE9]
                 hover:bg-white/[0.07]
                 hover:text-white
               `
@@ -224,14 +210,18 @@ function SidebarContent({
         `}
       >
         {active && (
-          <span
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-              bg-[linear-gradient(180deg,rgba(255,255,255,0.10),transparent)]
-            "
-          />
+          <>
+            <span
+              className="
+                pointer-events-none
+                absolute
+                inset-0
+                bg-[linear-gradient(180deg,rgba(255,255,255,0.10),transparent)]
+              "
+            />
+            {/* Gold marker on the current page */}
+            <span className="pointer-events-none absolute left-0 top-[6px] bottom-[6px] w-[3px] rounded-r-full bg-[#e0b84a]" />
+          </>
         )}
 
         <span className="relative z-10 contents">
@@ -325,62 +315,47 @@ function SidebarContent({
           [&::-webkit-scrollbar]:hidden
         "
       >
-        {NAV_SECTIONS.map(
-          (
-            section,
-            index,
-          ) => (
+        {NAV_SECTIONS.map((section, index) => {
+          const items = section.items.filter((item) => !item.disabled && (item.href || item.children?.length));
+          if (items.length === 0) return null;
+          const holdsCurrentPage = items.some(itemIsActive);
+          const open = index === 0 || (openSections[section.title] ?? holdsCurrentPage);
+
+          return (
             <section
               key={section.title}
-              className={`
-                mb-[7px]
-                ${index > 0
-                  ? "border-t border-[#c9a227]/25 pt-[7px]"
-                  : ""
-                }
-              `}
+              className={`mb-[4px] ${index > 0 ? "border-t border-[#c9a227]/20 pt-[4px]" : ""}`}
             >
-              <div
-                className="
-                  mb-[4px]
-                  flex
-                  items-center
-                  gap-[7px]
-                  px-[5px]
-                "
-              >
-                <h2
-                  className="
-                    shrink-0
-                    text-[9.5px]
-                    font-bold
-                    uppercase
-                    leading-[13px]
-                    tracking-[0.035em]
-                    text-[#e0b84a]
-                  "
-                  style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.4)" }}
-                >
+              {index === 0 ? (
+                <h2 className="mb-[3px] px-[6px] py-[4px] text-[9.5px] font-bold uppercase leading-[13px] tracking-[0.06em] text-[#e0b84a]">
                   {section.title}
                 </h2>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => toggleSection(section.title, open)}
+                  aria-expanded={open}
+                  className="group mb-[2px] flex w-full items-center gap-[6px] rounded-[6px] px-[6px] py-[5px] text-left transition-colors hover:bg-white/[0.05]"
+                >
+                  <span className="min-w-0 flex-1 truncate text-[9.5px] font-bold uppercase leading-[13px] tracking-[0.06em] text-[#e0b84a]">
+                    {section.title}
+                  </span>
+                  {!open && (
+                    <span className="rounded-full bg-white/10 px-[6px] py-[1px] text-[9px] font-semibold leading-[12px] text-white/70">
+                      {items.length}
+                    </span>
+                  )}
+                  {holdsCurrentPage && !open && <span className="h-[6px] w-[6px] rounded-full bg-[#e0b84a]" aria-hidden />}
+                  <ChevronDown
+                    className={`h-[13px] w-[13px] shrink-0 text-[#e0b84a]/80 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+                  />
+                </button>
+              )}
 
-                <span
-                  className="
-                    h-px
-                    flex-1
-                    bg-[#c9a227]/25
-                  "
-                />
-              </div>
-
-              <div className="space-y-[1px]">
-                {section.items.map(
-                  renderItem,
-                )}
-              </div>
+              {open && <div className="space-y-[1px] pb-[3px]">{items.map(renderItem)}</div>}
             </section>
-          ),
-        )}
+          );
+        })}
       </nav>
 
       {/* HELP BOX */}

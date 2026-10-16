@@ -536,24 +536,10 @@ export default function LoginPage() {
           {/* HEADING */}
 
           <div className="auth-heading">
-            <div
-              style={{
-                width: 72,
-                height: 72,
-                margin: "0 auto 6px",
-                overflow: "visible",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                mixBlendMode: "multiply",
-              }}
-            >
+            {/* Same logo as the admin sidebar, shown plain on the white card */}
+            <div className="login-logo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/vaidhyashala-logo.png"
-                alt="Vaidhyashala"
-                style={{ width: "100%", height: "100%", objectFit: "contain" }}
-              />
+              <img src="/sidebar/vaidhyashala-horizontal-logo.png" alt="Vaidhyashala" />
             </div>
 
             <h2>

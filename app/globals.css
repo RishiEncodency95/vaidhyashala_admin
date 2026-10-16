@@ -299,3 +299,6 @@ div:where(.swal2-container) .swal-toast-popup {
   .sidebar-logo-frame:hover { transition: none; }
   .sidebar-logo-inner::after { animation: none; display: none; }
 }
+/* Login form: the sidebar logo in a quiet card (thin warm border, soft shadow), centred above "Welcome Back!" */
+.login-logo{width:min(270px,100%);margin:0 auto 12px;padding:10px 16px;background:#fff;border:1px solid #e7dcc0;border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 6px 18px rgba(27,94,32,.08)}
+.login-logo img{display:block;width:100%;height:auto}
