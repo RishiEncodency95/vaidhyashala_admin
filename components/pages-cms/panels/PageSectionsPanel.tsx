@@ -14,6 +14,7 @@ export function PageSectionsPanel({
   addSectionItem,
   removeSectionItem,
   resetToWebsiteDefaults,
+  getItemsEditorProps,
 }: {
   sectionsDraft: Array<CmsRecord>;
   setSectionsDraft: React.Dispatch<React.SetStateAction<Array<CmsRecord>>>;
@@ -25,6 +26,13 @@ export function PageSectionsPanel({
   addSectionItem: (sectionIndex: number) => void;
   removeSectionItem: (sectionIndex: number, itemIndex: number) => void;
   resetToWebsiteDefaults: () => void;
+  /** Extra props for a section's items list (dropdown fields, labels) */
+  getItemsEditorProps?: (section: CmsRecord) => {
+    fieldOptions?: Record<string, Array<{ label: string; value: string }>>;
+    title?: string;
+    addLabel?: string;
+    canAdd?: boolean;
+  };
 }) {
   return (
     <section
@@ -205,6 +213,7 @@ export function PageSectionsPanel({
                       onAddItem={() => addSectionItem(sectionIndex)}
                       onRemoveItem={(itemIndex) => removeSectionItem(sectionIndex, itemIndex)}
                       sectionId={section.key}
+                      {...getItemsEditorProps?.(section)}
                     />
                   )}
                 </div>

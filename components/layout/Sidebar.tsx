@@ -211,7 +211,7 @@ function SidebarContent({
 
           ${active
             ? `
-                bg-[linear-gradient(90deg,#1e5e1a_0%,#2a6d21_48%,#66871c_68%,#cb620c_92%,#b85208_100%)]
+                bg-[linear-gradient(90deg,#1b5e20_0%,#2e7d32_45%,#4f9a2f_75%,#7cb342_100%)]
                 text-white
                 shadow-[0_3px_10px_rgba(0,0,0,0.32)]
               `
@@ -252,31 +252,14 @@ function SidebarContent({
         flex-col
         overflow-hidden
         border-r
-        border-[#183E59]
-        bg-[#071f3c]
+        border-[#1f4d2b]
+        bg-[#0d3319]
         text-white
         shadow-[4px_0_18px_rgba(0,0,0,0.20)]
       "
     >
-      {/* BACKGROUND IMAGE */}
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          z-0
-          bg-cover
-          bg-bottom
-          bg-no-repeat
-        "
-        style={{
-          backgroundImage:
-            'url("/sidebar/sidebar-background.png")',
-          backgroundPosition: "center bottom",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      />
+      {/* BACKGROUND */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(180deg,#0f3a1d_0%,#0d3319_55%,#0a2913_100%)]" />
 
       {/* LIGHT OVERLAY */}
       <div
@@ -287,9 +270,9 @@ function SidebarContent({
           z-[1]
           bg-[linear-gradient(
             180deg,
-            rgba(3,22,47,0.06)_0%,
-            rgba(3,25,50,0.04)_55%,
-            rgba(2,20,40,0.02)_100%
+            rgba(201,162,39,0.06)_0%,
+            rgba(124,179,66,0.03)_55%,
+            rgba(0,0,0,0.04)_100%
           )]
         "
       />
@@ -300,46 +283,29 @@ function SidebarContent({
           relative
           z-10
           shrink-0
-          px-[14px]
+          px-[10px]
           pt-[14px]
           pb-[12px]
           text-center
         "
       >
-        <Link
-          href="/"
-          className="
-            group
-            relative
-            flex
-            h-[78px]
-            items-center
-            justify-center
-            rounded-[12px]
-            bg-white
-            px-2
-            py-1
-            shadow-[0_2px_8px_rgba(0,0,0,0.18)]
-            transition-all
-            duration-200
-            hover:shadow-[0_4px_14px_rgba(0,0,0,0.25)]
-          "
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/vaidhyashala-logo.png"
-            alt="Vaidhyashala Admin"
-            className="
-              h-full
-              max-h-[70px]
-              w-auto
-              max-w-[196px]
-              object-contain
-              transition-transform
-              duration-200
-              group-hover:scale-[1.03]
-            "
-          />
+        <Link href="/" className="sidebar-logo-frame group" aria-label="Vaidhyashala Admin – Dashboard">
+          <span className="sidebar-logo-inner">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/sidebar/vaidhyashala-horizontal-logo.png"
+              alt="Vaidhyashala Admin"
+              className="
+                relative
+                z-[1]
+                h-full
+                max-h-[70px]
+                w-auto
+                max-w-full
+                object-contain
+              "
+            />
+          </span>
         </Link>
       </div>
 
@@ -369,7 +335,7 @@ function SidebarContent({
               className={`
                 mb-[7px]
                 ${index > 0
-                  ? "border-t border-[#668196]/40 pt-[7px]"
+                  ? "border-t border-[#c9a227]/25 pt-[7px]"
                   : ""
                 }
               `}
@@ -391,7 +357,7 @@ function SidebarContent({
                     uppercase
                     leading-[13px]
                     tracking-[0.035em]
-                    text-[#facc15]
+                    text-[#e0b84a]
                   "
                   style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.4)" }}
                 >
@@ -402,7 +368,7 @@ function SidebarContent({
                   className="
                     h-px
                     flex-1
-                    bg-[#668196]/20
+                    bg-[#c9a227]/25
                   "
                 />
               </div>
@@ -439,8 +405,8 @@ function SidebarContent({
             overflow-hidden
             rounded-[9px]
             border
-            border-emerald-500/30
-            bg-[linear-gradient(90deg,#14532d_0%,#16a34a_55%,#15803d_100%)]
+            border-[#c9a227]/40
+            bg-[linear-gradient(90deg,#1b5e20_0%,#2e7d32_55%,#558b2f_100%)]
             px-[13px]
             text-white
             shadow-[0_4px_14px_rgba(0,0,0,0.24)]
@@ -507,7 +473,7 @@ export default function Sidebar({
   onNavigate?: () => void;
 }) {
   return (
-    <Suspense fallback={<aside className="flex h-screen w-[218px] shrink-0 flex-col border-r border-[#e8ecef] bg-white" />}>
+    <Suspense fallback={<aside className="flex h-screen w-[218px] shrink-0 flex-col border-r border-[#1f4d2b] bg-[#0d3319]" />}>
       <SidebarContent onNavigate={onNavigate} />
     </Suspense>
   );

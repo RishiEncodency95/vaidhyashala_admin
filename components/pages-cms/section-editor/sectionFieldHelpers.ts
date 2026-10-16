@@ -6,7 +6,7 @@
 ========================================================= */
 
 export const SECTION_SKIP_KEYS = new Set(["_id", "key", "slides", "items", "enabled", "name"]);
-export const LONG_TEXT_KEY_PATTERN = /description|shortDescription|subtitle|quote|message|statement|notice|bullets/i;
+export const LONG_TEXT_KEY_PATTERN = /description|shortDescription|subtitle|quote|message|statement|notice|bullets|excerpt|productInfo|directions|usageNotes|experienceOptions/i;
 export const IMAGE_KEY_PATTERN = /image|img|logo|photo|banner|picture|bg|avatar|thumbnail/i;
 export const VIDEO_KEY_PATTERN = /video|youtube|embed|vimeo|clip|mediaUrl/i;
 

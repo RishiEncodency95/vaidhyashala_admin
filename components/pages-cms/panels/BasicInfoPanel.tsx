@@ -1,11 +1,21 @@
 import { PUBLIC_SITE_URL, type CmsPage } from "@/lib/cmsPages";
+import { getTemplateForPage } from "../utils/templateMapping";
 import { FieldLabel, SearchableSelectField, SelectField, TextInput } from "../fields";
 import { SectionTitle } from "../section-editor";
 import type { FormState } from "../types";
 
 const TEMPLATE_OPTIONS = [
   "Homepage",
-  "About Expo",
+  "Home 2",
+  "About Us",
+  "About Story",
+  "Treatments",
+  "Panchakarma",
+  "Products",
+  "Contact Us",
+  "Privacy Policy",
+  "Terms of Use",
+  "Patient Testimonials",
   "Advisory Board Members",
   "Nominate Advisory Board Member",
   // "Support Services Helpdesk",
@@ -17,8 +27,6 @@ const TEMPLATE_OPTIONS = [
   "DELEGATE REGISTRATION",
   "REGISTER AS BUYER",
   "SPONSORSHIP OPPORTUNITIES",
-  "Terms & Conditions",
-  "Privacy Policy",
   "Refund Policy",
   "Why Visit ORGANIC EXPO",
   "Why Exhibit at ORGANIC EXPO?",
@@ -46,13 +54,17 @@ const TEMPLATE_OPTIONS = [
   "User Login Portal",
   "Our Services",
   "Careers",
-  "Contact Us",
 ];
 
 const BASE_PARENT_OPTIONS = [
   "— No Parent (Top Level) —",
   "Home",
-  "About Expo",
+  "Home 2",
+  "About Us",
+  "About Story",
+  "Treatments",
+  "Panchakarma",
+  "Products",
   "Advisory Board Members",
   "Blogs & News",
   "Why Visit ORGANIC EXPO",
@@ -223,7 +235,14 @@ export function BasicInfoPanel({
             placeholder="Select Template"
             searchPlaceholder="Search page or template..."
             onChange={onTemplateChange}
-            options={TEMPLATE_OPTIONS}
+            options={[
+              ...TEMPLATE_OPTIONS,
+              // Pages added to Pages & CMS later are offered too
+              ...pages
+                .filter((p) => p.configKey !== "supportServicesPage")
+                .map(getTemplateForPage)
+                .filter((t, i, all) => !TEMPLATE_OPTIONS.includes(t) && all.indexOf(t) === i),
+            ]}
           />
         </div>
 

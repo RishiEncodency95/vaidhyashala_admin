@@ -20,12 +20,22 @@ export function SectionItemsEditor({
   onAddItem,
   onRemoveItem,
   sectionId,
+  fieldOptions,
+  title,
+  addLabel,
+  canAdd = true,
 }: {
   items: Array<CmsRecord>;
   onChangeItem: (index: number, key: string, value: unknown) => void;
   onAddItem: () => void;
   onRemoveItem: (index: number) => void;
   sectionId?: string;
+  /** Fields shown as a dropdown instead of a text box, e.g. { category: [{ label, value }] } */
+  fieldOptions?: Record<string, Array<{ label: string; value: string }>>;
+  /** Overrides for the list heading and the add button label */
+  title?: string;
+  addLabel?: string;
+  canAdd?: boolean;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -80,6 +90,7 @@ export function SectionItemsEditor({
   };
 
   const getSectionAddLabel = () => {
+    if (addLabel) return addLabel;
     if (sectionId === "hero") return "Add Hero Slide";
     if (sectionId === "exhibition-hero") return "Add Feature";
     if (sectionId === "nominate-hero") return "Add Feature";
@@ -124,7 +135,7 @@ export function SectionItemsEditor({
       <div className="flex items-center justify-between border-t border-[#e2e8f0] pt-[8px]">
         <div className="flex items-center gap-[6px]">
           <span className="text-[11px] font-bold text-[#1e40af]">
-            {sectionId === "hero" ? "Hero Carousel Slides" :
+            {title ? title : sectionId === "hero" ? "Hero Carousel Slides" :
               sectionId === "audience-strip" ? "Target Audience List" :
                 sectionId === "introduction-section" ? "Key Feature Cards" :
                   sectionId === "global-platform" ? "Platform Highlights & Deals" :
@@ -145,7 +156,7 @@ export function SectionItemsEditor({
           </span>
         </div>
 
-        {sectionId !== "audience-strip" && sectionId !== "beyond-exhibition" && sectionId !== "reasons-to-exhibit" && sectionId !== "industry-segments" && (
+        {canAdd && sectionId !== "audience-strip" && sectionId !== "beyond-exhibition" && sectionId !== "reasons-to-exhibit" && sectionId !== "industry-segments" && (
           <button
             type="button"
             onClick={onAddItem}
@@ -329,6 +340,7 @@ export function SectionItemsEditor({
                 key !== "img" &&
                 key !== "status" &&
                 !(sectionId === "why-exhibit-hero" && key === "icon") &&
+                !(fieldOptions && key === "icon" && !("icon" in item)) &&
                 !(sectionId === "expo-categories" && key === "icon") &&
                 !(sectionId === "industry-segments" && key === "icon") &&
                 !(sectionId === "why-visit-matters" && key === "icon") &&
@@ -414,7 +426,13 @@ export function SectionItemsEditor({
                                             : humanizeKey(key)}
                         </FieldLabel>
 
-                        {key === "icon" && sectionId !== "journey-glimpse" ? (
+                        {fieldOptions?.[key] ? (
+                          <SelectField
+                            value={String(value)}
+                            options={fieldOptions[key]}
+                            onChange={(next) => onChangeItem(index, key, next)}
+                          />
+                        ) : key === "icon" && sectionId !== "journey-glimpse" ? (
                           <SelectField
                             value={String(value)}
                             options={[

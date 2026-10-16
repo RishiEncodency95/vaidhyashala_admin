@@ -48,6 +48,11 @@ import {
 } from "@/lib/cmsPages";
 import { settingsApi } from "@/lib/settingsApi";
 import { dashboardApi } from "@/lib/dashboardApi";
+import { home1Api } from "@/lib/home1Api";
+import { home2Api } from "@/lib/home2Api";
+import { pageContentApi } from "@/lib/pageContentApi";
+import { CONTENT_PAGES, getContentPageConfig } from "@/components/cms-content/pageConfigs";
+import type { CmsPageMeta } from "@/components/cms-home/CmsPageEditorShell";
 import { useAppSelector } from "@/store/hooks";
 import type { CmsRecord } from "@/lib/cmsJson";
 
@@ -234,6 +239,36 @@ function FilterSelect({
    MAIN PAGE
 ========================================================= */
 
+/** A home page row (Home / Home 2) with SEO, score, status and last update from its own editor's data */
+function withHomeData(
+  page: CmsPage,
+  home: CmsPageMeta & { sections: object },
+): CmsPage {
+  const { seo } = home;
+  const sections = home.sections as Record<string, { isActive?: boolean; titleLine1?: unknown; titleLine2?: unknown } | undefined>;
+  const checks = [
+    Boolean(seo.metaTitle?.trim()),
+    Boolean(seo.metaDescription?.trim()),
+    Boolean(`${sections.hero?.titleLine1 ?? ""}${sections.hero?.titleLine2 ?? ""}`.trim()),
+    Boolean(seo.schemaMarkup?.trim()),
+    seo.robotsIndex !== false,
+    Object.keys(sections).length > 0,
+    Object.values(sections).some((sec) => sec?.isActive !== false),
+  ];
+  const score = Math.round((checks.filter(Boolean).length / checks.length) * 100);
+  return {
+    ...page,
+    seo: { ...seo, h1Tag: seo.h1Tag || [sections.hero?.titleLine1, sections.hero?.titleLine2].filter(Boolean).join(" ") },
+    seoScore: score,
+    rating: score >= 90 ? "Excellent" : score >= 75 ? "Good" : "Needs Work",
+    lastUpdated: home.updatedAt,
+    updated: formatPublishDate(home.updatedAt),
+    status: home.publish?.status ?? page.status,
+    visibility: home.publish?.visibility ?? page.visibility,
+    publishedAt: home.publish?.publishedAt ?? page.publishedAt,
+  };
+}
+
 export default function PagesCmsPage() {
   const router = useRouter();
   const admin = useAppSelector((state) => state.auth.admin);
@@ -297,6 +332,9 @@ export default function PagesCmsPage() {
     setIsSavingStatus(true);
     try {
       const saved = await settingsApi.setPageStatus(page.configKey, newStatus, loggedInAdminName);
+      // Pages with their own backend keep their status there too (it decides the website 404)
+      const contentPage = getContentPageConfig(page.configKey);
+      if (contentPage) await pageContentApi.updatePublish(contentPage.pageKey, { status: newStatus });
       const lastUpdated = typeof saved.lastUpdated === "string" ? saved.lastUpdated : new Date().toISOString();
       applyPageStatus(page.id, newStatus, {
         lastUpdated,
@@ -340,6 +378,18 @@ export default function PagesCmsPage() {
       const realPages = cmsPagesFromSettings(raw).filter((p) => p.configKey !== "supportServicesPage");
       setPages(realPages);
       setSelectedPage(realPages[0] ?? null);
+      // Home ("/") and Home 2 ("/home") have their own editors: show their SEO, status and last update
+      const patchRow = (configKey: string, home: Parameters<typeof withHomeData>[1]) => {
+        if (!active) return;
+        const patch = (p: CmsPage) => (p.configKey === configKey ? withHomeData(p, home) : p);
+        setPages((prev) => prev.map(patch));
+        setSelectedPage((prev) => (prev ? patch(prev) : prev));
+      };
+      home1Api.getPage().then((home) => patchRow("landingPage", home)).catch(() => {});
+      home2Api.getPage().then((home) => patchRow("home2Page", home)).catch(() => {});
+      for (const { pageKey, cmsConfigKey } of CONTENT_PAGES) {
+        pageContentApi.getPage(pageKey).then((p) => patchRow(cmsConfigKey, p)).catch(() => {});
+      }
       const sections = Object.entries(raw).reduce((count, [key, value]) => {
         if (!key.toLowerCase().endsWith("page") || !value || typeof value !== "object") return count;
         const page = value as { sections?: unknown[] };

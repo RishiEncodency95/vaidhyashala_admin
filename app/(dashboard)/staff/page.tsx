@@ -121,7 +121,7 @@ export default function StaffPage() {
 
   const openEdit = (member: StaffMember) => {
     setEditingId(member._id);
-    setForm({ name: member.name, email: member.email ?? "", phone: member.phone, employeeId: member.employeeId ?? "", roleId: member.roleId ?? "" });
+    setForm({ name: member.name, email: member.email ?? "", phone: member.phone, employeeId: member.employeeId ?? "", roleId: member.roleId ?? "", avatarUrl: member.avatarUrl || undefined });
     setError("");
     setCreatedCredential(null);
     setModalOpen(true);
@@ -156,9 +156,22 @@ export default function StaffPage() {
     setSaving(true);
     setError("");
     try {
-      await staffApi.update(editingId, form);
-      if (currentAdmin && editingId === currentAdmin.id) {
-        dispatch(updateAdmin({ name: form.name, email: form.email, phone: form.phone, avatarUrl: form.avatarUrl }));
+      const updated = await staffApi.update(editingId, form);
+      // Show the saved values right away instead of waiting for the list reload
+      setStaff((prev) =>
+        prev.map((s) =>
+          s._id === editingId
+            ? { ...s, ...form, ...updated, avatarUrl: updated?.avatarUrl ?? form.avatarUrl }
+            : s,
+        ),
+      );
+      if (currentAdmin && editingId === String(currentAdmin.id)) {
+        dispatch(updateAdmin({
+          name: updated?.name ?? form.name,
+          email: updated?.email ?? form.email,
+          phone: updated?.phone ?? form.phone,
+          avatarUrl: updated?.avatarUrl ?? form.avatarUrl,
+        }));
       }
       showSuccess(`Updated staff details for ${form.name}`);
       setModalOpen(false);

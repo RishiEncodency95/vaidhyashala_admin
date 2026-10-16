@@ -623,6 +623,7 @@ async function request<T>(path: string, options?: ApiRequestOptions, isRetry = f
     path.startsWith("/activity-logs") ||
     path.startsWith("/api-limits") ||
     path.startsWith("/crm-") ||
+    path.startsWith("/cms/") ||
     (isWrite && (path.startsWith("/settings") || path.startsWith("/uploads")));
 
   try {
@@ -667,6 +668,12 @@ async function request<T>(path: string, options?: ApiRequestOptions, isRetry = f
       throw new ApiRequestError(res.status, errorMessage);
     }
     return getMockDataForPath(path, options?.method ?? "GET") as T;
+  }
+
+  // A successful write makes cached reads stale: drop them so the next GET hits the server
+  if (isWrite) {
+    getCache.clear();
+    getInFlight.clear();
   }
 
   if (body !== null) {

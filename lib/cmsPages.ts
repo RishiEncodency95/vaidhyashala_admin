@@ -52,6 +52,8 @@ const routeAliases: Record<string, string> = {
   "about": "aboutPage",
   "about-us": "aboutPage",
   "about-expo": "aboutPage",
+  "our-story": "aboutStoryPage",
+  "about-our-story": "aboutStoryPage",
   "advisory": "advisoryPage",
   "advisory-board": "advisoryPage",
   "advisory-board-members": "advisoryPage",
@@ -81,6 +83,8 @@ const routeAliases: Record<string, string> = {
   "talk-to-expo-advisor": "contactPage",
   "terms": "termsAndConditionsPage",
   "terms-and-conditions": "termsAndConditionsPage",
+  "terms-of-use": "termsAndConditionsPage",
+  "testimonials": "testimonialsPage",
   "privacy": "privacyPolicyPage",
   "privacy-policy": "privacyPolicyPage",
   "refund": "refundPolicyPage",
@@ -245,7 +249,7 @@ export function formatPublishDate(dateString?: string | Date): string {
 
 const pageDefinitions = [
   ["landingPage", "Home", "/", "home"],
-  ["aboutPage", "About Expo", "/about", "page"],
+  ["aboutPage", "About Us", "/about", "page"],
   ["advisoryPage", "Advisory Board Members", "/about/advisory_board_member", "page"],
   ["nominateAdvisoryPage", "Nominate Advisory Board Member", "/about/nominate_advisory_board", "page"],
   ["supportServicesPage", "Support Services Helpdesk", "/about/suport_services", "page"],
@@ -257,9 +261,9 @@ const pageDefinitions = [
   ["delegateRegistrationPage", "DELEGATE REGISTRATION", "/registration/delegate-registration", "page"],
   ["buyerRegistrationPage", "REGISTER AS BUYER", "/registration/buyer-registration", "page"],
   ["sponsorshipPage", "SPONSORSHIP OPPORTUNITIES", "/sponsorship", "page"],
-  ["contactPage", "TALK TO EXPO ADVISOR", "/contact", "page"],
-  ["termsAndConditionsPage", "Terms & Conditions", "/registration/terms-and-conditions", "page"],
-  ["privacyPolicyPage", "Privacy Policy", "/registration/privacy-policy", "page"],
+  ["contactPage", "Contact Us", "/contact", "page"],
+  ["termsAndConditionsPage", "Terms of Use", "/terms", "page"],
+  ["privacyPolicyPage", "Privacy Policy", "/privacy", "page"],
   ["refundPolicyPage", "Refund Policy", "/registration/refund-policy", "page"],
   ["whyVisitPage", "Why Visit ORGANIC EXPO", "/participate/why-visit", "page"],
   ["whyExhibitPage", "Why Exhibit at ORGANIC EXPO?", "/why-exhibit", "page"],
@@ -288,6 +292,14 @@ const pageDefinitions = [
   ["hotelStayPartnerPage", "Hotel & Stay Partner", "/partnership/hotel-stay-partner", "page"],
   // Appended last: page ids are list positions, so new pages must not shift existing ones.
   ["careersPage", "Careers", "/careers", "page"],
+  // Website "/home" — edited by the Home 2 editor (components/home2)
+  ["home2Page", "Home 2", "/home", "home"],
+  // Edited by the generic content editor (components/cms-content)
+  ["aboutStoryPage", "About Story", "/about/our-story", "page"],
+  ["treatmentsPage", "Treatments", "/treatments", "page"],
+  ["panchakarmaPage", "Panchakarma", "/panchakarma", "page"],
+  ["productsPage", "Products", "/products", "page"],
+  ["testimonialsPage", "Patient Testimonials", "/testimonials", "page"],
 ] as const;
 
 function seoScore(config: SettingsPageConfig): number {
@@ -305,6 +317,19 @@ function seoScore(config: SettingsPageConfig): number {
 }
 
 export function cmsPagesFromSettings(settings: Record<string, unknown>): CmsPage[] {
+  // Pages appended later are listed next to the page they belong with; ids still come from
+  // their definition position, so existing ids never shift
+  const pages = buildCmsPages(settings);
+  for (const [configKey, afterKey] of [["home2Page", "landingPage"], ["aboutStoryPage", "aboutPage"], ["treatmentsPage", "aboutStoryPage"], ["panchakarmaPage", "treatmentsPage"], ["productsPage", "panchakarmaPage"], ["contactPage", "productsPage"], ["privacyPolicyPage", "contactPage"], ["termsAndConditionsPage", "privacyPolicyPage"], ["testimonialsPage", "termsAndConditionsPage"]]) {
+    const from = pages.findIndex((p) => p.configKey === configKey);
+    if (from < 0) continue;
+    const [moved] = pages.splice(from, 1);
+    pages.splice(pages.findIndex((p) => p.configKey === afterKey) + 1, 0, moved);
+  }
+  return pages;
+}
+
+function buildCmsPages(settings: Record<string, unknown>): CmsPage[] {
   const globalUpdatedAt = typeof settings.updatedAt === "string" ? new Date(settings.updatedAt) : new Date();
   const globalCreatedAt = typeof settings.createdAt === "string" ? new Date(settings.createdAt) : globalUpdatedAt;
 
@@ -349,3 +374,37 @@ export function getCmsPageDefinition(id: number) {
 }
 
 export const cmsPages: CmsPage[] = cmsPagesFromSettings({});
+
+/** True when a /pages/<routeKey> URL points at the website home page (edited by the Home 1 editor) */
+export function isHomePageRoute(routeKey?: string): boolean {
+  if (!routeKey) return false;
+  // Exact keys only: the loose matching in findCmsPageByRouteKey would also catch typos like "/pages/o"
+  return ["1", "home", "homepage", "landingpage"].includes(decodeURIComponent(routeKey).toLowerCase().trim());
+}
+
+/** True when a /pages/<routeKey> URL points at the website "/home" page (edited by the Home 2 editor) */
+export function isHome2PageRoute(routeKey?: string): boolean {
+  if (!routeKey) return false;
+  const key = decodeURIComponent(routeKey).toLowerCase().trim();
+  const home2 = cmsPages.find((p) => p.configKey === "home2Page");
+  return ["home-2", "home2", "home2page"].includes(key) || (!!home2 && key === String(home2.id));
+}
+
+/**
+ * The page a /pages/<routeKey> URL means, matched exactly (id, alias, title key, config key
+ * or slug) — unlike findCmsPageByRouteKey, never by a partial match.
+ */
+export function findCmsPageExact(routeKey?: string): CmsPage | undefined {
+  if (!routeKey) return undefined;
+  const key = decodeURIComponent(routeKey).toLowerCase().trim();
+  const alias = routeAliases[key];
+  return cmsPages.find(
+    (p) =>
+      String(p.id) === key ||
+      (alias && p.configKey === alias) ||
+      getCmsPageRouteKey(p) === key ||
+      p.configKey?.toLowerCase() === key ||
+      p.slug.replace(/^\//, "").toLowerCase() === key ||
+      p.slug.replace(/^\//, "").toLowerCase().replace(/\//g, "-") === key,
+  );
+}

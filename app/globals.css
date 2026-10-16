@@ -243,3 +243,59 @@ div:where(.swal2-container) .swal-toast-popup {
   .control { display:flex; height:2.5rem; align-items:center; gap:.45rem; border:1px solid #dce3ea; border-radius:.5rem; background:white; padding:0 .75rem; font-size:.75rem; }
   .control select,.control input { min-width:0; background:transparent; outline:none; }
 }
+
+/* Sidebar logo: gold gradient frame, soft glow and a slow light sweep (no movement on hover) */
+.sidebar-logo-frame {
+  position: relative;
+  display: block;
+  border-radius: 14px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, #f3dc8a 0%, #c9a227 30%, #fff4cf 50%, #b8891c 72%, #e6c76a 100%);
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.18),
+    0 6px 18px rgba(0, 0, 0, 0.28),
+    0 0 22px rgba(224, 184, 74, 0.28);
+  transition: box-shadow 0.3s ease;
+}
+.sidebar-logo-frame:hover {
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.3),
+    0 10px 24px rgba(0, 0, 0, 0.32),
+    0 0 30px rgba(224, 184, 74, 0.45);
+}
+.sidebar-logo-inner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 76px;
+  border-radius: 12.5px;
+  padding: 4px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #ffffff 0%, #fbf8ef 55%, #f3ecd8 100%);
+}
+/* Light sweep */
+.sidebar-logo-inner::after {
+  content: "";
+  position: absolute;
+  inset: -20% auto -20% -60%;
+  width: 45%;
+  transform: skewX(-20deg);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0) 100%);
+  animation: sidebar-logo-shine 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+.sidebar-logo-frame:hover .sidebar-logo-inner::after {
+  animation-duration: 1.6s;
+}
+@keyframes sidebar-logo-shine {
+  0%, 70% { left: -60%; }
+  100% { left: 130%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-logo-frame,
+  .sidebar-logo-frame:hover { transition: none; }
+  .sidebar-logo-inner::after { animation: none; display: none; }
+}

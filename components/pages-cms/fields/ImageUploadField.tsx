@@ -4,7 +4,8 @@ import { useState } from "react";
 import { ExternalLink, ImageIcon, RotateCcw, Trash2, Upload } from "lucide-react";
 import Swal from "sweetalert2";
 import { uploadApi } from "@/lib/uploadApi";
-import { ApiRequestError } from "@/lib/api";
+import { ApiRequestError, getBackendUrl } from "@/lib/api";
+import { PUBLIC_SITE_URL } from "@/lib/cmsPages";
 import { TextInput } from "./TextInput";
 
 export function ImageUploadField({
@@ -104,12 +105,10 @@ export function ImageUploadField({
           : value.startsWith("/")
             ? value
             : `/${value}`;
-        const fullBackendUrl = value.startsWith("http")
-          ? value
-          : value.startsWith("/")
-            ? `http://localhost:4000${value}`
-            : `http://localhost:4000/${value}`;
-        const displayUrl = fullBackendUrl;
+        // Not in the admin's own /public: try the website's /public, then the backend
+        const path = value.startsWith("/") ? value : `/${value}`;
+        const fallbackUrls = value.startsWith("http") ? [] : [`${PUBLIC_SITE_URL}${path}`, `${getBackendUrl()}${path}`];
+        const displayUrl = fallbackUrls[0] ?? value;
 
         return (
           <div className="flex items-center gap-3 bg-white p-1.5 rounded border border-[#e2e8f0]">
@@ -120,9 +119,10 @@ export function ImageUploadField({
                 className="h-full w-full object-contain transition-transform group-hover:scale-105"
                 onError={(e) => {
                   const img = e.currentTarget;
-                  if (img.src !== fullBackendUrl && !img.dataset.retry) {
-                    img.dataset.retry = "true";
-                    img.src = fullBackendUrl;
+                  const attempt = Number(img.dataset.retry || 0);
+                  if (attempt < fallbackUrls.length) {
+                    img.dataset.retry = String(attempt + 1);
+                    img.src = fallbackUrls[attempt];
                   }
                 }}
               />

@@ -21,9 +21,18 @@ import {
   cmsPages,
   cmsPagesFromSettings,
   findCmsPageByRouteKey,
+  isHomePageRoute,
+  isHome2PageRoute,
+  findCmsPageExact,
   getCmsPageRouteKey,
 } from "@/lib/cmsPages";
 import { settingsApi } from "@/lib/settingsApi";
+import Home1Editor from "@/components/home1/Home1Editor";
+import Home2Editor from "@/components/home2/Home2Editor";
+import ContentPageEditor from "@/components/cms-content/ContentPageEditor";
+import ProductsEditor from "@/components/products-cms/ProductsEditor";
+import TestimonialsEditor from "@/components/testimonials-cms/TestimonialsEditor";
+import { getContentPageConfig } from "@/components/cms-content/pageConfigs";
 import typography from "../../PagesTypography.module.css";
 import Swal from "sweetalert2";
 
@@ -90,7 +99,7 @@ import type { CmsJson, CmsRecord } from "@/lib/cmsJson";
    MAIN PAGE
 ========================================================= */
 
-export default function CmsEditPage() {
+function CmsEditPage() {
   const params =
     useParams<{
       id: string;
@@ -905,4 +914,17 @@ export default function CmsEditPage() {
       </div>
     </div>
   );
+}
+
+/* Pages with their own backend: the home pages ("/", "/home" → /api/cms/home1, /home2) and the
+   content pages (About Us, About Story, … → /api/cms/pages) */
+export default function CmsEditPageRoute() {
+  const { id } = useParams<{ id: string }>();
+  if (isHomePageRoute(id)) return <Home1Editor />;
+  if (isHome2PageRoute(id)) return <Home2Editor />;
+  const contentConfig = getContentPageConfig(findCmsPageExact(id)?.configKey);
+  if (contentConfig?.pageKey === "products") return <ProductsEditor config={contentConfig} />;
+  if (contentConfig?.pageKey === "testimonials") return <TestimonialsEditor config={contentConfig} />;
+  if (contentConfig) return <ContentPageEditor key={contentConfig.pageKey} config={contentConfig} />;
+  return <CmsEditPage />;
 }
