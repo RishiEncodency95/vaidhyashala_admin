@@ -249,19 +249,20 @@ div:where(.swal2-container) .swal-toast-popup {
   position: relative;
   display: block;
   border-radius: 14px;
-  padding: 1.5px;
-  background: linear-gradient(135deg, #f3dc8a 0%, #c9a227 30%, #fff4cf 50%, #b8891c 72%, #e6c76a 100%);
+  padding: 2px;
+  /* Mostly white with a soft gold sheen */
+  background: linear-gradient(135deg, #ffffff 0%, #f1e3b8 28%, #ffffff 50%, #e8d39a 74%, #ffffff 100%);
   box-shadow:
-    0 0 0 1px rgba(201, 162, 39, 0.18),
-    0 6px 18px rgba(0, 0, 0, 0.28),
-    0 0 22px rgba(224, 184, 74, 0.28);
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 6px 18px rgba(0, 0, 0, 0.26),
+    0 0 16px rgba(255, 255, 255, 0.12);
   transition: box-shadow 0.3s ease;
 }
 .sidebar-logo-frame:hover {
   box-shadow:
-    0 0 0 1px rgba(201, 162, 39, 0.3),
-    0 10px 24px rgba(0, 0, 0, 0.32),
-    0 0 30px rgba(224, 184, 74, 0.45);
+    0 0 0 1px rgba(255, 255, 255, 0.55),
+    0 8px 22px rgba(0, 0, 0, 0.3),
+    0 0 22px rgba(255, 255, 255, 0.2);
 }
 .sidebar-logo-inner {
   position: relative;
@@ -273,7 +274,8 @@ div:where(.swal2-container) .swal-toast-popup {
   border-radius: 12.5px;
   padding: 4px;
   background:
-    radial-gradient(120% 90% at 50% 0%, #ffffff 0%, #fbf8ef 55%, #f3ecd8 100%);
+    radial-gradient(120% 90% at 50% 0%, #ffffff 0%, #fefcf7 60%, #f8f3e6 100%);
+  box-shadow: inset 0 0 0 1px rgba(232, 211, 154, 0.35);
 }
 /* Light sweep */
 .sidebar-logo-inner::after {
