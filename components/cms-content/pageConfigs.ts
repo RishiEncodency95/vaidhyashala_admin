@@ -470,6 +470,32 @@ export const CONTENT_PAGES: ContentPageConfig[] = [
       { key: "cta", name: "Ready to Discuss Your Care CTA" },
     ],
   },
+  {
+    pageKey: "careers",
+    cmsConfigKey: "careersPage",
+    h1Fields: ["titleLine1", "titleLine2"],
+    sections: [
+      { key: "hero", name: "Hero" },
+      { key: "openings", name: "Current Openings" },
+      {
+        key: "whyWork",
+        name: "Why Work With Us",
+        itemsTitle: "Reasons",
+        addLabel: "Add Reason",
+        blank: { iconImage: "", title: "", description: "" },
+        required: [["title", "Every reason needs a title."]],
+      },
+      {
+        key: "life",
+        name: "Life at Vaidhyashala",
+        itemsTitle: "Photos",
+        addLabel: "Add Photo",
+        blank: { image: "", imageAlt: "" },
+        required: [["imageAlt", "Every photo needs alt text."]],
+      },
+      { key: "shareProfile", name: "Don't See the Right Role Banner" },
+    ],
+  },
 ];
 
 export const getContentPageConfig = (cmsConfigKey?: string) =>
