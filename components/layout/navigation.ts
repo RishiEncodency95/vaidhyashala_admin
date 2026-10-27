@@ -3,6 +3,7 @@ import {
   BarChart3,
   BellRing,
   BookOpenText,
+  CalendarCheck,
   Bot,
   Briefcase,
   BriefcaseBusiness,
@@ -60,6 +61,7 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [
       { label: "Dashboard", href: "/", icon: LayoutDashboard },
       { label: "General Enquiries", href: "/general-enquiries", icon: Mail },
+      { label: "Appointment Requests", href: "/appointment-requests", icon: CalendarCheck, badge: "NEW" },
       { label: "Contact Us Messages", href: "/contact-us", icon: MessageSquareText },
       { label: "Communication / Follow-ups", href: "/communication", icon: MessageSquare, badge: "NEW" },
     ],

@@ -30,12 +30,17 @@ export interface Home2Page {
 
 export type AppointmentStatus = "new" | "contacted" | "confirmed" | "cancelled";
 
+export type AppointmentSource = "home2" | "consultation" | "panchakarma";
+
 export interface AppointmentRequest {
   _id: string;
+  source: AppointmentSource;
   service: string;
   serviceLabel: string;
-  preferredDate: string;
-  consultationType: "clinic" | "online";
+  preferredDate?: string;
+  preferredTime?: string;
+  consent?: boolean;
+  consultationType?: "clinic" | "online";
   name?: string;
   phone?: string;
   email?: string;
@@ -54,7 +59,7 @@ export const home2Api = {
   updateSeo: (data: Partial<Home1Seo>) => api.put<Home1Seo>(`${BASE}/seo`, data),
   updatePublish: (data: Partial<Home1Publish>) => api.put<Home1Publish>(`${BASE}/publish`, data),
 
-  listAppointments: (query: { status?: AppointmentStatus | ""; page?: number; limit?: number } = {}) => {
+  listAppointments: (query: { status?: AppointmentStatus | ""; source?: AppointmentSource | ""; q?: string; page?: number; limit?: number } = {}) => {
     const params = new URLSearchParams();
     Object.entries(query).forEach(([k, v]) => v !== undefined && v !== "" && params.set(k, String(v)));
     const qs = params.toString();
