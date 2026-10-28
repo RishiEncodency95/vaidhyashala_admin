@@ -23,6 +23,7 @@ import { getPageForTemplate } from "@/components/pages-cms/utils/templateMapping
 import type { FormState } from "@/components/pages-cms/types";
 import typography from "@/app/(dashboard)/pages/PagesTypography.module.css";
 import { errorMessage } from "./shared";
+import { parseSchemaMarkup } from "@/lib/schemaMarkup";
 
 /** SEO + Publish data every CMS-managed page (Home 1, Home 2) stores on the backend */
 export interface CmsPageMeta {
@@ -195,9 +196,12 @@ function EditorBody(props: ShellProps & { meta: CmsPageMeta }) {
     try {
       const res: CmsJson = await api.post("/seo/generate", {
         page: props.seoPageKey,
+        // The page's own website address, for the canonical URL, og:url and schema
+        path: websitePath,
         envType,
         metaTitle: form.metaTitle || undefined,
         metaDescription: form.metaDescription || undefined,
+        ogImage: form.ogImage || undefined,
       });
       const gen = res?.data?.data || res?.data || res;
       if (!gen) return;
@@ -228,12 +232,13 @@ function EditorBody(props: ShellProps & { meta: CmsPageMeta }) {
     if (form.status === "Draft" && !props.allowDraft) {
       return Swal.fire({ title: "Not allowed", text: "A home page cannot be unpublished.", icon: "warning" });
     }
-    if (form.schemaMarkup.trim()) {
-      try {
-        JSON.parse(form.schemaMarkup);
-      } catch {
-        return Swal.fire({ title: "Invalid schema", text: "Schema markup must be valid JSON-LD.", icon: "error" });
-      }
+    // Plain JSON-LD, or JSON-LD inside <script type="application/ld+json"> / <script type="application/json">
+    if (parseSchemaMarkup(form.schemaMarkup) === null) {
+      return Swal.fire({
+        title: "Invalid schema",
+        text: "Schema markup must be valid JSON-LD: plain JSON, or JSON inside a <script> tag.",
+        icon: "error",
+      });
     }
     const problem = props.validate?.();
     if (problem) return Swal.fire({ title: "Missing details", text: problem, icon: "warning" });

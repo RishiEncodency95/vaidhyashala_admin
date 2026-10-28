@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
+  CalendarDays,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
@@ -17,6 +18,7 @@ import {
   Search,
   Sparkles,
   Trash2,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import Swal from "sweetalert2";
@@ -58,6 +60,18 @@ function formatDateTime(value: string): string {
     hour12: true,
   });
 }
+
+/** Digits for a wa.me link; a bare 10-digit Indian mobile gets the 91 prefix */
+const whatsappNumber = (phone: string) => {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 10 ? `91${digits}` : digits;
+};
+
+/** yyyy-mm-dd of a timestamp in the browser's own timezone, to compare with the date pickers */
+const localDay = (value: string) => {
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? "" : new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+};
 
 const isSameDay = (a: Date, b: Date) =>
   a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
@@ -130,6 +144,8 @@ export default function ContactUsPage() {
   const [tab, setTab] = useState<"all" | ContactEnquiryStatus>("all");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
   const [viewing, setViewing] = useState<ContactEnquiry | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
@@ -207,21 +223,32 @@ export default function ContactUsPage() {
     });
   };
 
+  // The date filter narrows the tabs, the status cards and the table; "Today" and "Last 7 days" always count everything
+  const dated = useMemo(
+    () =>
+      enquiries.filter((e) => {
+        if (!dateFrom && !dateTo) return true;
+        const day = localDay(e.createdAt);
+        return (!dateFrom || day >= dateFrom) && (!dateTo || day <= dateTo);
+      }),
+    [enquiries, dateFrom, dateTo]
+  );
+
   const counts = useMemo(
     () => ({
-      all: enquiries.length,
-      pending: enquiries.filter((e) => e.status === "pending").length,
-      contacted: enquiries.filter((e) => e.status === "contacted").length,
-      resolved: enquiries.filter((e) => e.status === "resolved").length,
+      all: dated.length,
+      pending: dated.filter((e) => e.status === "pending").length,
+      contacted: dated.filter((e) => e.status === "contacted").length,
+      resolved: dated.filter((e) => e.status === "resolved").length,
       today: enquiries.filter((e) => isSameDay(new Date(e.createdAt), new Date())).length,
       week: enquiries.filter((e) => isWithinLastDays(e.createdAt, 7)).length,
     }),
-    [enquiries]
+    [dated, enquiries]
   );
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return enquiries.filter((e) => {
+    return dated.filter((e) => {
       if (tab !== "all" && e.status !== tab) return false;
       if (!q) return true;
       return (
@@ -232,7 +259,7 @@ export default function ContactUsPage() {
         e.message.toLowerCase().includes(q)
       );
     });
-  }, [enquiries, tab, search]);
+  }, [dated, tab, search]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
@@ -324,8 +351,53 @@ export default function ContactUsPage() {
               Contact Us Messages
             </h1>
             <p className="mt-0.5 text-[9px] font-medium text-[#6c7587]">
-              WhatsApp-verified submissions from the website&apos;s &quot;Send Us a Message&quot; contact form.
+              Submissions from the website&apos;s Contact Us page: the &quot;Send us an enquiry&quot; and &quot;Send Us a Message&quot; forms.
             </p>
+          </div>
+
+          {/* DATE FILTER */}
+          <div className="flex flex-wrap items-center gap-[6px]">
+            <CalendarDays className="h-[13px] w-[13px] text-[#6c7587]" />
+            <label className="flex items-center gap-1 text-[8.5px] font-bold uppercase tracking-wide text-[#6c7587]">
+              From
+              <input
+                type="date"
+                value={dateFrom}
+                max={dateTo || undefined}
+                onChange={(e) => {
+                  setDateFrom(e.target.value);
+                  setPage(1);
+                }}
+                className="h-[26px] rounded-[5px] border border-[#e5e6e2] bg-white px-[6px] text-[9.5px] font-medium normal-case text-[#414b5e] outline-none focus:border-[#8fa98e]"
+              />
+            </label>
+            <label className="flex items-center gap-1 text-[8.5px] font-bold uppercase tracking-wide text-[#6c7587]">
+              To
+              <input
+                type="date"
+                value={dateTo}
+                min={dateFrom || undefined}
+                onChange={(e) => {
+                  setDateTo(e.target.value);
+                  setPage(1);
+                }}
+                className="h-[26px] rounded-[5px] border border-[#e5e6e2] bg-white px-[6px] text-[9.5px] font-medium normal-case text-[#414b5e] outline-none focus:border-[#8fa98e]"
+              />
+            </label>
+            {(dateFrom || dateTo) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setDateFrom("");
+                  setDateTo("");
+                  setPage(1);
+                }}
+                className="inline-flex h-[26px] items-center gap-1 rounded-[5px] border border-[#e5e6e2] bg-white px-[8px] text-[9px] font-bold text-[#6c7587] transition hover:bg-slate-50 hover:text-[#18233b]"
+              >
+                <X className="h-[10px] w-[10px]" />
+                Clear
+              </button>
+            )}
           </div>
         </div>
 
@@ -462,7 +534,7 @@ export default function ContactUsPage() {
                           {enquiry.name}
                         </button>
                       </td>
-                      <td className="px-[12px] py-[8px] text-[9px] font-medium text-[#334155]">{enquiry.email}</td>
+                      <td className="px-[12px] py-[8px] text-[9px] font-medium text-[#334155]">{enquiry.email || "—"}</td>
                       <td className="px-[12px] py-[8px] text-[9px] font-bold text-[#166534]">{enquiry.phone}</td>
                       <td className="px-[12px] py-[8px] text-[9px] font-medium text-[#334155]">{enquiry.alternatePhone || "—"}</td>
                       <td className="max-w-[160px] truncate px-[12px] py-[8px] text-[9px] font-medium text-[#334155]" title={enquiry.subject}>
@@ -496,7 +568,7 @@ export default function ContactUsPage() {
                             <Eye className="h-[12px] w-[12px] text-orange-600" />
                           </button>
                           <a
-                            href={`https://wa.me/${enquiry.phone.replace(/\D/g, "")}`}
+                            href={`https://wa.me/${whatsappNumber(enquiry.phone)}`}
                             target="_blank"
                             rel="noreferrer"
                             title="Message on WhatsApp"
@@ -590,7 +662,7 @@ export default function ContactUsPage() {
                 Delete
               </button>
               <a
-                href={`https://wa.me/${viewing.phone.replace(/\D/g, "")}`}
+                href={`https://wa.me/${whatsappNumber(viewing.phone)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-[32px] items-center gap-1.5 px-[14px] text-[12px] font-semibold text-white transition-all hover:opacity-90 active:scale-95"
@@ -631,7 +703,7 @@ export default function ContactUsPage() {
 
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: "Email", value: viewing.email, icon: Mail },
+                { label: "Email", value: viewing.email || "—", icon: Mail },
                 { label: "WhatsApp Number", value: viewing.phone, icon: Phone },
                 ...(viewing.alternatePhone ? [{ label: "Alternate Number", value: viewing.alternatePhone, icon: Phone }] : []),
                 { label: "Subject", value: viewing.subject || "—", icon: MessageSquareText },

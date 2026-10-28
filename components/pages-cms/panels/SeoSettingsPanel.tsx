@@ -1,5 +1,5 @@
 import { Globe, Sparkles, Upload, X } from "lucide-react";
-import type { CmsPage } from "@/lib/cmsPages";
+import { LIVE_SITE_URL, PUBLIC_SITE_URL, type CmsPage } from "@/lib/cmsPages";
 import { EditorToolbar, Toggle } from "../fields";
 import type { FormState } from "../types";
 
@@ -52,7 +52,7 @@ export function SeoSettingsPanel({
             type="button"
             onClick={() => onAutoGenerateSeo("local")}
             className="px-2.5 py-1.5 bg-blue-50 border border-blue-200 text-blue-700 hover:bg-blue-100 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
-            title="Auto-generate tags for Local environment (http://localhost:3002)"
+            title={`Auto-generate tags for Local environment (${PUBLIC_SITE_URL})`}
           >
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             Auto Generate (Local)
@@ -61,7 +61,7 @@ export function SeoSettingsPanel({
             type="button"
             onClick={() => onAutoGenerateSeo("live")}
             className="px-2.5 py-1.5 bg-green-50 border border-green-200 text-green-700 hover:bg-green-100 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
-            title="Auto-generate tags for Live environment (https://bharatorganicexpo.com)"
+            title={`Auto-generate tags for Live environment (${LIVE_SITE_URL})`}
           >
             <Globe className="w-3.5 h-3.5 text-green-600" />
             Auto Generate (Live)
@@ -201,22 +201,22 @@ export function SeoSettingsPanel({
                 type="button"
                 onClick={() => {
                   const p = page.slug === "/" ? "" : (page.slug?.startsWith("/") ? page.slug : `/${page.slug || ""}`);
-                  const tag = `<link rel="canonical" href="http://localhost:3002${p}" />`;
+                  const tag = `<link rel="canonical" href="${PUBLIC_SITE_URL}${p}" />`;
                   updateField("canonicalTag", tag);
-                  updateField("canonicalUrl", `http://localhost:3002${p}`);
+                  updateField("canonicalUrl", `${PUBLIC_SITE_URL}${p}`);
                   if (canonicalEditorRef.current) canonicalEditorRef.current.innerText = tag;
                 }}
                 className="text-[11px] px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded hover:bg-blue-100 cursor-pointer font-medium"
               >
-                Set Local (3002)
+                Set Local ({new URL(PUBLIC_SITE_URL).port || "80"})
               </button>
               <button
                 type="button"
                 onClick={() => {
                   const p = page.slug === "/" ? "" : (page.slug?.startsWith("/") ? page.slug : `/${page.slug || ""}`);
-                  const tag = `<link rel="canonical" href="https://bharatorganicexpo.com${p}" />`;
+                  const tag = `<link rel="canonical" href="${LIVE_SITE_URL}${p}" />`;
                   updateField("canonicalTag", tag);
-                  updateField("canonicalUrl", `https://bharatorganicexpo.com${p}`);
+                  updateField("canonicalUrl", `${LIVE_SITE_URL}${p}`);
                   if (canonicalEditorRef.current) canonicalEditorRef.current.innerText = tag;
                 }}
                 className="text-[11px] px-2 py-0.5 bg-green-50 text-green-700 border border-green-200 rounded hover:bg-green-100 cursor-pointer font-medium"

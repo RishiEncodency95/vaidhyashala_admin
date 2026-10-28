@@ -1,4 +1,6 @@
-export const PUBLIC_SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3002").replace(/\/$/, "");
+export const PUBLIC_SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+/** The website's live domain, for "Set Live" / "Auto Generate (Live)" in SEO Information */
+export const LIVE_SITE_URL = (process.env.NEXT_PUBLIC_LIVE_SITE_URL ?? "https://www.vaidhyashala.com").replace(/\/$/, "");
 
 export type PageStatus = "Published" | "Draft";
 

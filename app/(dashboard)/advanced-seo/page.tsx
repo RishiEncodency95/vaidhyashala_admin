@@ -19,7 +19,8 @@ import {
   Share2,
 } from "lucide-react";
 import Swal from "sweetalert2";
-import { api, getBackendUrl } from "@/lib/api";
+import { api } from "@/lib/api";
+import { LIVE_SITE_URL, PUBLIC_SITE_URL } from "@/lib/cmsPages";
 import typography from "../pages/PagesTypography.module.css";
 
 const FacebookIcon = ({ size = 16, color = "#1877F2" }: { size?: number; color?: string }) => (
@@ -191,7 +192,6 @@ export default function AdvancedSeoPage() {
   const footerRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const backendUrl = getBackendUrl();
 
   const fetchData = async () => {
     try {
@@ -448,7 +448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <div className="flex items-center gap-[10px]">
             <a
-              href="http://localhost:3002/sitemap.xml"
+              href={`${PUBLIC_SITE_URL}/sitemap.xml`}
               target="_blank"
               rel="noreferrer"
               className="flex h-[30px] items-center justify-center gap-[5px] rounded-[6px] border border-[#fed7aa] bg-[#fff7ed] px-[14px] text-[8.5px] font-semibold text-[#ea580c] transition hover:bg-[#ffedd5] shadow-sm cursor-pointer"
@@ -852,6 +852,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
               </div>
 
+              {/* sitemap.xml / robots.txt: automatic unless a file with that name is uploaded */}
+              <div className="mb-5 space-y-2">
+                <div className="flex items-center justify-between border-b pb-2">
+                  <h3 className="text-[11px] font-bold text-[#134698] uppercase tracking-wider">Sitemap & Robots</h3>
+                  <span className="text-[10px] text-gray-400 font-semibold">Auto-generated unless uploaded</span>
+                </div>
+                {["sitemap.xml", "robots.txt"].map((name) => {
+                  const uploaded = seoFiles.some((f) => f.fileName.toLowerCase() === name);
+                  return (
+                    <div key={name} className="flex items-center justify-between p-3 border border-gray-200 bg-white">
+                      <div className="flex items-center gap-3 overflow-hidden">
+                        <div className="p-2 bg-gray-100 rounded">
+                          <FileCode className="w-4 h-4 text-[#0284c7]" />
+                        </div>
+                        <div className="overflow-hidden">
+                          <p className="text-xs font-bold text-gray-900">/{name}</p>
+                          <p className="mt-0.5 text-[10px] text-gray-500">
+                            {uploaded ? (
+                              <span className="text-blue-800 bg-blue-50 px-1.5 rounded font-semibold border border-blue-200">
+                                Using your uploaded file
+                              </span>
+                            ) : (
+                              <span className="text-emerald-800 bg-emerald-50 px-1.5 rounded font-semibold border border-emerald-200">
+                                Auto-generated
+                              </span>
+                            )}{" "}
+                            {uploaded
+                              ? "Delete the upload below to go back to the automatic one."
+                              : name === "sitemap.xml"
+                                ? "Lists the website's pages and blog articles, updated on every visit."
+                                : "Allows crawling and points search engines to the sitemap."}
+                          </p>
+                        </div>
+                      </div>
+                      <a
+                        href={`${PUBLIC_SITE_URL}/${name}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                        title={`Open /${name} on the website`}
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+
               {/* Active Files List */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between border-b pb-2">
@@ -899,7 +947,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         <div className="flex items-center gap-1.5">
                           <a
-                            href={`${backendUrl}/seo-files/${file.fileName}`}
+                            href={`${PUBLIC_SITE_URL}/${file.fileName}`}
                             target="_blank"
                             rel="noreferrer"
                             className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
@@ -931,9 +979,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p className="text-[11px] text-orange-800 leading-relaxed font-medium">
                   Files uploaded here are served directly from the root domain (e.g.,{" "}
                   <code className="bg-orange-100 px-1 py-0.5 rounded font-mono text-[10px]">
-                    bharatorganicexpo.com/sitemap.xml
+                    {new URL(LIVE_SITE_URL).host}/sitemap.xml
                   </code>
-                  ) for search crawlers and search console verification.
+                  ) for search crawlers and search console verification. An uploaded sitemap.xml or robots.txt
+                  replaces the auto-generated one; delete it to switch back.
                 </p>
               </div>
             </section>
