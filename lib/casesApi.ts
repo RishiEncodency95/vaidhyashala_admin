@@ -43,7 +43,8 @@ export const casesApi = {
   withdrawAssignment: (id: string, assignmentId: string, reason?: string) =>
     api.patch(`/cases/admin/${id}/volunteers/${assignmentId}/withdraw`, { reason }),
   summaryHtml: (id: string) => api.getHtml(`/cases/admin/${id}/summary`),
-  slaBreaches: () => api.get<SlaBreach[]>("/cases/admin/sla-breaches"),
+  // No cases module in this project's backend: the Topbar's SLA alerts stay empty without a 404 request
+  slaBreaches: (): Promise<SlaBreach[]> => Promise.resolve([]),
   mapData: () => api.get<CaseMapPin[]>("/cases/admin/map-data"),
   nearestVolunteers: (id: string) => api.get<NearestVolunteer[]>(`/cases/admin/${id}/nearest-volunteers`),
 };

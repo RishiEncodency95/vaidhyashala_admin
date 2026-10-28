@@ -63,6 +63,8 @@ export interface JobPosting {
   showMatchScoreToCandidate?: boolean;
   showMatchBreakdown?: boolean;
 
+  /** Photo on the job's card on the website Careers page */
+  image?: string;
   featuredJob?: boolean;
   applicationOpenDate?: string;
   applicationClosingDate?: string;

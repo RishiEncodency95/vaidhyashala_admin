@@ -20,6 +20,7 @@ import {
 
 import Image from "next/image";
 import { jobsApi, type BackendJobStatus, type JobPosting } from "@/lib/careersApi";
+import { uploadApi } from "@/lib/uploadApi";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -374,13 +375,32 @@ function CreateJobForm() {
   const searchParams = useSearchParams();
   const editId = searchParams.get("id");
   const [submitting, setSubmitting] = useState(false);
+  // Required fields left empty on the last Publish / Save, outlined in red until filled
+  const [missing, setMissing] = useState<string[]>([]);
+  // Photo on the job's card on the website Careers page (empty = the website picks one)
+  const [cardImage, setCardImage] = useState("");
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const cardImageInputRef = useRef<HTMLInputElement>(null);
+
+  const handleCardImageUpload = async (file: File) => {
+    setUploadingImage(true);
+    try {
+      const res = await uploadApi.file(file, "vaidhyashala/careers");
+      if (res?.url) setCardImage(res.url);
+    } catch (err) {
+      Swal.fire({ icon: "error", title: "Upload failed", text: err instanceof Error ? err.message : "Could not upload the image." });
+    } finally {
+      setUploadingImage(false);
+      if (cardImageInputRef.current) cardImageInputRef.current.value = "";
+    }
+  };
   const [loadingJob, setLoadingJob] = useState(Boolean(editId));
   const [loadError, setLoadError] = useState<string | null>(null);
 
   const [fields, setFields] = useState({
     title: "",
     designation: "",
-    company: "",
+    company: "Vaidhyashala",
     projectEvent: "",
     department: "",
     jobCode: "",
@@ -430,6 +450,7 @@ function CreateJobForm() {
       try {
         const job: JobPosting = await jobsApi.getById(editId);
         if (!active) return;
+        setCardImage(job.image || "");
 
         setFields({
           title: job.title || "",
@@ -556,8 +577,22 @@ function CreateJobForm() {
   };
 
   const handleSubmit = async (status: BackendJobStatus) => {
-    if (!fields.title.trim() || !fields.department.trim() || !fields.location.trim()) {
-      Toast.fire({ icon: "warning", iconColor: "#fbbf24", title: "Job title, department and location are required." });
+    const empty = (
+      [
+        ["title", "Job Title"],
+        ["department", "Department"],
+        ["location", "Job Location"],
+      ] as const
+    ).filter(([key]) => !fields[key].trim());
+    setMissing(empty.map(([key]) => key));
+    if (empty.length) {
+      // A clear popup (not a small toast): without these the job cannot be saved or shown on the website
+      Swal.fire({
+        icon: "warning",
+        title: "Please fill the required fields",
+        html: `The job is not saved yet. Fill in: <b>${empty.map(([, label]) => label).join(", ")}</b>`,
+        confirmButtonColor: "#059669",
+      });
       return;
     }
 
@@ -621,6 +656,7 @@ function CreateJobForm() {
         showMatchBreakdown: toggles.showBreakdown,
 
         featuredJob: toggles.featuredJob,
+        image: cardImage,
         applicationOpenDate: parseDate(fields.applicationOpenDate),
         applicationClosingDate: parseDate(fields.applicationClosingDate),
         tags: fields.tags.split(",").map((t) => t.trim()).filter(Boolean),
@@ -751,7 +787,7 @@ function CreateJobForm() {
             <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
               <div>
                 <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">Job Title <span className="text-red-500">*</span></label>
-                <input type="text" value={fields.title} onChange={updateField("title")} className="h-[30px] w-full rounded-[5px] border border-[#cbd5e1] bg-white px-2.5 text-[10.5px] font-semibold text-[#1e293b] outline-none focus:border-[#2563eb]" />
+                <input type="text" value={fields.title} onChange={updateField("title")} className={`h-[30px] w-full rounded-[5px] border ${missing.includes("title") ? "border-red-500 ring-1 ring-red-300" : "border-[#cbd5e1]"} bg-white px-2.5 text-[10.5px] font-semibold text-[#1e293b] outline-none focus:border-[#2563eb]`} />
               </div>
 
               <div>
@@ -771,7 +807,7 @@ function CreateJobForm() {
 
               <div>
                 <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">Department <span className="text-red-500">*</span></label>
-                <input type="text" value={fields.department} onChange={updateField("department")} className="h-[30px] w-full rounded-[5px] border border-[#cbd5e1] bg-white px-2.5 text-[10.5px] font-semibold text-[#1e293b] outline-none focus:border-[#2563eb]" />
+                <input type="text" value={fields.department} onChange={updateField("department")} placeholder="e.g. Clinical, Panchakarma, Administration" className={`h-[30px] w-full rounded-[5px] border ${missing.includes("department") ? "border-red-500 ring-1 ring-red-300" : "border-[#cbd5e1]"} bg-white px-2.5 text-[10.5px] font-semibold text-[#1e293b] outline-none focus:border-[#2563eb]`} />
               </div>
 
               <div>
@@ -838,6 +874,57 @@ function CreateJobForm() {
                       <option>Post Graduate</option>
                     </select>
                     <ChevronDown className="pointer-events-none absolute right-2 top-2 h-3.5 w-3.5 text-slate-400" />
+                  </div>
+                </div>
+              </div>
+              {/* Card photo shown on the website Careers page */}
+              <div className="col-span-2">
+                <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">
+                  Job Card Image <span className="font-medium text-[#64748b]">(shown on the website Careers page)</span>
+                </label>
+                <div className="flex items-center gap-3 rounded-[5px] border border-dashed border-[#cbd5e1] bg-[#f8fafc] p-2">
+                  <div className="relative h-[64px] w-[96px] shrink-0 overflow-hidden rounded-[4px] border border-[#e2e8f0] bg-white">
+                    {cardImage ? (
+                      <img src={cardImage} alt="Job card" className="h-full w-full object-cover" />
+                    ) : (
+                      <span className="grid h-full w-full place-items-center px-1 text-center text-[8.5px] font-semibold text-[#94a3b8]">No image</span>
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] font-medium text-[#64748b]">
+                      {cardImage
+                        ? "This photo is shown on the job's card."
+                        : "Upload a photo for this job's card. Without one, the website shows one of its own Careers photos."}
+                    </p>
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <input
+                        ref={cardImageInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleCardImageUpload(file);
+                        }}
+                      />
+                      <button
+                        type="button"
+                        disabled={uploadingImage}
+                        onClick={() => cardImageInputRef.current?.click()}
+                        className="h-[26px] rounded-[5px] bg-[#2563eb] px-3 text-[10px] font-bold text-white hover:bg-[#1d4ed8] disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        {uploadingImage ? "Uploading…" : cardImage ? "Change Image" : "Upload Image"}
+                      </button>
+                      {cardImage && !uploadingImage && (
+                        <button
+                          type="button"
+                          onClick={() => setCardImage("")}
+                          className="h-[26px] rounded-[5px] border border-[#fecaca] bg-white px-3 text-[10px] font-bold text-red-600 hover:bg-red-50"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
