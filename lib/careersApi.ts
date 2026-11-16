@@ -66,8 +66,10 @@ export interface JobPosting {
   /** Photo on the job's card on the website Careers page */
   image?: string;
   featuredJob?: boolean;
-  applicationOpenDate?: string;
-  applicationClosingDate?: string;
+  /** LISTED: on the website Careers page. UNLISTED: only via the job's own link */
+  websiteVisibility?: "LISTED" | "UNLISTED";
+  applicationOpenDate?: string | null;
+  applicationClosingDate?: string | null;
   tags?: string[];
 
   views: number;

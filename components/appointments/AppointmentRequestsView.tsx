@@ -152,15 +152,19 @@ export default function AppointmentRequestsView({ title, subtitle, noun, sources
     try {
       // The API gives at most 100 per page: read every page of every source this page lists
       const all: AppointmentRequest[] = [];
-      for (const source of sourcesKey.split(",") as AppointmentSource[]) {
-        let p = 1;
-        for (;;) {
-          const res = await home2Api.listAppointments({ source, page: p, limit: 100 });
-          all.push(...res.items);
-          if (p >= res.totalPages) break;
-          p += 1;
-        }
-      }
+      // Each form's requests are fetched at the same time, not one after the other
+      const perSource = await Promise.all(
+        (sourcesKey.split(",") as AppointmentSource[]).map(async (source) => {
+          const items: AppointmentRequest[] = [];
+          for (let p = 1; ; p += 1) {
+            const res = await home2Api.listAppointments({ source, page: p, limit: 100 });
+            items.push(...res.items);
+            if (p >= res.totalPages) break;
+          }
+          return items;
+        })
+      );
+      all.push(...perSource.flat());
       all.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       setRows(all);
       setLoadError(null);

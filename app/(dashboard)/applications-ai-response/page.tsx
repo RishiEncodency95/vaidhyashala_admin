@@ -106,6 +106,8 @@ export interface CandidateApplication {
   cvFileName?: string;
   cvFileSize?: number;
   whyInterested?: string;
+  /** The job's application questions with this candidate's answers */
+  screeningAnswers?: { question: string; answer: string }[];
   notes?: string;
 }
 
@@ -659,7 +661,7 @@ function ApplicationsAiResponse() {
     }
   };
 
-  const chipClass = "inline-flex h-[22px] items-center whitespace-nowrap rounded-[4px] border px-[8px] text-[8px] font-bold shadow-xs";
+  const chipClass = "inline-flex h-[20px] items-center whitespace-nowrap rounded-[4px] border px-[7px] text-[10.5px] font-bold shadow-xs";
   const thClass = "px-[12px] py-[6px] whitespace-nowrap text-[8.5px] font-bold text-white uppercase tracking-wider";
 
   return (
@@ -875,7 +877,7 @@ function ApplicationsAiResponse() {
                           className={`cursor-pointer transition hover:bg-slate-50/80 ${isSelected ? "bg-[#f4faf6]" : ""}`}
                         >
                           {/* Checkbox */}
-                          <td className="px-[12px] py-[8px] text-center" onClick={(e) => e.stopPropagation()}>
+                          <td className="px-[12px] py-[6px] text-center" onClick={(e) => e.stopPropagation()}>
                             <input
                               type="checkbox"
                               checked={selectedIds.includes(app.id)}
@@ -885,65 +887,59 @@ function ApplicationsAiResponse() {
                           </td>
 
                           {/* Candidate Name */}
-                          <td className="px-[12px] py-[8px]">
-                            <div className="flex items-center gap-[10px] min-w-[160px]">
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
+                            <div className="flex items-center gap-[8px]">
                               <div style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08), 0 0 0 1.5px #e2e8f0" }} className="shrink-0 rounded-full">
-                                <CandidateAvatar app={app} className="h-[32px] w-[32px] rounded-full border-[2px] border-white" />
+                                <CandidateAvatar app={app} className="h-[26px] w-[26px] rounded-full border-[2px] border-white" />
                               </div>
-                              <div className="min-w-0 flex-1">
-                                <p className="truncate text-[10.5px] font-bold text-[#1b5e20]">{app.name}</p>
-                                <p className="truncate text-[8px] font-semibold text-[#4B1426]">{app.experienceYrs}</p>
-                              </div>
+                              <span className="text-[11px] font-bold text-[#1b5e20]">{app.name}</span>
+                              <span className="text-[10px] font-semibold text-[#4B1426]">· {app.experienceYrs}</span>
                             </div>
                           </td>
 
                           {/* Position */}
-                          <td className="px-[12px] py-[8px] max-w-[190px]">
-                            <div className="flex items-center gap-1 text-[9px] font-bold text-[#0f766e]">
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
+                            <div className="flex items-center gap-1">
                               <Briefcase className="h-3 w-3 shrink-0 text-[#d26019]" />
-                              <span className="truncate" title={app.position}>{app.position}</span>
+                              <span className="max-w-[160px] truncate text-[11px] font-bold text-[#0f766e]" title={app.position}>{app.position}</span>
+                              {app.department && <span className="text-[10px] font-medium text-[#64748b]">· {app.department}</span>}
                             </div>
-                            <p className="mt-0.5 truncate text-[8px] font-medium text-[#64748b]">{app.department}</p>
                           </td>
 
                           {/* Contact */}
-                          <td className="px-[12px] py-[8px] whitespace-nowrap">
-                            <div className="flex flex-col items-start leading-tight">
-                              <span className="text-[9px] font-bold text-[#dc2626]">{app.phone}</span>
-                              <span className="mt-0.5 text-[8px] font-medium text-[#64748b]">{app.email}</span>
-                            </div>
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
+                            <span className="text-[11px] font-bold text-[#dc2626]">{app.phone}</span>
+                            <span className="ml-1.5 text-[10px] font-medium text-[#64748b]">· {app.email}</span>
                           </td>
 
                           {/* AI Score */}
-                          <td className="px-[12px] py-[8px] whitespace-nowrap">
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
                             <span className={`${chipClass} ${getAiScoreBadge(app.aiScore)}`}>{app.aiScore}%</span>
                           </td>
 
                           {/* AI Result */}
-                          <td className="px-[12px] py-[8px] whitespace-nowrap">
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
                             <span className={`${chipClass} ${getAiResultBadge(app.aiResult)}`}>{app.aiResult}</span>
                           </td>
 
                           {/* Application Stage */}
-                          <td className="px-[12px] py-[8px] whitespace-nowrap">
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
                             <span className={`${chipClass} ${getStageBadge(app.stage)}`}>{app.stage}</span>
                           </td>
 
                           {/* HR Status */}
-                          <td className="px-[12px] py-[8px] whitespace-nowrap">
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
                             <span className={`${chipClass} ${getHrStatusBadge(app.hrStatus)}`}>{app.hrStatus}</span>
                           </td>
 
                           {/* Applied On */}
-                          <td className="px-[12px] py-[8px] whitespace-nowrap">
-                            <div className="flex flex-col items-start leading-tight">
-                              <span className="text-[9px] font-bold text-[#293681]">{app.appliedOn}</span>
-                              <span className="mt-0.5 text-[8px] font-medium text-[#64748b]">{app.appliedTime}</span>
-                            </div>
+                          <td className="px-[12px] py-[6px] whitespace-nowrap">
+                            <span className="text-[11px] font-bold text-[#293681]">{app.appliedOn}</span>
+                            <span className="ml-1.5 text-[10px] font-medium text-[#64748b]">{app.appliedTime}</span>
                           </td>
 
                           {/* Actions */}
-                          <td className="px-[12px] py-[8px] text-right" onClick={(e) => e.stopPropagation()}>
+                          <td className="px-[12px] py-[6px] text-right" onClick={(e) => e.stopPropagation()}>
                             <div className="flex items-center justify-end gap-1.5">
                               <button
                                 type="button"
@@ -1280,6 +1276,19 @@ function ApplicationsAiResponse() {
                     <div className="p-2.5 bg-slate-50 rounded border border-slate-200">
                       <p className="font-bold text-slate-900 mb-1">Why interested</p>
                       <p className="text-[10px] text-slate-600 whitespace-pre-line">{selectedCandidate.whyInterested}</p>
+                    </div>
+                  )}
+                  {(selectedCandidate.screeningAnswers?.length ?? 0) > 0 && (
+                    <div className="p-2.5 bg-slate-50 rounded border border-slate-200">
+                      <p className="font-bold text-slate-900 mb-1">Application questions</p>
+                      <ol className="space-y-1.5 list-decimal pl-4">
+                        {selectedCandidate.screeningAnswers!.map((qa, i) => (
+                          <li key={i} className="text-[10px]">
+                            <p className="font-semibold text-slate-800">{qa.question}</p>
+                            <p className="text-slate-600 whitespace-pre-line">{qa.answer || "—"}</p>
+                          </li>
+                        ))}
+                      </ol>
                     </div>
                   )}
                   {(selectedCandidate.skills?.length ?? 0) > 0 && (

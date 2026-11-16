@@ -205,9 +205,9 @@ function ServiceClock({
       onClick={onClick}
       suppressHydrationWarning
       title={mounted ? `${name} — renews ${new Date(expiryDate).toLocaleDateString()}` : name}
-      className={`group flex h-[46px] min-w-[210px] items-center gap-2 rounded-none border px-2.5 text-left shadow-[0_4px_14px_rgba(15,23,42,0.06)] transition-all hover:-translate-y-px hover:shadow-[0_7px_20px_rgba(15,23,42,0.10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent ${palette.card}`}
+      className={`group flex h-[38px] min-w-[200px] items-center gap-2 rounded-none border px-2.5 text-left shadow-[0_4px_14px_rgba(15,23,42,0.06)] transition-all hover:-translate-y-px hover:shadow-[0_7px_20px_rgba(15,23,42,0.10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent ${palette.card}`}
     >
-      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-none border shadow-inner ${palette.icon}`}>
+      <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-none border shadow-inner ${palette.icon}`}>
         <Icon className="h-4 w-4" />
       </span>
       <span className="min-w-0 flex-1">
@@ -545,7 +545,7 @@ export default function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
 
   return (
     <>
-      <header className="relative z-30 flex h-[62px] shrink-0 items-center justify-between border-b border-slate-200/80 bg-white/90 px-4 sm:px-6 backdrop-blur-xl shadow-xs">
+      <header className="relative z-30 flex h-[48px] shrink-0 items-center justify-between border-b border-slate-200/80 bg-white/90 px-4 sm:px-6 backdrop-blur-xl shadow-xs">
         {/* LEFT – MOBILE TOGGLE, CURRENT PAGE TITLE / BREADCRUMB & SEARCH */}
         <div className="flex min-w-0 items-center gap-3">
           <button
@@ -617,8 +617,8 @@ export default function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
           )}
         </div>
 
-        {/* CENTER – DOMAIN & HOSTING EXPIRE COUNTDOWN TIMERS */}
-        <div className="hidden lg:flex items-center justify-center gap-2.5 min-w-0 px-2">
+        {/* CENTER – DOMAIN & HOSTING EXPIRE COUNTDOWN TIMERS (the Dashboard shows them beside its title instead) */}
+        <div className={`${isDashboard ? "hidden" : "hidden lg:flex"} items-center justify-center gap-2.5 min-w-0 px-2`}>
           <ServiceClock
             label="Domain"
             name={domainService?.name || "bharatorganicexpo.com"}
@@ -720,11 +720,11 @@ export default function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
                 setMenuOpen(!menuOpen);
                 setActiveTitle(null);
               }}
-              className="relative flex items-center gap-2 p-1 sm:pr-3 bg-white border-2 border-slate-300 shadow-xs rounded-full hover:bg-slate-50 transition-all duration-200"
+              className="relative flex items-center gap-2 p-px sm:pr-3 bg-white border border-slate-300 shadow-xs rounded-full hover:bg-slate-50 transition-all duration-200"
             >
               {/* Profile Avatar: image if uploaded, Lottie animation if not */}
               <div className="relative flex-shrink-0">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border-2 border-slate-200 flex-shrink-0 flex items-center justify-center shadow-xs bg-white">
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-slate-200 flex-shrink-0 flex items-center justify-center bg-white">
                   {admin?.avatarUrl && admin.avatarUrl.trim() !== "" && admin.avatarUrl !== "null" ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -738,18 +738,18 @@ export default function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
                 </div>
 
                 {/* Online Status Dot */}
-                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 border-2 border-white rounded-full z-10 flex items-center justify-center">
+                <div className="absolute -bottom-px -right-px w-2 h-2 bg-green-500 border border-white rounded-full z-10 flex items-center justify-center">
                   <div className="absolute inset-0 w-full h-full bg-green-500 rounded-full animate-ping opacity-75" />
                 </div>
               </div>
 
               {/* User Info */}
-              <div className="hidden sm:flex flex-col text-left leading-none ml-1">
+              <div className="hidden sm:flex items-center gap-1.5 whitespace-nowrap text-left leading-none ml-1">
                 <span className="text-[12px] font-bold text-slate-800">
                   {admin?.name || displayName}
                 </span>
-
-                <span className="text-[10px] font-bold uppercase tracking-wide mt-0.5" style={{ color: "#4B1426" }}>
+                <span className="text-[12px] font-bold text-slate-400">-</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: "#4B1426" }}>
                   {displayRole}
                 </span>
               </div>

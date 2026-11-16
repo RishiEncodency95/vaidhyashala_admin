@@ -113,12 +113,141 @@ function linesToHtml(lines?: string[]): string {
   return `<ul>${lines.map((line) => `<li>${line}</li>`).join("")}</ul>`;
 }
 
-/** Formats an ISO date string into the "DD Mon YYYY" text the date inputs use. */
-function formatDateInput(value?: string): string {
+/** Formats an ISO date string into the yyyy-mm-dd value the date pickers use (local date). */
+function formatDateInput(value?: string | null): string {
   if (!value) return "";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "";
-  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/**
+ * The job's application questions: every candidate answers them before submitting on the website.
+ * Edited here as a list; "Generate with AI" fills them from the job description.
+ */
+function ScreeningQuestionsModal({
+  questions,
+  onClose,
+  onSave,
+}: {
+  questions: string[];
+  onClose: () => void;
+  onSave: (questions: string[]) => void;
+}) {
+  const [draft, setDraft] = useState<string[]>(questions.length ? questions : [""]);
+  const update = (i: number, value: string) => setDraft((prev) => prev.map((q, idx) => (idx === i ? value : q)));
+  const remove = (i: number) => setDraft((prev) => prev.filter((_, idx) => idx !== i));
+  const move = (i: number, dir: -1 | 1) =>
+    setDraft((prev) => {
+      const j = i + dir;
+      if (j < 0 || j >= prev.length) return prev;
+      const next = [...prev];
+      [next[i], next[j]] = [next[j], next[i]];
+      return next;
+    });
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Application Questions"
+        onClick={(e) => e.stopPropagation()}
+        className="flex max-h-[85vh] w-full max-w-[560px] flex-col rounded-[8px] bg-white shadow-xl"
+      >
+        <div className="flex items-start justify-between border-b border-[#e2e8f0] px-4 py-3">
+          <div>
+            <h3 className="text-[13px] font-bold text-[#0f172a]">Application Questions</h3>
+            <p className="mt-0.5 text-[10px] font-medium text-[#64748b]">
+              Candidates must answer every question before submitting their application on the website.
+            </p>
+          </div>
+          <button type="button" onClick={onClose} aria-label="Close" className="rounded p-1 text-slate-500 hover:bg-slate-100">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        <ol className="flex-1 space-y-2 overflow-y-auto px-4 py-3">
+          {draft.map((q, i) => (
+            <li key={i} className="flex items-start gap-1.5">
+              <span className="mt-1.5 w-4 shrink-0 text-right text-[10.5px] font-bold text-slate-500">{i + 1}.</span>
+              <textarea
+                value={q}
+                onChange={(e) => update(i, e.target.value)}
+                rows={2}
+                placeholder="e.g. How many years of Panchakarma experience do you have?"
+                className="min-h-[44px] flex-1 resize-y rounded-[5px] border border-[#cbd5e1] px-2 py-1.5 text-[10.5px] font-medium text-[#1e293b] outline-none focus:border-[#2563eb]"
+              />
+              <div className="flex shrink-0 flex-col gap-0.5">
+                <button type="button" onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up" className="rounded border border-[#cbd5e1] px-1 text-[10px] text-slate-600 hover:bg-slate-50 disabled:opacity-30">↑</button>
+                <button type="button" onClick={() => move(i, 1)} disabled={i === draft.length - 1} aria-label="Move down" className="rounded border border-[#cbd5e1] px-1 text-[10px] text-slate-600 hover:bg-slate-50 disabled:opacity-30">↓</button>
+              </div>
+              <button type="button" onClick={() => remove(i)} aria-label="Remove question" className="mt-1 rounded p-1 text-red-500 hover:bg-red-50">
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </li>
+          ))}
+          {draft.length === 0 && (
+            <p className="py-4 text-center text-[10.5px] text-slate-500">No questions: candidates will not be asked any.</p>
+          )}
+        </ol>
+
+        <div className="flex items-center justify-between border-t border-[#e2e8f0] px-4 py-2.5">
+          <button
+            type="button"
+            onClick={() => setDraft((prev) => [...prev, ""])}
+            className="h-[30px] rounded-[5px] border border-[#2563eb] px-3 text-[10.5px] font-bold text-[#2563eb] hover:bg-blue-50"
+          >
+            + Add Question
+          </button>
+          <div className="flex gap-2">
+            <button type="button" onClick={onClose} className="h-[30px] rounded-[5px] border border-[#cbd5e1] px-3 text-[10.5px] font-bold text-[#334155] hover:bg-slate-50">
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => onSave(draft.map((q) => q.trim()).filter(Boolean))}
+              className="h-[30px] rounded-[5px] bg-[#059669] px-3.5 text-[10.5px] font-bold text-white hover:bg-[#047857]"
+            >
+              Save Questions
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * A date picker that opens on a click anywhere in the field or on its calendar icon
+ * (the browser's own picker; the value is yyyy-mm-dd).
+ */
+function DateField({ value, onChange, min }: { value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; min?: string }) {
+  const input = useRef<HTMLInputElement>(null);
+  const open = () => {
+    try {
+      input.current?.showPicker();
+    } catch {
+      input.current?.focus();
+    }
+  };
+  return (
+    <div className="relative">
+      <input
+        ref={input}
+        type="date"
+        value={value}
+        min={min}
+        onChange={onChange}
+        onClick={open}
+        className="h-[30px] w-full cursor-pointer rounded-[5px] border border-[#cbd5e1] bg-white px-2 pr-7 text-[10.5px] font-semibold text-[#1e293b] outline-none focus:border-[#2563eb] [&::-webkit-calendar-picker-indicator]:hidden"
+      />
+      <button type="button" onClick={open} aria-label="Choose date" className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 hover:text-[#2563eb]">
+        <Calendar className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  );
 }
 
 function GreenToggle({ checked, onChange }: { checked: boolean; onChange: () => void }) {
@@ -370,6 +499,9 @@ function CreateJobForm() {
   const [kpis, setKpis] = useState<{ label: string; measurement: string }[]>([]);
   const [referenceIndustries, setReferenceIndustries] = useState<string[]>([]);
   const [screeningQuestions, setScreeningQuestions] = useState<string[]>([]);
+  const [questionsOpen, setQuestionsOpen] = useState(false);
+  // "Job Visibility on Website": LISTED shows it on the Careers page; UNLISTED only opens from its link
+  const [websiteVisibility, setWebsiteVisibility] = useState<"LISTED" | "UNLISTED">("LISTED");
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -502,6 +634,7 @@ function CreateJobForm() {
         setKpis(job.kpis || []);
         setReferenceIndustries(job.referenceIndustries || []);
         setScreeningQuestions(job.screeningQuestions || []);
+        setWebsiteVisibility(job.websiteVisibility === "UNLISTED" ? "UNLISTED" : "LISTED");
 
         setDescriptionHtml(job.description || DESCRIPTION_DEFAULT);
         setRespHtml(linesToHtml(job.responsibilities));
@@ -596,15 +729,50 @@ function CreateJobForm() {
       return;
     }
 
+    // The score bands the website uses to decide Eligible / Partial / Not eligible
+    const passing = Number(fields.minPassingScore);
+    const pMin = Number(fields.partialMatchMin);
+    const pMax = Number(fields.partialMatchMax);
+    const inRange = (n: number) => Number.isFinite(n) && n >= 0 && n <= 100;
+    const rulesProblem = !inRange(passing) || !inRange(pMin) || !inRange(pMax)
+      ? "Scores must be between 0 and 100."
+      : pMin > pMax
+        ? "In Partial Match Range, the first number must not be more than the second."
+        : "";
+    // The AI screening scores experience against this range
+    const expMin = Number(fields.experienceMin || 0);
+    const expMax = Number(fields.experienceMax || 0);
+    const experienceProblem =
+      !Number.isFinite(expMin) || !Number.isFinite(expMax) || expMin < 0 || expMax < 0 || expMin > 50 || expMax > 50
+        ? "Experience must be between 0 and 50 years."
+        : expMax > 0 && expMin > expMax
+          ? "Minimum experience must not be more than the maximum."
+          : "";
+    const datesProblem =
+      fields.applicationOpenDate && fields.applicationClosingDate && fields.applicationClosingDate < fields.applicationOpenDate
+        ? "The Application Closing Date is before the Open Date."
+        : "";
+    if (experienceProblem || rulesProblem || datesProblem) {
+      Swal.fire({
+        icon: "warning",
+        title: "Please check the settings",
+        text: experienceProblem || rulesProblem || datesProblem,
+        confirmButtonColor: "#059669",
+      });
+      return;
+    }
+
     setSubmitting(true);
     try {
       const parseMoney = (v: string) => {
         const n = parseFloat(v.replace(/,/g, ""));
         return Number.isFinite(n) ? n : undefined;
       };
+      // A picked day (local midnight); null clears a date that was removed
       const parseDate = (v: string) => {
-        const d = new Date(v);
-        return Number.isNaN(d.getTime()) ? undefined : d.toISOString();
+        if (!v) return null;
+        const d = new Date(`${v}T00:00:00`);
+        return Number.isNaN(d.getTime()) ? null : d.toISOString();
       };
 
       const payload = {
@@ -656,6 +824,7 @@ function CreateJobForm() {
         showMatchBreakdown: toggles.showBreakdown,
 
         featuredJob: toggles.featuredJob,
+        websiteVisibility,
         image: cardImage,
         applicationOpenDate: parseDate(fields.applicationOpenDate),
         applicationClosingDate: parseDate(fields.applicationClosingDate),
@@ -1194,6 +1363,17 @@ function CreateJobForm() {
                   <span className="text-[10px] font-medium text-slate-500">to</span>
                   <input type="number" value={fields.partialMatchMax} onChange={updateField("partialMatchMax")} className="h-[28px] w-full rounded-[5px] border border-[#cbd5e1] bg-white px-2 text-center text-[10.5px] font-bold" />
                 </div>
+                {(() => {
+                  // Same rule as the backend (decideVerdict): Eligible needs the passing score and to be above the partial range
+                  const eligibleFrom = Math.max(Number(fields.minPassingScore) || 0, (Number(fields.partialMatchMax) || 0) + 1);
+                  return (
+                    <p className="mt-1 text-[9px] font-medium leading-snug text-[#64748b]">
+                      On the website: <b className="text-[#059669]">Eligible</b> {eligibleFrom}%+ ·{" "}
+                      <b className="text-[#d97706]">Partial</b> {fields.partialMatchMin || 0}–{eligibleFrom - 1}% ·{" "}
+                      <b className="text-[#dc2626]">Not eligible</b> below {fields.partialMatchMin || 0}%
+                    </p>
+                  );
+                })()}
               </div>
 
               <div className="flex items-center justify-between pt-0.5">
@@ -1211,8 +1391,12 @@ function CreateJobForm() {
           {/* CARD 3: APPLICATION QUESTIONS */}
           <div className="rounded-[8px] border border-[#cbd5e1] bg-white p-3 shadow-2xs">
             <h3 className="text-[11.5px] font-bold text-[#0f172a]">Application Questions</h3>
-            <p className="mt-0.5 text-[9px] font-medium text-[#64748b]">Predefined questions from JD (10)</p>
-            <button type="button" className="mt-2 flex h-[30px] w-full items-center justify-between rounded-[5px] border border-[#2563eb] bg-white px-2.5 text-[10.5px] font-bold text-[#2563eb] hover:bg-blue-50">
+            <p className="mt-0.5 text-[9px] font-medium text-[#64748b]">
+              {screeningQuestions.length
+                ? `${screeningQuestions.length} question${screeningQuestions.length === 1 ? "" : "s"} candidates must answer`
+                : "No questions yet (Generate with AI adds them)"}
+            </p>
+            <button type="button" onClick={() => setQuestionsOpen(true)} className="mt-2 flex h-[30px] w-full items-center justify-between rounded-[5px] border border-[#2563eb] bg-white px-2.5 text-[10.5px] font-bold text-[#2563eb] hover:bg-blue-50">
               <span>Manage Questions</span>
               <ArrowRight className="h-3 w-3" />
             </button>
@@ -1231,8 +1415,13 @@ function CreateJobForm() {
               <div>
                 <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">Job Visibility on Website</label>
                 <div className="relative">
-                  <select defaultValue="Show in Career Page Menu" className="h-[30px] w-full appearance-none rounded-[5px] border border-[#cbd5e1] bg-white px-2 text-[10.5px] font-bold text-[#1e293b] outline-none">
-                    <option>Show in Career Page Menu</option>
+                  <select
+                    value={websiteVisibility}
+                    onChange={(e) => setWebsiteVisibility(e.target.value === "UNLISTED" ? "UNLISTED" : "LISTED")}
+                    className="h-[30px] w-full appearance-none rounded-[5px] border border-[#cbd5e1] bg-white px-2 text-[10.5px] font-bold text-[#1e293b] outline-none"
+                  >
+                    <option value="LISTED">Show in Career Page Menu</option>
+                    <option value="UNLISTED">Hidden (only via direct link)</option>
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-2 top-2 h-3.5 w-3.5 text-slate-400" />
                 </div>
@@ -1247,19 +1436,15 @@ function CreateJobForm() {
               </div>
 
               <div>
-                <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">Application Open Date <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <input type="text" value={fields.applicationOpenDate} onChange={updateField("applicationOpenDate")} className="h-[30px] w-full rounded-[5px] border border-[#cbd5e1] bg-white px-2 pr-7 text-[10.5px] font-semibold text-[#1e293b]" />
-                  <Calendar className="pointer-events-none absolute right-2 top-2 h-3.5 w-3.5 text-slate-400" />
-                </div>
+                <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">Application Open Date</label>
+                <DateField value={fields.applicationOpenDate} onChange={updateField("applicationOpenDate")} />
+                <p className="mt-0.5 text-[9px] font-medium text-[#94a3b8]">Empty: open as soon as it is published.</p>
               </div>
 
               <div>
-                <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">Application Closing Date <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <input type="text" value={fields.applicationClosingDate} onChange={updateField("applicationClosingDate")} className="h-[30px] w-full rounded-[5px] border border-[#cbd5e1] bg-white px-2 pr-7 text-[10.5px] font-semibold text-[#1e293b]" />
-                  <Calendar className="pointer-events-none absolute right-2 top-2 h-3.5 w-3.5 text-slate-400" />
-                </div>
+                <label className="mb-0.5 block text-[10.5px] font-bold text-[#1e293b]">Application Closing Date</label>
+                <DateField value={fields.applicationClosingDate} min={fields.applicationOpenDate || undefined} onChange={updateField("applicationClosingDate")} />
+                <p className="mt-0.5 text-[9px] font-medium text-[#94a3b8]">The job leaves the website after this day. Empty: no closing date.</p>
               </div>
 
               <div>
@@ -1272,6 +1457,17 @@ function CreateJobForm() {
 
         </div>
       </div>
+
+      {questionsOpen && (
+        <ScreeningQuestionsModal
+          questions={screeningQuestions}
+          onClose={() => setQuestionsOpen(false)}
+          onSave={(next) => {
+            setScreeningQuestions(next);
+            setQuestionsOpen(false);
+          }}
+        />
+      )}
 
       {/* BOTTOM FIXED ACTION BAR */}
       <div className="flex shrink-0 items-center justify-between border-t border-[#e2e8f0] bg-white px-5 py-2 shadow-md">

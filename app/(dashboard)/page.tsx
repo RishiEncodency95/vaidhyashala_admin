@@ -13,6 +13,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 
 import typography from "./DashboardTypography.module.css";
+import RenewalBadges from "@/components/dashboard/RenewalBadges";
 
 import {
   dashboardApi,
@@ -1844,10 +1845,16 @@ export default function DashboardPage() {
           "
         >
           {/* DASHBOARD PAGE TITLE (ABOVE SEO HEALTH SCORE & STAT CARDS) */}
-          <div className="mb-2.5 flex items-center justify-between">
-            <h1 className="text-[17px] font-bold tracking-tight text-slate-800">
-              Dashboard
-            </h1>
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h1 className="text-[21px] font-semibold leading-tight tracking-tight text-[#1E293B]">
+                Dashboard
+              </h1>
+              <p className="mt-0.5 text-[13.5px] font-medium text-[#64748B]">
+                Website performance &amp; activity
+              </p>
+            </div>
+            <RenewalBadges />
           </div>
 
           {/* =================================================
