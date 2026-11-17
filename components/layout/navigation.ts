@@ -33,6 +33,7 @@ import {
   Settings,
   Settings2,
   ShieldCheck,
+  ShoppingBag,
   Star,
   Stethoscope,
   UserCheck,
@@ -93,6 +94,7 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [
       { label: "Pages & CMS", href: "/pages", icon: FileText },
       { label: "Services Management", href: "/services", icon: BriefcaseBusiness },
+      { label: "Products", href: "/products", icon: ShoppingBag },
       { label: "Blog & Insights", href: "/blogs", icon: BookOpenText },
       { label: "Media Library", href: "/gallery", icon: GalleryHorizontalEnd },
       { label: "Video Highlights", href: "/video-highlights", icon: Video, badge: "NEW" },

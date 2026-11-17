@@ -44,6 +44,9 @@ export const productsApi = {
   deleteCategory: (id: string) => api.delete<{ deleted: boolean }>(`${BASE}/categories/${id}`),
 
   listProducts: () => api.get<{ items: Product[]; total: number }>(BASE),
+  getProduct: (id: string) => api.get<Product>(`${BASE}/${id}`),
+  /** Adds the website's built-in products and categories that are not in the database yet */
+  importDefaults: () => api.post<{ categoriesCreated: number; productsCreated: number }>(`${BASE}/import-defaults`),
   createProduct: (data: ProductInput) => api.post<Product>(BASE, data),
   updateProduct: (id: string, data: Partial<ProductInput>) => api.put<Product>(`${BASE}/${id}`, data),
   deleteProduct: (id: string) => api.delete<{ deleted: boolean }>(`${BASE}/${id}`),
