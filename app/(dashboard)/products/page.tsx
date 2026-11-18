@@ -271,7 +271,7 @@ export default function ProductsPage() {
                   </tr>
                 ) : (
                   rows.map((p) => {
-                    const imageCount = [p.image, p.galleryImage1, p.galleryImage2].filter(Boolean).length;
+                    const imageCount = [p.image, p.galleryImage1, p.galleryImage2, p.galleryImage3].filter(Boolean).length;
                     const categoryHidden = p.category?.isActive === false;
                     return (
                       <tr
@@ -310,7 +310,7 @@ export default function ProductsPage() {
                             <span className="font-medium text-amber-700">On request</span>
                           )}
                         </td>
-                        <td className="px-[10px] py-[8px] text-center text-[12px] font-semibold text-[#334155]">{imageCount} / 3</td>
+                        <td className="px-[10px] py-[8px] text-center text-[12px] font-semibold text-[#334155]">{imageCount} / 4</td>
                         <td className="px-[10px] py-[8px]" onClick={(e) => e.stopPropagation()}>
                           <div className="flex justify-center">
                             {busyId === p._id ? (

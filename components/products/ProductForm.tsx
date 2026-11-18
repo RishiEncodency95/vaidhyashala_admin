@@ -31,6 +31,7 @@ interface FormValues {
   imageAlt: string;
   galleryImage1: string;
   galleryImage2: string;
+  galleryImage3: string;
   isActive: boolean;
   order: string;
 }
@@ -52,6 +53,7 @@ const BLANK: FormValues = {
   imageAlt: "",
   galleryImage1: "",
   galleryImage2: "",
+  galleryImage3: "",
   isActive: true,
   order: "",
 };
@@ -73,6 +75,7 @@ const fromProduct = (p: Product): FormValues => ({
   imageAlt: p.imageAlt ?? "",
   galleryImage1: p.galleryImage1 ?? "",
   galleryImage2: p.galleryImage2 ?? "",
+  galleryImage3: p.galleryImage3 ?? "",
   isActive: p.isActive !== false,
   order: p.order ? String(p.order) : "",
 });
@@ -215,6 +218,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       imageAlt: t(values.imageAlt),
       galleryImage1: t(values.galleryImage1),
       galleryImage2: t(values.galleryImage2),
+      galleryImage3: t(values.galleryImage3),
       isActive: values.isActive,
       ...(values.order.trim() ? { order: Number(values.order.trim()) } : {}),
     };
@@ -342,12 +346,15 @@ export default function ProductForm({ productId }: { productId?: string }) {
               <Field label="Image description (alt text)" help="Describes the picture for search engines and screen readers. Leave empty to use the product name.">
                 <TextInput value={values.imageAlt} onChange={set("imageAlt")} placeholder="e.g. Bottle of Ayurvedic massage oil with herbs" maxLength={300} />
               </Field>
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
                 <Field label="Product image 2" help="Optional. Another view of the product (pack, label, texture…).">
                   <ImageUploadField value={values.galleryImage1} onChange={set("galleryImage1")} />
                 </Field>
                 <Field label="Product image 3" help="Optional. A related image, e.g. the product in use.">
                   <ImageUploadField value={values.galleryImage2} onChange={set("galleryImage2")} />
+                </Field>
+                <Field label="Product image 4" help="Optional. One more picture, e.g. ingredients or the back of the pack.">
+                  <ImageUploadField value={values.galleryImage3} onChange={set("galleryImage3")} />
                 </Field>
               </div>
             </Section>

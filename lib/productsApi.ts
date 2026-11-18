@@ -30,6 +30,7 @@ export interface Product {
   imageAlt: string;
   galleryImage1: string;
   galleryImage2: string;
+  galleryImage3: string;
   isActive: boolean;
   order: number;
 }

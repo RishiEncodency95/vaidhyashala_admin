@@ -29,6 +29,7 @@ export interface ProductPreviewValues {
   imageAlt: string;
   galleryImage1: string;
   galleryImage2: string;
+  galleryImage3: string;
 }
 
 const Label = ({ children }: { children: React.ReactNode }) => (
@@ -38,7 +39,7 @@ const Label = ({ children }: { children: React.ReactNode }) => (
 /** Live look of the product's card and its page (/products/<slug>) on the website */
 export default function ProductPreview({ values }: { values: ProductPreviewValues }) {
   const [active, setActive] = useState(0);
-  const images = [values.image, values.galleryImage1, values.galleryImage2].filter(Boolean);
+  const images = [values.image, values.galleryImage1, values.galleryImage2, values.galleryImage3].filter(Boolean);
   const shown = images[Math.min(active, images.length - 1)] ?? "";
   const title = values.title || "Product name";
   const category = (values.categoryName || "Category").toUpperCase();
@@ -81,7 +82,7 @@ export default function ProductPreview({ values }: { values: ProductPreviewValue
             <ProductImage src={shown} alt={values.imageAlt || title} className="h-full w-full object-cover" />
           </div>
           {images.length > 1 && (
-            <div className="mt-2 grid grid-cols-3 gap-2">
+            <div className="mt-2 grid grid-cols-4 gap-2">
               {images.map((src, i) => (
                 <button
                   key={`${i}-${src}`}
