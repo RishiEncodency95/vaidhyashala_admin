@@ -4,9 +4,30 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import PreviewServiceView from "./PreviewServiceView";
 import {
-  AlignCenter, AlignLeft, AlignRight, Bold, ChevronDown, ChevronRight, Eye, FileImage,
-  Grid2X2, Image as ImageIcon, Italic, Link2, List, ListOrdered, Plus, Quote,
-  Redo2, Save, Send, Strikethrough, Trash2, Underline, Undo2, Upload, X,
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Bold,
+  ChevronDown,
+  ChevronRight,
+  Eye,
+  FileImage,
+  Grid2X2,
+  Image as ImageIcon,
+  Italic,
+  Link2,
+  List,
+  ListOrdered,
+  Plus,
+  Quote,
+  Redo2,
+  Save,
+  Send,
+  Strikethrough,
+  Trash2,
+  Underline,
+  Undo2,
+  X,
 } from "lucide-react";
 
 const fieldClass = "h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-[11.5px] font-semibold text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100";

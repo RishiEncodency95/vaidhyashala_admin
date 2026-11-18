@@ -3,7 +3,6 @@
 import {
   useRef,
   useState,
-  useEffect,
   Suspense,
   type ChangeEvent,
   type FormEvent,
@@ -25,7 +24,6 @@ import {
   HeartHandshake,
   Info,
   Mail,
-  MapPin,
   MessageCircleMore,
   Phone,
   Save,
@@ -34,7 +32,6 @@ import {
   Truck,
   UploadCloud,
   UserRound,
-  UsersRound,
   X,
 } from "lucide-react";
 

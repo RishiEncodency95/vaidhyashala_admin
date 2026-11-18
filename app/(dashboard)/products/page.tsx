@@ -12,7 +12,7 @@ import { Toggle } from "@/components/pages-cms/fields";
 import ProductImage from "@/components/products/ProductImage";
 import ProductCategoriesModal from "@/components/products/ProductCategoriesModal";
 
-/* Products of the website's Products page (cards + "View Details" popup). Backend: /api/cms/products */
+/* Products of the website's Products page (cards + product pages). Backend: /api/cms/products */
 
 const Toast = Swal.mixin({
   toast: true,
@@ -152,7 +152,7 @@ export default function ProductsPage() {
           <div>
             <h1 className="text-[22px] font-bold leading-[1.15] tracking-[-0.018em] text-[#23471d]">Products</h1>
             <p className="mt-0.5 text-[12px] font-medium text-[#6c7587]">
-              The product cards on the website&apos;s Products page and their &quot;View Details&quot; popup.
+              The product cards on the website&apos;s Products page and their product pages, with price and discount.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -244,8 +244,8 @@ export default function ProductsPage() {
                   <th className={`w-[84px] ${TH}`}>Image</th>
                   <th className={TH}>Product</th>
                   <th className={TH}>Category</th>
-                  <th className={TH}>Product type</th>
-                  <th className={`${TH} text-center`}>Popup images</th>
+                  <th className={`${TH} text-right`}>Price</th>
+                  <th className={`${TH} text-center`}>Images</th>
                   <th className={`${TH} text-center`}>On website</th>
                   <th className={`${TH} text-right`}>Actions</th>
                 </tr>
@@ -295,8 +295,20 @@ export default function ProductsPage() {
                           {p.category?.name ?? "—"}
                           {categoryHidden && <span className="ml-1 text-[10.5px] font-bold text-amber-700">(hidden)</span>}
                         </td>
-                        <td className="max-w-[160px] truncate px-[10px] py-[8px] text-[12px] font-medium text-[#334155]">
-                          {p.productType || "—"}
+                        <td className="whitespace-nowrap px-[10px] py-[8px] text-right text-[12px]">
+                          {p.price > 0 ? (
+                            <>
+                              <p className="font-bold text-[#18233b]">₹{p.price.toLocaleString("en-IN")}</p>
+                              {p.mrp > p.price && (
+                                <p className="text-[11px] text-[#6c7587]">
+                                  <span className="line-through">₹{p.mrp.toLocaleString("en-IN")}</span>{" "}
+                                  <span className="font-bold text-emerald-700">{Math.round(((p.mrp - p.price) / p.mrp) * 100)}% off</span>
+                                </p>
+                              )}
+                            </>
+                          ) : (
+                            <span className="font-medium text-amber-700">On request</span>
+                          )}
                         </td>
                         <td className="px-[10px] py-[8px] text-center text-[12px] font-semibold text-[#334155]">{imageCount} / 3</td>
                         <td className="px-[10px] py-[8px]" onClick={(e) => e.stopPropagation()}>

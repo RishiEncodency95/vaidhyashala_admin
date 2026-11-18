@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X, Sparkles, CheckCircle2, AlertTriangle, HelpCircle, Code, Link as LinkIcon, RefreshCw, FileText, ChevronDown, ChevronUp, Search, Eye, Filter } from "lucide-react";
+import { X, Sparkles, CheckCircle2, AlertTriangle, HelpCircle, Code, Link as LinkIcon, RefreshCw, ChevronDown, ChevronUp, Search, Eye } from "lucide-react";
 import { formatDateTime } from "../SeoBadges";
 
 import { seoAuditApi } from "@/lib/seoAuditApi";

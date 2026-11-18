@@ -31,9 +31,6 @@ import {
   Trash2,
   Globe,
   Upload,
-  User,
-  X,
-  Image as ImageIcon,
 } from "lucide-react";
 import Swal from "sweetalert2";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";

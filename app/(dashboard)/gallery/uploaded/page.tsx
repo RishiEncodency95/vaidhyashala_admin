@@ -18,8 +18,6 @@ import {
   Settings2,
   ShieldCheck,
   SlidersHorizontal,
-  Trash2,
-  Upload,
 } from "lucide-react";
 
 type ToggleProps = {

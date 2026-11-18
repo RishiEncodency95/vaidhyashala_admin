@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ManageBlogCategoriesView from "@/components/blogs/ManageBlogCategoriesView";
@@ -16,12 +16,10 @@ import {
   Info,
   Megaphone,
   MessageCircleMore,
-  MoreVertical,
   Pencil,
   Plus,
   Share2,
   Tag,
-  ExternalLink,
   Trash2,
   UsersRound,
 } from "lucide-react";

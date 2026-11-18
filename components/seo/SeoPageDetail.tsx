@@ -3,7 +3,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   AlertTriangle,
-  ExternalLink,
   X,
   ShieldCheck,
   RefreshCw,

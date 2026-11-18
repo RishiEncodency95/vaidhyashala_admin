@@ -1,9 +1,21 @@
 import React, { useState } from "react";
-import { 
-  Bell, Lightbulb, Mail, MessageSquare, Edit, 
-  Send, ChevronDown, Check, Clock, User, Users,
-  CheckCircle, XCircle, AlertCircle, Calendar,
-  Play, Pause, Briefcase, FileText, Smartphone, Settings
+import {
+  Bell,
+  Lightbulb,
+  Mail,
+  Edit,
+  Send,
+  ChevronDown,
+  Clock,
+  User,
+  Users,
+  CheckCircle,
+  XCircle,
+  AlertCircle,
+  Calendar,
+  Pause,
+  Briefcase,
+  Settings,
 } from "lucide-react";
 
 const Toggle = ({ checked, disabled }: { checked: boolean, disabled?: boolean }) => (

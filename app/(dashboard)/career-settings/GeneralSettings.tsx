@@ -1,5 +1,5 @@
 import React from "react";
-import { Settings, Brain, FileText, MessageSquare, Users, Bell, Edit, Check, AlertTriangle, Info, ChevronDown, Eye, Mail } from "lucide-react";
+import { Settings, Brain, FileText, MessageSquare, Users, Bell, Check, AlertTriangle, Info, ChevronDown, Eye, Mail } from "lucide-react";
 
 const Toggle2 = ({ checked }: { checked: boolean }) => (
   <div className={`w-[22px] h-[12px] flex items-center rounded-full p-[2px] transition-colors duration-200 ease-in-out ${checked ? 'bg-[#148943]' : 'bg-[#E1E6EC]'}`}>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowRight, Calendar, Info, Leaf, Package } from "lucide-react";
 import ProductImage from "./ProductImage";
 
-/** What the website's product popup shows for an empty field (keep in step with the website's ProductDetailModal) */
+/** What the website's product page shows for an empty field (keep in step with the website's ProductDetailView) */
 export const POPUP_DEFAULTS = {
   packOptions: "Confirm with the clinic",
   availability: "Enquire with our team",
@@ -22,6 +22,8 @@ export interface ProductPreviewValues {
   productType: string;
   packOptions: string;
   availability: string;
+  price: string;
+  mrp: string;
   usageNotes: string;
   image: string;
   imageAlt: string;
@@ -33,7 +35,7 @@ const Label = ({ children }: { children: React.ReactNode }) => (
   <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wide text-[#6c7587]">{children}</p>
 );
 
-/** Live look of the product's card and popup on the website's Products page */
+/** Live look of the product's card and its page (/products/<slug>) on the website */
 export default function ProductPreview({ values }: { values: ProductPreviewValues }) {
   const [active, setActive] = useState(0);
   const images = [values.image, values.galleryImage1, values.galleryImage2].filter(Boolean);
@@ -41,7 +43,10 @@ export default function ProductPreview({ values }: { values: ProductPreviewValue
   const title = values.title || "Product name";
   const category = (values.categoryName || "Category").toUpperCase();
   const cardText = values.shortDescription || values.description || "Short description shown on the card.";
-  const popupText = values.description || values.shortDescription || "Full description shown in the popup.";
+  const popupText = values.description || values.shortDescription || "Full description shown on the product page.";
+  const price = Number(values.price) || 0;
+  const mrp = Number(values.mrp) || 0;
+  const off = price > 0 && mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0;
   const notes = (values.usageNotes || POPUP_DEFAULTS.usageNotes).split("\n").map((l) => l.trim()).filter(Boolean);
 
   const attributes = [
@@ -68,9 +73,9 @@ export default function ProductPreview({ values }: { values: ProductPreviewValue
         </div>
       </div>
 
-      {/* Popup */}
+      {/* Product page */}
       <div>
-        <Label>Popup after &quot;View Details&quot;</Label>
+        <Label>Product page after &quot;View Details&quot;</Label>
         <div className="rounded-lg border border-[#ECE5D8] bg-white p-3">
           <div className="relative aspect-[4/4.1] w-full overflow-hidden rounded-lg border border-[#E6DFD1] bg-[#F7F4EC]">
             <ProductImage src={shown} alt={values.imageAlt || title} className="h-full w-full object-cover" />
@@ -93,7 +98,12 @@ export default function ProductPreview({ values }: { values: ProductPreviewValue
           )}
           <p className="mt-3 text-[10px] font-bold uppercase tracking-[1.2px] text-[#A07038]">{category}</p>
           <p className="mt-0.5 font-serif text-[20px] font-medium leading-tight text-[#0A291F]">{title}</p>
-          <p className="mt-1 whitespace-pre-line text-[12px] leading-[1.55] text-[#4A5950]">{popupText}</p>
+          <div className="mt-1.5 flex flex-wrap items-center gap-2">
+            {off > 0 && <span className="rounded bg-[#C4933F] px-1.5 py-0.5 text-[10px] font-bold text-white">-{off}%</span>}
+            <span className="text-[18px] font-bold text-[#0D382B]">{price > 0 ? `₹${price.toLocaleString("en-IN")}` : "Price on request"}</span>
+            {off > 0 && <span className="text-[11px] text-[#8C988F]">M.R.P. <s>₹{mrp.toLocaleString("en-IN")}</s></span>}
+          </div>
+          <p className="mt-1 line-clamp-3 whitespace-pre-line text-[12px] leading-[1.55] text-[#4A5950]">{popupText}</p>
           <div className="my-2.5 border-t border-[#ECE5D8]" />
           <div className="space-y-2">
             {attributes.map(({ icon: Icon, label, value }) => (

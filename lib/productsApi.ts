@@ -21,6 +21,8 @@ export interface Product {
   productType: string;
   packOptions: string;
   availability: string;
+  price: number;
+  mrp: number;
   productInfo: string;
   directions: string;
   usageNotes: string;

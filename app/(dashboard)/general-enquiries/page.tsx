@@ -12,10 +12,8 @@ import Link from "next/link";
 import typography from "../pages/PagesTypography.module.css";
 
 import {
-  ArrowDown,
   ArrowLeft,
   ArrowRight,
-  ArrowUp,
   CalendarDays,
   CheckCircle2,
   ChevronDown,
@@ -29,7 +27,6 @@ import {
   Hourglass,
   Mail,
   MessageCircleMore,
-  MoreVertical,
   Phone,
   Plus,
   RefreshCcw,

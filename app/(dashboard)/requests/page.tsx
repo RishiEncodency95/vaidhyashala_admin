@@ -30,7 +30,6 @@ import {
   Info,
   Mail,
   MessageCircleMore,
-  MoreVertical,
   Phone,
   Plus,
   Search,

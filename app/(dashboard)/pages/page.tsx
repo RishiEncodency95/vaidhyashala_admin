@@ -7,7 +7,6 @@ import typography from "./PagesTypography.module.css";
 import SeoPagesTable from "@/components/seo/SeoPagesTable";
 import SeoPageDetail from "@/components/seo/SeoPageDetail";
 import {
-  ArrowRight,
   CheckCircle2,
   ChevronDown,
   CircleGauge,
@@ -22,8 +21,6 @@ import {
   Home,
   ImageIcon,
   Layers,
-  Link2,
-  MoreVertical,
   MousePointerClick,
   Pencil,
   Play,

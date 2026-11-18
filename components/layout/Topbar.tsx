@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { FaUserAstronaut } from "react-icons/fa";
 import {
   Menu,
-  X,
   LogOut,
   ChevronDown,
   ChevronRight,
@@ -19,12 +18,8 @@ import {
   Moon,
   Sunrise,
   Mail,
-  CalendarDays,
-  Check,
-  ArrowUpRight,
   Server,
   Globe2,
-  LayoutGrid,
   CreditCard,
   ShieldCheck,
   Database,
@@ -58,7 +53,6 @@ import {
   daysRemaining,
   isWithinPopupThreshold,
   useCountdown,
-  formatCountdown,
 } from "@/lib/systemServiceUtils";
 import { NAV_SECTIONS } from "./navigation";
 import Modal from "@/components/ui/Modal";

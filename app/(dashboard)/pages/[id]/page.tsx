@@ -17,7 +17,6 @@ import {
   Eye,
   FileText,
   Globe2,
-  HeartHandshake,
   History,
   Home,
   Laptop,

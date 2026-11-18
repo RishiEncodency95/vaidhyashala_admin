@@ -11,7 +11,7 @@ import { productsApi, type Product, type ProductCategory, type ProductInput } fr
 import { FieldLabel, ImageUploadField, SelectField, TextInput, Textarea, Toggle } from "@/components/pages-cms/fields";
 import ProductPreview, { POPUP_DEFAULTS } from "./ProductPreview";
 
-/* Add / edit one product of the website's Products page: its card and its "View Details" popup.
+/* Add / edit one product of the website's Products page: its card and its product page (/products/<slug>).
    Text limits match the backend (modules/products/products.schema.ts). */
 
 interface FormValues {
@@ -22,6 +22,8 @@ interface FormValues {
   productType: string;
   packOptions: string;
   availability: string;
+  price: string;
+  mrp: string;
   productInfo: string;
   directions: string;
   usageNotes: string;
@@ -41,6 +43,8 @@ const BLANK: FormValues = {
   productType: "",
   packOptions: POPUP_DEFAULTS.packOptions,
   availability: POPUP_DEFAULTS.availability,
+  price: "",
+  mrp: "",
   productInfo: "",
   directions: "",
   usageNotes: POPUP_DEFAULTS.usageNotes,
@@ -60,6 +64,8 @@ const fromProduct = (p: Product): FormValues => ({
   productType: p.productType ?? "",
   packOptions: p.packOptions ?? "",
   availability: p.availability ?? "",
+  price: p.price ? String(p.price) : "",
+  mrp: p.mrp ? String(p.mrp) : "",
   productInfo: p.productInfo ?? "",
   directions: p.directions ?? "",
   usageNotes: p.usageNotes ?? "",
@@ -174,6 +180,9 @@ export default function ProductForm({ productId }: { productId?: string }) {
     if (!values.title.trim()) return "Please enter the product name.";
     if (!values.category) return "Please choose a category (or add one).";
     if (!values.image.trim()) return "Please add the main product image.";
+    if (values.price && !/^\d+(\.\d{1,2})?$/.test(values.price.trim())) return "Selling price must be a number, e.g. 450.";
+    if (values.mrp && !/^\d+(\.\d{1,2})?$/.test(values.mrp.trim())) return "MRP must be a number, e.g. 600.";
+    if (Number(values.mrp) && Number(values.price) > Number(values.mrp)) return "Selling price cannot be higher than the MRP.";
     if (values.order && !/^\d+$/.test(values.order.trim())) return "Display order must be a whole number.";
     return null;
   };
@@ -193,6 +202,8 @@ export default function ProductForm({ productId }: { productId?: string }) {
       productType: t(values.productType),
       packOptions: t(values.packOptions),
       availability: t(values.availability),
+      price: Number(values.price) || 0,
+      mrp: Number(values.mrp) || 0,
       productInfo: t(values.productInfo),
       directions: t(values.directions),
       usageNotes: values.usageNotes
@@ -284,7 +295,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
           {/* FORM */}
           <div className="min-w-0 space-y-4">
-            <Section title="Basic details" hint="Name and category, shown on the product card and at the top of the popup.">
+            <Section title="Basic details" hint="Name and category, shown on the product card and at the top of the product page.">
               <Field label="Product name" required>
                 <TextInput value={values.title} onChange={set("title")} placeholder="e.g. Ayurvedic Massage Oil" maxLength={160} />
               </Field>
@@ -323,26 +334,26 @@ export default function ProductForm({ productId }: { productId?: string }) {
 
             <Section
               title="Images"
-              hint="Best size: 1200 × 900 px (4:3), WebP or JPG. Keep the product in the centre — the popup crops the sides to a square."
+              hint="Best size: 1200 × 900 px (4:3), WebP or JPG. Keep the product in the centre — the product page crops the sides to a square."
             >
-              <Field label="Main image" required help="Shown on the card and as the first picture in the popup.">
+              <Field label="Main image" required help="Shown on the card and as the first picture on the product page.">
                 <ImageUploadField value={values.image} onChange={set("image")} />
               </Field>
               <Field label="Image description (alt text)" help="Describes the picture for search engines and screen readers. Leave empty to use the product name.">
                 <TextInput value={values.imageAlt} onChange={set("imageAlt")} placeholder="e.g. Bottle of Ayurvedic massage oil with herbs" maxLength={300} />
               </Field>
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                <Field label="Popup image 2" help="Optional. Another view of the product (pack, label, texture…).">
+                <Field label="Product image 2" help="Optional. Another view of the product (pack, label, texture…).">
                   <ImageUploadField value={values.galleryImage1} onChange={set("galleryImage1")} />
                 </Field>
-                <Field label="Popup image 3" help="Optional. A related image, e.g. the product in use.">
+                <Field label="Product image 3" help="Optional. A related image, e.g. the product in use.">
                   <ImageUploadField value={values.galleryImage2} onChange={set("galleryImage2")} />
                 </Field>
               </div>
             </Section>
 
-            <Section title="Popup details" hint={`What the "View Details" popup shows next to the images.`}>
-              <Field label="Full description" help="Paragraph under the product name in the popup. Leave empty to repeat the short description.">
+            <Section title="Product page details" hint="Price and details shown on the product page next to the images.">
+              <Field label="Full description" help="Paragraph under the price on the product page. Leave empty to repeat the short description.">
                 <Textarea
                   value={values.description}
                   onChange={set("description")}
@@ -360,6 +371,14 @@ export default function ProductForm({ productId }: { productId?: string }) {
                 </Field>
                 <Field label="Availability">
                   <TextInput value={values.availability} onChange={set("availability")} placeholder={POPUP_DEFAULTS.availability} maxLength={200} />
+                </Field>
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                <Field label="Selling price (₹)" help="What the customer pays. Leave empty for “price on request” (no Add to Cart).">
+                  <TextInput value={values.price} onChange={set("price")} placeholder="e.g. 450" maxLength={9} />
+                </Field>
+                <Field label="MRP / original price (₹)" help="Shown struck through. Discount % is worked out automatically.">
+                  <TextInput value={values.mrp} onChange={set("mrp")} placeholder="e.g. 600" maxLength={9} />
                 </Field>
               </div>
               <Field label="Product information" help={`Text inside the "Product information" box. Leave empty for the standard text.`}>

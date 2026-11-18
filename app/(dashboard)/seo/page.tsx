@@ -5,34 +5,21 @@ import Link from "next/link";
 import {
   Activity,
   AlertTriangle,
-  ArrowUpRight,
   BellRing,
   Check,
   Code2,
   FileCheck2,
-  Gauge,
-  Globe2,
-  Link2Off,
   Play,
   RefreshCw,
   Search,
   Sparkles,
-  TrendingUp,
-  ShieldCheck,
   FileSearch,
   Download,
-  Settings as SettingsIcon,
   Building2,
   Target,
   Users,
-  CheckCircle2,
-  AlertCircle,
-  Calendar,
-  Layers,
   Info,
-  ChevronDown,
-  ChevronUp,
-  Bot
+  Bot,
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Spinner from "@/components/ui/Spinner";
@@ -44,7 +31,6 @@ import {
   type SeoOverview,
   type SeoScoreExplanation,
 } from "@/lib/seoAuditApi";
-import { SeverityBadge, formatDateTime } from "@/components/seo/SeoBadges";
 import SeoPagesTable from "@/components/seo/SeoPagesTable";
 import SeoPageDetail from "@/components/seo/SeoPageDetail";
 import SeoCheckupFullReport from "@/components/seo/SeoCheckupFullReport";

@@ -5,7 +5,6 @@ import { Check, Clock3, KeyRound, LockKeyhole, ShieldCheck, UserCheck } from "lu
 import { ApiRequestError } from "@/lib/api";
 import { externalServiceApi, type SystemServiceAccessRequirements } from "@/lib/externalServiceApi";
 
-import { useAppSelector } from "@/store/hooks";
 
 type Props = { onGranted: (expiresAt: string) => void | Promise<void> };
 

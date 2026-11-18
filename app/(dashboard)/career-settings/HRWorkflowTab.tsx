@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { 
-  Bell, Lightbulb, Mail, MessageSquare, Edit, 
-  Send, ChevronDown, Check, Clock, User, Users,
-  CheckCircle, XCircle, AlertCircle, Calendar,
-  Play, Pause, Briefcase, FileText, Smartphone, Settings,
-  Eye, Type, Italic, Underline, List, Link, Send as SendIcon
+import {
+  Lightbulb,
+  ChevronDown,
+  FileText,
+  Settings,
+  Eye,
+  Type,
+  Italic,
+  Underline,
+  List,
+  Link,
+  Send as SendIcon,
 } from "lucide-react";
 
 const Toggle = ({ checked, disabled }: { checked: boolean, disabled?: boolean }) => (

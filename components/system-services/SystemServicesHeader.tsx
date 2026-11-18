@@ -1,4 +1,4 @@
-import { BellRing, LockKeyhole, Plus, ShieldCheck } from "lucide-react";
+import { BellRing, Plus, ShieldCheck } from "lucide-react";
 
 type Props = {
   reminderDisabled: boolean;

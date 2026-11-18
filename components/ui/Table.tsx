@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Spinner from "./Spinner";
 import EmptyState from "./EmptyState";
 import { Inbox } from "lucide-react";

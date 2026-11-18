@@ -1,5 +1,6 @@
 import {
   Activity,
+  ShoppingCart,
   BarChart3,
   BellRing,
   BookOpenText,
@@ -66,6 +67,7 @@ export const NAV_SECTIONS: NavSection[] = [
       { label: "General Enquiries", href: "/general-enquiries", icon: Mail },
       { label: "Appointments", href: "/appointments", icon: CalendarCheck, badge: "NEW" },
       { label: "Consultations", href: "/consultations", icon: Stethoscope, badge: "NEW" },
+      { label: "Orders", href: "/orders", icon: ShoppingCart, badge: "NEW" },
       { label: "Product Enquiries", href: "/product-enquiries", icon: Package, badge: "NEW" },
       { label: "Contact Us Messages", href: "/contact-us", icon: MessageSquareText },
       { label: "Communication / Follow-ups", href: "/communication", icon: MessageSquare, badge: "NEW" },

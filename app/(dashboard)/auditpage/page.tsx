@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, FileSearch, Gauge, Globe2, ShieldCheck, TriangleAlert, RefreshCw, Search } from "lucide-react";
+import { ArrowLeft, FileSearch } from "lucide-react";
 import { seoAuditApi, type SeoOverview, type PageSpeedAudit } from "@/lib/seoAuditApi";
 import SeoSiteCheckupReport from "@/components/seo/SeoSiteCheckupReport";
 import { PAGE_INVENTORY } from "@/lib/seoCheckupData";

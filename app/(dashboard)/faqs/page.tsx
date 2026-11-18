@@ -3,7 +3,6 @@
 import React, { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   CircleHelp,
@@ -18,10 +17,7 @@ import {
   Search,
   Settings,
   SlidersHorizontal,
-  Star,
   ThumbsUp,
-  Upload,
-  Download,
   GripVertical,
 } from "lucide-react";
 

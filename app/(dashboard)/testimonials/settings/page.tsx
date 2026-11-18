@@ -13,7 +13,6 @@ import {
   Quote,
   RotateCcw,
   Save,
-  Settings,
   ShieldCheck,
   Star,
   Upload,

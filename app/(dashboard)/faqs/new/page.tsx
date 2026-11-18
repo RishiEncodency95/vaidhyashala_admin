@@ -5,7 +5,6 @@ import {
   ArrowLeft,
   Bold,
   Bookmark,
-  Check,
   ChevronDown,
   Image as ImageIcon,
   Info,

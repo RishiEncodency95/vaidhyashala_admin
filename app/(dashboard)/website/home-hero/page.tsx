@@ -12,7 +12,7 @@ import {
 import { toast } from "react-toastify";
 import Button from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { Save, Trash2, Edit, Plus, Image as ImageIcon } from "lucide-react";
+import { Save, Trash2, Plus } from "lucide-react";
 import { getBackendUrl } from "@/lib/api";
 
 export default function HomeHeroPage() {

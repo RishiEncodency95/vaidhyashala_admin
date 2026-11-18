@@ -16,10 +16,6 @@ import {
   CheckCircle2,
   Mail,
   MailCheck,
-  HeartHandshake,
-  UsersRound,
-  Flower2,
-  Headphones,
   Clock3,
   MonitorCheck,
 } from "lucide-react";

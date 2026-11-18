@@ -1,8 +1,19 @@
 import React from "react";
-import { 
-  FileText, Settings, Eye, Check, Info, GripVertical, Image as ImageIcon, 
-  GraduationCap, Briefcase, IdCard, Link as LinkIcon, Paperclip, ChevronDown, 
-  CloudUpload, Lightbulb 
+import {
+  FileText,
+  Settings,
+  Eye,
+  Check,
+  GripVertical,
+  Image as ImageIcon,
+  GraduationCap,
+  Briefcase,
+  IdCard,
+  Link as LinkIcon,
+  Paperclip,
+  ChevronDown,
+  CloudUpload,
+  Lightbulb,
 } from "lucide-react";
 
 const Toggle2 = ({ checked }: { checked: boolean }) => (
