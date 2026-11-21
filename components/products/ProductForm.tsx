@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { ApiRequestError } from "@/lib/api";
 import { PUBLIC_SITE_URL } from "@/lib/cmsPages";
 import { productsApi, type Product, type ProductCategory, type ProductInput } from "@/lib/productsApi";
-import { FieldLabel, ImageUploadField, SelectField, TextInput, Textarea, Toggle } from "@/components/pages-cms/fields";
+import { FieldLabel, ImageUploadField, SelectField, TextInput, Textarea, Toggle, VideoUploadField } from "@/components/pages-cms/fields";
 import ProductPreview, { POPUP_DEFAULTS } from "./ProductPreview";
 
 /* Add / edit one product of the website's Products page: its card and its product page (/products/<slug>).
@@ -32,6 +32,7 @@ interface FormValues {
   galleryImage1: string;
   galleryImage2: string;
   galleryImage3: string;
+  video: string;
   isActive: boolean;
   order: string;
 }
@@ -54,6 +55,7 @@ const BLANK: FormValues = {
   galleryImage1: "",
   galleryImage2: "",
   galleryImage3: "",
+  video: "",
   isActive: true,
   order: "",
 };
@@ -76,6 +78,7 @@ const fromProduct = (p: Product): FormValues => ({
   galleryImage1: p.galleryImage1 ?? "",
   galleryImage2: p.galleryImage2 ?? "",
   galleryImage3: p.galleryImage3 ?? "",
+  video: p.video ?? "",
   isActive: p.isActive !== false,
   order: p.order ? String(p.order) : "",
 });
@@ -219,6 +222,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       galleryImage1: t(values.galleryImage1),
       galleryImage2: t(values.galleryImage2),
       galleryImage3: t(values.galleryImage3),
+      video: t(values.video),
       isActive: values.isActive,
       ...(values.order.trim() ? { order: Number(values.order.trim()) } : {}),
     };
@@ -357,6 +361,12 @@ export default function ProductForm({ productId }: { productId?: string }) {
                   <ImageUploadField value={values.galleryImage3} onChange={set("galleryImage3")} />
                 </Field>
               </div>
+              <Field
+                label="Product video"
+                help="Optional. Upload an MP4 / WebM video (keep it short and small, under about 20 MB) or paste a YouTube link. It shows below the pictures on the product page."
+              >
+                <VideoUploadField value={values.video} onChange={set("video")} />
+              </Field>
             </Section>
 
             <Section title="Product page details" hint="Price and details shown on the product page next to the images.">

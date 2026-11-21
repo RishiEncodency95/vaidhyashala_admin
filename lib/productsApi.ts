@@ -31,6 +31,8 @@ export interface Product {
   galleryImage1: string;
   galleryImage2: string;
   galleryImage3: string;
+  /** Uploaded video URL or YouTube link (empty = none) */
+  video?: string;
   isActive: boolean;
   order: number;
 }
